@@ -6,7 +6,7 @@
 	<welcome-file-list>
 		<welcome-file>Elearning_LanNP.html</welcome-file>
 	</welcome-file-list>
-	<!-- Servlets session-->
+	<!-- Servlets session -->
 	<servlet>
 		<servlet-name>SessionServiceImpl</servlet-name>
 		<servlet-class>com.hust.soict.elearning_lannp.server.SessionServiceImpl</servlet-class>
@@ -15,7 +15,7 @@
 		<servlet-name>SessionServiceImpl</servlet-name>
 		<url-pattern>/elearning_lannp/sesionservice</url-pattern>
 	</servlet-mapping>
-	<!-- Servlets courses-->
+	<!-- Servlets courses -->
 	<servlet>
 		<servlet-name>CoursesServiceImpl</servlet-name>
 		<servlet-class>com.hust.soict.elearning_lannp.server.CoursesServiceImpl</servlet-class>
@@ -24,7 +24,7 @@
 		<servlet-name>CoursesServiceImpl</servlet-name>
 		<url-pattern>/elearning_lannp/coursesservice</url-pattern>
 	</servlet-mapping>
-	<!-- Servlets categories-->
+	<!-- Servlets categories -->
 	<servlet>
 		<servlet-name>CategoriesServiceImpl</servlet-name>
 		<servlet-class>com.hust.soict.elearning_lannp.server.CategoriesServiceImpl</servlet-class>
@@ -33,7 +33,7 @@
 		<servlet-name>CategoriesServiceImpl</servlet-name>
 		<url-pattern>/elearning_lannp/categoriesservice</url-pattern>
 	</servlet-mapping>
-	<!-- Servlets lectures-->
+	<!-- Servlets lectures -->
 	<servlet>
 		<servlet-name>LecturesServiceImpl</servlet-name>
 		<servlet-class>com.hust.soict.elearning_lannp.server.LecturesServiceImpl</servlet-class>
@@ -42,7 +42,7 @@
 		<servlet-name>LecturesServiceImpl</servlet-name>
 		<url-pattern>/elearning_lannp/lecturesservice</url-pattern>
 	</servlet-mapping>
-	<!-- Servlets assignments-->
+	<!-- Servlets assignments -->
 	<servlet>
 		<servlet-name>AssigmentsSeviceImpl</servlet-name>
 		<servlet-class>com.hust.soict.elearning_lannp.server.AssigmentsSeviceImpl</servlet-class>
@@ -50,5 +50,13 @@
 	<servlet-mapping>
 		<servlet-name>AssigmentsSeviceImpl</servlet-name>
 		<url-pattern>/elearning_lannp/assignmentsservice</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>fileUploaderServlet</servlet-name>
+		<servlet-class>com.hust.soict.elearning_lannp.server.FileUpload</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>fileUploaderServlet</servlet-name>
+		<url-pattern>/elearning_lannp/fileupload</url-pattern>
 	</servlet-mapping>
 </web-app>

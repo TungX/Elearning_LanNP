@@ -3,7 +3,6 @@ package com.hust.soict.elearning_lannp.server.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.hust.soict.elearning_lannp.shared.model.Lecture;
 import com.hust.soict.elearning_lannp.shared.model.Model;

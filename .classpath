@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtbootstrap3-extras-0.8.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/mysql-connector-java-5.1.23-bin.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/org.apache.commons.fileupload.jar"/>
+	<classpathentry kind="lib" path="/home/likewise-open/FRAMGIA/nguyen.xuan.tung/Downloads/poi-3.8-beta4-20110826.jar.zip"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

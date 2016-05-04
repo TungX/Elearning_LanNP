@@ -9,8 +9,6 @@ import com.hust.soict.elearning_lannp.client.service.CategoriesService;
 import com.hust.soict.elearning_lannp.client.service.CategoriesServiceAsync;
 import com.hust.soict.elearning_lannp.client.service.CoursesService;
 import com.hust.soict.elearning_lannp.client.service.CoursesServiceAsync;
-import com.hust.soict.elearning_lannp.client.service.LecturesService;
-import com.hust.soict.elearning_lannp.client.service.LecturesServiceAsync;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseIndex;
 import com.hust.soict.elearning_lannp.shared.model.*;
 
