@@ -51,13 +51,4 @@
 		<servlet-name>AssigmentsSeviceImpl</servlet-name>
 		<url-pattern>/elearning_lannp/assignmentsservice</url-pattern>
 	</servlet-mapping>
-	<!-- Servlets file-->
-	<servlet>
-		<servlet-name>FileServiceImpl</servlet-name>
-		<servlet-class>com.hust.soict.elearning_lannp.server.FileServiceImpl</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>FileServiceImpl</servlet-name>
-		<url-pattern>/elearning_lannp/UploadFile</url-pattern>
-	</servlet-mapping>
 </web-app>
