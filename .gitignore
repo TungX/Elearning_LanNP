@@ -2,3 +2,5 @@
 /war/elearning_lannp/*
 /war/WEB-INF/deploy/*
 .settings/*
+/test-classes/*
+/war/WEB-INF/classes/*
