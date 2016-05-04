@@ -1,0 +1,25 @@
+package com.hust.soict.elearning_lannp.client.service;
+
+import java.util.ArrayList;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.hust.soict.elearning_lannp.shared.model.Assignment;
+
+public interface AssignmentServiceAsync {
+
+	void addAssignment(Assignment assignment, AsyncCallback<Assignment> callback);
+
+	void destroyAssigment(Assignment assignment, AsyncCallback<Boolean> callback);
+
+	void getAssignment(int id, AsyncCallback<Assignment> callback);
+
+	void getAssignmentOfCourse(int course_id,
+			AsyncCallback<ArrayList<Assignment>> callback);
+
+	void getAssignmentOfLecture(int lecture_id,
+			AsyncCallback<ArrayList<Assignment>> callback);
+
+	void updateAssignment(Assignment assignment,
+			AsyncCallback<Assignment> callback);
+
+}

@@ -1,0 +1,109 @@
+package com.hust.soict.elearning_lannp.server.model;
+
+import java.sql.*;
+import java.util.HashMap;
+
+public class ConnectData {
+	static String jdbc_url = "jdbc:mysql://127.0.0.1:3306/elearning_lannp";
+	static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	static String mysql_user = "root";
+	static String mysql_password = "123456";
+	private Connection conn = null;
+	private Statement stmt = null;
+	public HashMap<String, String> condition;
+
+	public ConnectData() {
+		this.condition = new HashMap<String, String>();
+	}
+
+	public void connectDatabase() {
+		try {
+			Class.forName(JDBC_DRIVER).newInstance();
+			conn = DriverManager.getConnection(jdbc_url, mysql_user,
+					mysql_password);
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void closeDatabase() throws SQLException {
+		this.conn.close();
+	}
+
+	public boolean checkUserExist(String email, String password) {
+		connectDatabase();
+		int count = 0;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt
+					.executeQuery("select * from users where email='" + email
+							+ "'&& encrypted_password='" + password + "'");
+			rs.last();
+			count = rs.getRow();
+			closeDatabase();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return (count > 0);
+	}
+
+	public boolean checkExist(String table_name, String queryplus) {
+		connectDatabase();
+		int count = 0;
+		try {
+			String query = "select * from " + table_name;
+			query += getQuery(condition, queryplus);
+			ResultSet rs = stmt.executeQuery(query);
+			rs.last();
+			count = rs.getRow();
+			closeDatabase();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return (count > 0);
+	}
+
+	public ResultSet getResultSet(String table_name, String queryplus) {
+		connectDatabase();
+		ResultSet rs = null;
+		try {
+			String query = "select * from " + table_name;
+			query += getQuery(condition, queryplus);
+			rs = stmt.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+
+	private String getQuery(HashMap<String, String> condition, String queryplus) {
+		if ((condition.size() == 0 || condition == null)
+				&& (queryplus.isEmpty() || queryplus == null))
+			return "";
+		String[] keys = condition.keySet().toArray(new String[0]);
+		String query = " where (";
+		for (int i = 0; i < keys.length - 1; i++) {
+			query += keys[i] + "='" + condition.get(keys[i]) + "' and ";
+		}
+		query += keys[keys.length - 1] + "='"
+				+ condition.get(keys[keys.length - 1]) + "')";
+		if (keys.length > 0 && !queryplus.isEmpty())
+			query += " and ";
+		query += queryplus;
+		return query;
+	}
+}

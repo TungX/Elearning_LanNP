@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5" xmlns="http://java.sun.com/xml/ns/javaee">
+	<welcome-file-list>
+		<welcome-file>Elearning_LanNP.html</welcome-file>
+	</welcome-file-list>
+	<!-- Servlets session-->
+	<servlet>
+		<servlet-name>SessionServiceImpl</servlet-name>
+		<servlet-class>com.hust.soict.elearning_lannp.server.SessionServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SessionServiceImpl</servlet-name>
+		<url-pattern>/elearning_lannp/sesionservice</url-pattern>
+	</servlet-mapping>
+	<!-- Servlets courses-->
+	<servlet>
+		<servlet-name>CoursesServiceImpl</servlet-name>
+		<servlet-class>com.hust.soict.elearning_lannp.server.CoursesServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CoursesServiceImpl</servlet-name>
+		<url-pattern>/elearning_lannp/coursesservice</url-pattern>
+	</servlet-mapping>
+	<!-- Servlets categories-->
+	<servlet>
+		<servlet-name>CategoriesServiceImpl</servlet-name>
+		<servlet-class>com.hust.soict.elearning_lannp.server.CategoriesServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoriesServiceImpl</servlet-name>
+		<url-pattern>/elearning_lannp/categoriesservice</url-pattern>
+	</servlet-mapping>
+	<!-- Servlets lectures-->
+	<servlet>
+		<servlet-name>LecturesServiceImpl</servlet-name>
+		<servlet-class>com.hust.soict.elearning_lannp.server.LecturesServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LecturesServiceImpl</servlet-name>
+		<url-pattern>/elearning_lannp/lecturesservice</url-pattern>
+	</servlet-mapping>
+	<!-- Servlets assignments-->
+	<servlet>
+		<servlet-name>AssigmentsSeviceImpl</servlet-name>
+		<servlet-class>com.hust.soict.elearning_lannp.server.AssigmentsSeviceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AssigmentsSeviceImpl</servlet-name>
+		<url-pattern>/elearning_lannp/assignmentsservice</url-pattern>
+	</servlet-mapping>
+	<!-- Servlets file-->
+	<servlet>
+		<servlet-name>FileServiceImpl</servlet-name>
+		<servlet-class>com.hust.soict.elearning_lannp.server.FileServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FileServiceImpl</servlet-name>
+		<url-pattern>/elearning_lannp/UploadFile</url-pattern>
+	</servlet-mapping>
+</web-app>
