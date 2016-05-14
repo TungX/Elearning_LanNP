@@ -3,11 +3,13 @@ package com.hust.soict.elearning_lannp.server.model;
 import java.sql.*;
 import java.util.HashMap;
 
+import com.hust.soict.elearning_lannp.server.Config;
+
 public class ConnectData {
 	static String jdbc_url = "jdbc:mysql://127.0.0.1:3306/elearning_lannp";
 	static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static String mysql_user = "root";
-	static String mysql_password = "123456";
+	static String mysql_user = Config.MYSQLUSER;
+	static String mysql_password = Config.MYSQLPASSWORD;
 	private Connection conn = null;
 	private Statement stmt = null;
 	public HashMap<String, String> condition;

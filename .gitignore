@@ -4,3 +4,4 @@
 .settings/*
 /test-classes/*
 /war/WEB-INF/classes/*
+/test-classes/
