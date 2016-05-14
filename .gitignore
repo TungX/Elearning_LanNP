@@ -5,3 +5,4 @@
 /test-classes/*
 /war/WEB-INF/classes/*
 /test-classes/
+/src/com/hust/soict/elearning_lannp/server/Config.java
