@@ -9,15 +9,15 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class FormAddLecture extends Composite {
+public class FormLecture extends Composite {
 
 	private static FormAddLectureUiBinder uiBinder = GWT
 			.create(FormAddLectureUiBinder.class);
 
-	interface FormAddLectureUiBinder extends UiBinder<Widget, FormAddLecture> {
+	interface FormAddLectureUiBinder extends UiBinder<Widget, FormLecture> {
 	}
 
-	public FormAddLecture() {
+	public FormLecture() {
 		initWidget(uiBinder.createAndBindUi(this));
 		RootPanel.get().add(this);
 	}

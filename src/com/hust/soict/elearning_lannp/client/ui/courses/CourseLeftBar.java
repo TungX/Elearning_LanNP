@@ -9,7 +9,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Widget;
@@ -17,14 +16,16 @@ import com.hust.soict.elearning_lannp.shared.model.*;
 
 public class CourseLeftBar extends Composite {
 
-	private static Course_left_barUiBinder uiBinder = GWT
-			.create(Course_left_barUiBinder.class);
+	private Course course;
+
+	private static Course_left_barUiBinder uiBinder = GWT.create(Course_left_barUiBinder.class);
 
 	interface Course_left_barUiBinder extends UiBinder<Widget, CourseLeftBar> {
 	}
 
 	public CourseLeftBar() {
 		initWidget(uiBinder.createAndBindUi(this));
+		this.course = new Course();
 	}
 
 	@UiField
@@ -39,18 +40,18 @@ public class CourseLeftBar extends Composite {
 	Anchor addLecture;
 	@UiField
 	Anchor addAssignment;
-	
+
 	@UiHandler("addLecture")
 	void onItemAddLecutureClick(ClickEvent e) {
-		FormAddLecture addLecture = new FormAddLecture();
-		addLecture.setTitleModal("Long cho con");
+		FormLecture addLecture = new FormLecture();
+		addLecture.setTitleModal(this.course.getName() + "/Add Lecture");
 		addLecture.showModal();
 	}
 
 	public void addLecture(Lecture lecture) {
 		ListGroupItem item = new ListGroupItem();
-		Hyperlink link = new Hyperlink(lecture.getName(), "courses/"
-				+ lecture.getCourseId() + "/lectures/" + lecture.getId());
+		Hyperlink link = new Hyperlink(lecture.getName(),
+				"courses/" + lecture.getCourseId() + "/lectures/" + lecture.getId());
 		item.add(link);
 		lectures.add(item);
 	}
@@ -63,8 +64,8 @@ public class CourseLeftBar extends Composite {
 
 	public void addAssinment(Assignment assignment) {
 		ListGroupItem item = new ListGroupItem();
-		Hyperlink link = new Hyperlink(assignment.getName(), "courses/"
-				+ assignment.getCourseId() + "/assignments/" + assignment.getId());
+		Hyperlink link = new Hyperlink(assignment.getName(),
+				"courses/" + assignment.getCourseId() + "/assignments/" + assignment.getId());
 		item.add(link);
 		assignments.add(item);
 	}
@@ -73,5 +74,9 @@ public class CourseLeftBar extends Composite {
 		for (Assignment assignment : assignments)
 			addAssinment(assignment);
 		itemAssignmentEmpty.setVisible(assignments.isEmpty());
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 }

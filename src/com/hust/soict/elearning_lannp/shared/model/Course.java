@@ -15,6 +15,13 @@ public class Course extends Model {
 		return false;
 	}
 
+	public Course(int id) {
+		this.id = id;
+	}
+
+	public Course() {
+	}
+
 	public int getId() {
 		return id;
 	}

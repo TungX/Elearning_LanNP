@@ -11,7 +11,7 @@
 		<b:ModalBody>
 			<b:Form type="HORIZONTAL">
 				<b:FormGroup>
-					<b:FormLabel for="formName" addStyleNames="col-lg-2">Name</b:FormLabel>
+					<b:FormLabel for="formName" addStyleNames="col-lg-2">Name*</b:FormLabel>
 					<g:FlowPanel addStyleNames="col-lg-10">
 						<b:TextBox placeholder="Name" b:id="formName"
 							ui:field="txtName" />
@@ -19,14 +19,14 @@
 				</b:FormGroup>
 
 				<b:FormGroup>
-					<b:FormLabel for="formDescription" addStyleNames="col-lg-2">Description</b:FormLabel>
+					<b:FormLabel for="formDescription" addStyleNames="col-lg-2">Description*</b:FormLabel>
 					<g:FlowPanel addStyleNames="col-lg-10">
 						<b:TextArea ui:field="txtDescription" />
 					</g:FlowPanel>
 				</b:FormGroup>
 				
 				<b:FormGroup>
-					<b:FormLabel for="formPassword" addStyleNames="col-lg-2">Description</b:FormLabel>
+					<b:FormLabel for="formPassword" addStyleNames="col-lg-2">Password</b:FormLabel>
 					<g:FlowPanel addStyleNames="col-lg-10">
 						<b:Input type="PASSWORD" b:id="formName"
 							ui:field="txtPassword" />
