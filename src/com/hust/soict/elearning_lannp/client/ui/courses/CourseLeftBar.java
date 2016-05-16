@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import org.gwtbootstrap3.client.ui.*;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Widget;
@@ -32,8 +35,17 @@ public class CourseLeftBar extends Composite {
 	ListGroupItem itemAssignmentEmpty;
 	@UiField
 	ListGroupItem itemLectureEmpty;
-//	@UiField
-//	Anchor txtCourseName;
+	@UiField
+	Anchor addLecture;
+	@UiField
+	Anchor addAssignment;
+	
+	@UiHandler("addLecture")
+	void onItemAddLecutureClick(ClickEvent e) {
+		FormAddLecture addLecture = new FormAddLecture();
+		addLecture.setTitleModal("Long cho con");
+		addLecture.showModal();
+	}
 
 	public void addLecture(Lecture lecture) {
 		ListGroupItem item = new ListGroupItem();
@@ -42,11 +54,6 @@ public class CourseLeftBar extends Composite {
 		item.add(link);
 		lectures.add(item);
 	}
-
-//	public void setCourseName(Course course) {
-//		txtCourseName.setText(course.getName());
-//		txtCourseName.setHref("#courses/" + course.getId());
-//	}
 
 	public void setLectures(ArrayList<Lecture> olectures) {
 		for (Lecture lecture : olectures)

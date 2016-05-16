@@ -30,12 +30,13 @@
 			</b:PanelHeader>
 			<b:PanelCollapse b:id="collapseLectures">
 				<b:ListGroup ui:field="lectures">
-					<b:ListGroupItem ui:field="addLecture">
-						<b:Icon type="PLUS" />
-						<b.html:Text text="Add lecture" />
-					</b:ListGroupItem>
 					<b:ListGroupItem text="(Lectures empty)" ui:field="itemLectureEmpty" />
+
 				</b:ListGroup>
+				<b:ListGroupItem>
+					<b:Icon type="PLUS" />
+					<b:Anchor text="Add lecture" ui:field="addLecture" />
+				</b:ListGroupItem>
 			</b:PanelCollapse>
 		</b:Panel>
 		<b:Panel>
@@ -47,14 +48,14 @@
 				</b:Heading>
 			</b:PanelHeader>
 			<b:PanelCollapse b:id="collapseAssignments">
-				<b:ListGroupItem ui:field="addAssignment">
-					<b:Icon type="PLUS" />
-					<b.html:Text text="Add lassignment" />
-				</b:ListGroupItem>
 				<b:ListGroup ui:field="assignments">
 					<b:ListGroupItem text="(Assignment empty)"
 						ui:field="itemAssignmentEmpty" />
 				</b:ListGroup>
+				<b:ListGroupItem>
+					<b:Icon type="PLUS" />
+					<b:Anchor text="Add lassignment" ui:field="addAssignment" />
+				</b:ListGroupItem>
 			</b:PanelCollapse>
 		</b:Panel>
 		<b:Panel>

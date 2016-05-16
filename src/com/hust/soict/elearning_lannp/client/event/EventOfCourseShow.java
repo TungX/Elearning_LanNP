@@ -13,19 +13,16 @@ import com.hust.soict.elearning_lannp.client.service.LecturesService;
 import com.hust.soict.elearning_lannp.client.service.LecturesServiceAsync;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseLeftBar;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseRightBar;
-import com.hust.soict.elearning_lannp.client.ui.courses.CourseShow;
 import com.hust.soict.elearning_lannp.shared.model.*;
 
 public class EventOfCourseShow {
 	private LecturesServiceAsync lecturesServiceAsync;
 	private AssignmentServiceAsync assignmentServiceAsync;
 	private CoursesServiceAsync coursesServiceAsync;
-	private CourseShow page;
 	private CourseLeftBar leftbar;
 	private CourseRightBar rightbar;
 
-	public EventOfCourseShow(CourseShow page, CourseLeftBar leftbar, CourseRightBar rightbar) {
-		this.page = page;
+	public EventOfCourseShow(CourseLeftBar leftbar, CourseRightBar rightbar) {
 		this.leftbar = leftbar;
 		this.rightbar = rightbar;
 		this.lecturesServiceAsync = GWT.create(LecturesService.class);
@@ -75,7 +72,7 @@ public class EventOfCourseShow {
 			@Override
 			public void onSuccess(Course result) {
 				// TODO Auto-generated method stub
-//				rightBar.setCourseInfo(result);
+				// rightBar.setCourseInfo(result);
 			}
 
 			@Override
