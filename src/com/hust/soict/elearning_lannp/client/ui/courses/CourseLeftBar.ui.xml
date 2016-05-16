@@ -14,8 +14,8 @@
 	<b:PanelGroup b:id="accordion">
 		<b:Panel>
 			<b:PanelHeader>
-				<b:Heading size="H4" >
-					<b:Icon type="HOME" fixedWidth="true"/>
+				<b:Heading size="H4">
+					<b:Icon type="HOME" fixedWidth="true" />
 					<b.html:Text text="Home" />
 				</b:Heading>
 			</b:PanelHeader>
@@ -31,7 +31,12 @@
 			<b:PanelCollapse b:id="collapseLectures">
 				<b:ListGroup ui:field="lectures">
 					<b:ListGroupItem text="(Lectures empty)" ui:field="itemLectureEmpty" />
+
 				</b:ListGroup>
+				<b:ListGroupItem>
+					<b:Icon type="PLUS" />
+					<b:Anchor text="Add lecture" ui:field="addLecture" />
+				</b:ListGroupItem>
 			</b:PanelCollapse>
 		</b:Panel>
 		<b:Panel>
@@ -47,6 +52,10 @@
 					<b:ListGroupItem text="(Assignment empty)"
 						ui:field="itemAssignmentEmpty" />
 				</b:ListGroup>
+				<b:ListGroupItem>
+					<b:Icon type="PLUS" />
+					<b:Anchor text="Add lassignment" ui:field="addAssignment" />
+				</b:ListGroupItem>
 			</b:PanelCollapse>
 		</b:Panel>
 		<b:Panel>

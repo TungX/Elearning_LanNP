@@ -13,19 +13,18 @@ import com.hust.soict.elearning_lannp.client.service.LecturesService;
 import com.hust.soict.elearning_lannp.client.service.LecturesServiceAsync;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseLeftBar;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseRightBar;
-import com.hust.soict.elearning_lannp.client.ui.courses.CourseShow;
 import com.hust.soict.elearning_lannp.shared.model.*;
 
 public class EventOfCourseShow {
 	private LecturesServiceAsync lecturesServiceAsync;
 	private AssignmentServiceAsync assignmentServiceAsync;
 	private CoursesServiceAsync coursesServiceAsync;
-	private CourseShow page;
 	private CourseLeftBar leftbar;
 	private CourseRightBar rightbar;
+	private Course course;
 
-	public EventOfCourseShow(CourseShow page, CourseLeftBar leftbar, CourseRightBar rightbar) {
-		this.page = page;
+	public EventOfCourseShow(CourseLeftBar leftbar, CourseRightBar rightbar, int course_id) {
+		this.course = new Course(course_id);
 		this.leftbar = leftbar;
 		this.rightbar = rightbar;
 		this.lecturesServiceAsync = GWT.create(LecturesService.class);
@@ -34,7 +33,7 @@ public class EventOfCourseShow {
 	}
 
 	public void loadLectures() {
-		this.lecturesServiceAsync.getLectures(1,
+		this.lecturesServiceAsync.getLectures(this.course.getId(),
 				new AsyncCallback<ArrayList<Lecture>>() {
 
 					@Override
@@ -52,7 +51,7 @@ public class EventOfCourseShow {
 	}
 
 	public void loadAssignments() {
-		this.assignmentServiceAsync.getAssignmentOfCourse(1,
+		this.assignmentServiceAsync.getAssignmentOfCourse(this.course.getId(),
 				new AsyncCallback<ArrayList<Assignment>>() {
 
 					@Override
@@ -70,12 +69,12 @@ public class EventOfCourseShow {
 	}
 
 	public void loadCourseName() {
-		this.coursesServiceAsync.getCourse(1, new AsyncCallback<Course>() {
+		this.coursesServiceAsync.getCourse(this.course.getId(), new AsyncCallback<Course>() {
 
 			@Override
 			public void onSuccess(Course result) {
 				// TODO Auto-generated method stub
-//				rightBar.setCourseInfo(result);
+				// rightBar.setCourseInfo(result);
 			}
 
 			@Override
@@ -87,12 +86,14 @@ public class EventOfCourseShow {
 	}
 
 	public void loadCourseInfo() {
-		this.coursesServiceAsync.getCourse(1, new AsyncCallback<Course>() {
+		this.coursesServiceAsync.getCourse(this.course.getId(), new AsyncCallback<Course>() {
 
 			@Override
 			public void onSuccess(Course result) {
 				// TODO Auto-generated method stub
+				course = result;
 				rightbar.setCourseInfo(result);
+				leftbar.setCourse(result);
 			}
 
 			@Override
@@ -101,5 +102,9 @@ public class EventOfCourseShow {
 
 			}
 		});
+	}
+	
+	public Course getCourse() {
+		return this.course;
 	}
 }

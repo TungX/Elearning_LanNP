@@ -44,10 +44,6 @@ public class NavTab extends Composite {
 		sessionService = GWT.create(SessionService.class);
 	}
 
-	void onBtnHomeClick(ClickEvent e) {
-
-	}
-
 	@UiHandler("btnCourses")
 	void onBtnCoursesClick(ClickEvent e) {
 	}
