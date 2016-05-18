@@ -23,16 +23,10 @@ public class ServerLectures extends Lecture implements ServerModel {
 		this.conn.condition.put("password", lecture.getPassword());
 		this.conn.condition.put("course_id", ""+lecture.getCourseId());
 		int id = this.conn.insertData("lectures");
-		try {
-			if(id == 0){
-				result = null;
-			}else{
-				result.setId(id);
-			}
-			this.conn.closeDatabase();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(id == 0){
+			result = null;
+		}else{
+			result.setId(id);
 		}
 		return result;
 	}

@@ -25,9 +25,12 @@ public class EventOfLecuture {
 			
 			@Override
 			public void onSuccess(Lecture result) {
-				Window.alert("Result: "+result.getId());
-				leftBar.addLecture(result);
 				form.hideModal();
+				if(result == null){
+					Window.alert("Error when insert");
+				}else{
+					leftBar.addLecture(result);
+				}
 			}
 			
 			@Override

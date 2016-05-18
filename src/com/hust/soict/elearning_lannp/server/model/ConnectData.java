@@ -103,9 +103,9 @@ public class ConnectData {
 				return 0;
 			ResultSet rs = stmt.getGeneratedKeys();
 			if (rs.next()) {
-				id = rs.getInt("id");
+				id = rs.getInt(1);
 			}
-
+			closeDatabase();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -124,9 +124,9 @@ public class ConnectData {
 		}
 		query += keys[keys.length - 1] + ") values (";
 		for (int i = 0; i < keys.length - 1; i++) {
-			query += condition.get(keys[i]) + ",";
+			query += "'"+condition.get(keys[i]) + "',";
 		}
-		query += condition.get(keys[keys.length - 1]) + ")";
+		query +="'" + condition.get(keys[keys.length - 1]) + "')";
 		return query;
 	}
 

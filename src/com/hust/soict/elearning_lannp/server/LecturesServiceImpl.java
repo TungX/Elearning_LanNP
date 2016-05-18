@@ -28,7 +28,7 @@ public class LecturesServiceImpl extends RemoteServiceServlet implements
 	@Override
 	public Lecture addLecture(Lecture lecture) {
 		ServerLectures lectures = new ServerLectures();
-		return lectures.insertLecuture(lectures);
+		return lectures.insertLecuture(lecture);
 	}
 
 	@Override
