@@ -43,7 +43,7 @@ public class CourseLeftBar extends Composite {
 
 	@UiHandler("addLecture")
 	void onItemAddLecutureClick(ClickEvent e) {
-		FormLecture addLecture = new FormLecture();
+		FormLecture addLecture = new FormLecture(this, this.course.getId());
 		addLecture.setTitleModal(this.course.getName() + "/Add Lecture");
 		addLecture.showModal();
 	}

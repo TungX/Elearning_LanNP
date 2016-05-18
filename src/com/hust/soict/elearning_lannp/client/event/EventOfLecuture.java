@@ -13,19 +13,20 @@ public class EventOfLecuture {
 	private LecturesServiceAsync lecturesServic;
 	private FormLecture form;
 	private CourseLeftBar leftBar;
-	public EventOfLecuture(CourseLeftBar leftBar) {
-		this.form = new FormLecture();
+	public EventOfLecuture(FormLecture form, CourseLeftBar leftBar) {
 		this.lecturesServic = GWT.create(LecturesService.class);
 		this.leftBar = leftBar;
+		this.form = form;
 	}
 	
 	public void doCreate(String name, String description, String password, int course_id) {
-		Lecture lecture = new Lecture(name, description, password, course_id);
+		Lecture lecture = new Lecture(name, description, password, course_id);		
 		lecturesServic.addLecture(lecture, new AsyncCallback<Lecture>() {
 			
 			@Override
 			public void onSuccess(Lecture result) {
-				leftBar.addLecture(lecture);
+				Window.alert("Result: "+result.getId());
+				leftBar.addLecture(result);
 				form.hideModal();
 			}
 			

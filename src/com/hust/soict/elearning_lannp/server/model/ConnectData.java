@@ -92,6 +92,44 @@ public class ConnectData {
 		return rs;
 	}
 
+	public int insertData(String table_name) {
+		connectDatabase();
+		int id;
+		try {
+			String query = "INSERT INTO " + table_name + getQueryInsert();
+			id = this.stmt
+					.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			if (id == 0)
+				return 0;
+			ResultSet rs = stmt.getGeneratedKeys();
+			if (rs.next()) {
+				id = rs.getInt("id");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		return id;
+	}
+
+	private String getQueryInsert() {
+		if (condition.size() == 0 || condition == null)
+			return "";
+		String[] keys = condition.keySet().toArray(new String[0]);
+		String query = "(";
+		for (int i = 0; i < keys.length - 1; i++) {
+			query += keys[i] + ",";
+		}
+		query += keys[keys.length - 1] + ") values (";
+		for (int i = 0; i < keys.length - 1; i++) {
+			query += condition.get(keys[i]) + ",";
+		}
+		query += condition.get(keys[keys.length - 1]) + ")";
+		return query;
+	}
+
 	private String getQuery(HashMap<String, String> condition, String queryplus) {
 		if ((condition.size() == 0 || condition == null)
 				&& (queryplus.isEmpty() || queryplus == null))
