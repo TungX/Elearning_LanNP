@@ -29,5 +29,8 @@ public class FormLecture extends Composite {
 	public void setTitleModal(String title) {
 		this.modalAddLecture.setTitle(title);
 	}
-
+	
+	public void hideModal() {
+		this.modalAddLecture.hide();
+	}
 }
