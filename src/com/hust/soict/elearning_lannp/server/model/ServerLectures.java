@@ -14,6 +14,22 @@ public class ServerLectures extends Lecture implements ServerModel {
 		super();
 		this.conn = new ConnectData();
 	}
+	
+	public Lecture insertLecuture(Lecture lecture) {
+		Lecture result = lecture;
+		this.conn.condition.clear();
+		this.conn.condition.put("name", lecture.getName());
+		this.conn.condition.put("description", lecture.getDescription());
+		this.conn.condition.put("password", lecture.getPassword());
+		this.conn.condition.put("course_id", ""+lecture.getCourseId());
+		int id = this.conn.insertData("lectures");
+		if(id == 0){
+			result = null;
+		}else{
+			result.setId(id);
+		}
+		return result;
+	}
 
 	public Lecture getLecture(int id) {
 		this.conn.condition.put("id", "" + id);

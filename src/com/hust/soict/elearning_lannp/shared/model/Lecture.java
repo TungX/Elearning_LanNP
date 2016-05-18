@@ -13,6 +13,18 @@ public class Lecture extends Model {
 		return false;
 	}
 
+	public Lecture(String name, String description, String password, int course_id) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.password = password;
+		this.course_id = course_id;
+	}
+	
+	public Lecture() {
+		
+	}
+
 	public int getId() {
 		return id;
 	}
