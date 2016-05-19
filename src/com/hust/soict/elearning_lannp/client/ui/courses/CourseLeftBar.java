@@ -54,6 +54,7 @@ public class CourseLeftBar extends Composite {
 	void onItemAddAssignmentClick(ClickEvent e) {
 		FormAssignment addAssignment = new FormAssignment();
 		addAssignment.setTitleModal(this.course.getName() + "/Add Assignment");
+		addAssignment.showModal();
 	}
 	public void addLecture(Lecture lecture) {
 		ListGroupItem item = new ListGroupItem();

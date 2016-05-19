@@ -7,6 +7,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtbootstrap3-0.9.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/mysql-connector-java-5.1.23-bin.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/org.apache.commons.fileupload.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtbootstrap3-extras-0.9.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/YINLONG/Dropbox/GWT/gwtbootstrap3-extras-0.9.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
