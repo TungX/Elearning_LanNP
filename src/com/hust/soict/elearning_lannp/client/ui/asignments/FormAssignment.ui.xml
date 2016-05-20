@@ -27,7 +27,7 @@
 				<b:FormGroup>
 					<b:FormLabel for="formDateline" addStyleNames="col-lg-2">Deadline</b:FormLabel>
 					<g:FlowPanel addStyleNames="col-lg-10">
-						<b:TextBox b:id="formName" ui:field="dateBox" />
+						<b:TextBox b:id="formName" ui:field="txtDate" />
 					</g:FlowPanel>
 				</b:FormGroup>
 				<b:FormGroup visible="false" ui:field="formDatePicker">

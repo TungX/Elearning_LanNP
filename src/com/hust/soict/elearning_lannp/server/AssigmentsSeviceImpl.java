@@ -36,8 +36,8 @@ public class AssigmentsSeviceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public Assignment addAssignment(Assignment assignment) {
-		// TODO Auto-generated method stub
-		return null;
+		ServerAssinment assinments = new ServerAssinment();
+		return assinments.insert(assignment);
 	}
 
 	@Override

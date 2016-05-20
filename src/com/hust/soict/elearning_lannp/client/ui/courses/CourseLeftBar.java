@@ -52,7 +52,7 @@ public class CourseLeftBar extends Composite {
 	
 	@UiHandler("addAssignment")
 	void onItemAddAssignmentClick(ClickEvent e) {
-		FormAssignment addAssignment = new FormAssignment();
+		FormAssignment addAssignment = new FormAssignment(this, this.course.getId());
 		addAssignment.setTitleModal(this.course.getName() + "/Add Assignment");
 		addAssignment.showModal();
 	}
