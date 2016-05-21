@@ -6,7 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.hust.soict.elearning_lannp.client.service.LecturesService;
 import com.hust.soict.elearning_lannp.client.service.LecturesServiceAsync;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseLeftBar;
-import com.hust.soict.elearning_lannp.client.ui.courses.FormLecture;
+import com.hust.soict.elearning_lannp.client.ui.lectures.FormLecture;
 import com.hust.soict.elearning_lannp.shared.model.Lecture;
 
 public class EventOfLecuture {
