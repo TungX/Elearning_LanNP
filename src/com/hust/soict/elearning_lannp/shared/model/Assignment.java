@@ -1,7 +1,5 @@
 package com.hust.soict.elearning_lannp.shared.model;
 
-import java.util.Date;
-
 public class Assignment extends Model {
 	protected int id;
 	protected String name;

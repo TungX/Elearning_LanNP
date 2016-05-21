@@ -1,12 +1,38 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
 	<ui:style>
 	
 	</ui:style>
-	<g:FormPanel ui:field="attachForm">
-		<g:VerticalPanel>
-			<g:FileUpload name="uploadFile" />
-		</g:VerticalPanel>
-	</g:FormPanel>
+	<b:Modal title="Add attach file" closable="true" fade="true"
+		dataBackdrop="STATIC" dataKeyboard="true" ui:field="modalAttachFile">
+		<b:ModalBody>
+			<b:Form type="HORIZONTAL">
+				<b:FormGroup>
+					<b:FormLabel for="formName" addStyleNames="col-lg-2">Name*</b:FormLabel>
+					<g:FlowPanel addStyleNames="col-lg-10">
+						<b:TextBox placeholder="Name" b:id="formName" ui:field="txtName" />
+					</g:FlowPanel>
+				</b:FormGroup>
+				<b:FormGroup>
+					<b:FormLabel for="formName" addStyleNames="col-lg-2">Path</b:FormLabel>
+					<g:FlowPanel addStyleNames="col-lg-10">
+						<b:TextBox placeholder="Name" b:id="formName" ui:field="txtPath" />
+					</g:FlowPanel>
+				</b:FormGroup>
+				<b:FormGroup>
+					<g:FormPanel ui:field="attachForm">
+						<g:VerticalPanel>
+							<g:FileUpload name="uploadFile" ui:field="uploadFile" />
+						</g:VerticalPanel>
+					</g:FormPanel>
+				</b:FormGroup>
+			</b:Form>
+		</b:ModalBody>
+		<b:ModalFooter>
+			<b:Button type="DEFAULT" dataDismiss="MODAL">Cancel</b:Button>
+			<b:Button type="PRIMARY" ui:field="btnSave">Submit</b:Button>
+		</b:ModalFooter>
+	</b:Modal>
+
 </ui:UiBinder> 

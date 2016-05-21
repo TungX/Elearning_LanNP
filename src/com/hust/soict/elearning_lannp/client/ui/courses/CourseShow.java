@@ -6,6 +6,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.event.EventOfCourseShow;
+import com.hust.soict.elearning_lannp.client.event.EventOfLecuture;
 
 public class CourseShow extends Composite {
 
@@ -22,6 +23,9 @@ public class CourseShow extends Composite {
 		event.loadAssignments();
 		event.loadCourseName();
 		event.loadCourseInfo();
+		EventOfLecuture eventOfLecuture = new EventOfLecuture();
+		eventOfLecuture.setRightBar(rightcontent);
+		eventOfLecuture.show(1);
 	}
 
 	@UiField

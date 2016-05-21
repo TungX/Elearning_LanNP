@@ -7,7 +7,6 @@ public class AttachFile extends Model{
 	protected String name;
 	protected int user_id;
 	protected String path;
-	protected Time time;
 
 	public int getId() {
 		return id;
@@ -39,14 +38,6 @@ public class AttachFile extends Model{
 
 	public void setPath(String path) {
 		this.path = path;
-	}
-
-	public Time getTime() {
-		return time;
-	}
-
-	public void setTime(Time time) {
-		this.time = time;
 	}
 
 	@Override

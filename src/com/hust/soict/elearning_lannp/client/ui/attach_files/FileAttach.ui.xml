@@ -1,0 +1,21 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
+	<ui:style>
+	.mouse-pointer {
+		cursor: pointer;
+	}
+	</ui:style>
+	<b:Panel type="SUCCESS">
+		<b:PanelHeader>
+			<b:Icon type="FILE" />
+			<b:Anchor ui:field="url" />
+			<b:Tooltip title="Remove attach file">
+				<b:Anchor icon="TRASH_O" pull="RIGHT" ui:field="btnRemove" />				
+			</b:Tooltip>
+			<b:Tooltip title="Edit attach file">
+				<b:Anchor icon="PENCIL_SQUARE_O" pull="RIGHT" ui:field="btnEdit" />
+			</b:Tooltip>
+		</b:PanelHeader>
+	</b:Panel>
+</ui:UiBinder> 

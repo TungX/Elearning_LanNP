@@ -10,4 +10,6 @@ import com.hust.soict.elearning_lannp.shared.model.User;
 public interface AttachFileService extends RemoteService {
 	void uploadAttachFiles(User user, String name);
 	ArrayList<AttachFile> getFileOfUser(User user);
+	ArrayList<AttachFile> getFileOfLecture(int lecture_id);
+	AttachFile update(AttachFile file);
 }

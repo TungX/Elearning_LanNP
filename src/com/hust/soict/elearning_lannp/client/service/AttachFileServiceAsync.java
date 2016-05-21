@@ -12,4 +12,8 @@ public interface AttachFileServiceAsync {
 
 	void uploadAttachFiles(User user, String name, AsyncCallback<Void> callback);
 
+	void getFileOfLecture(int lecture_id, AsyncCallback<ArrayList<AttachFile>> callback);
+
+	void update(AttachFile file, AsyncCallback<AttachFile> callback);
+
 }

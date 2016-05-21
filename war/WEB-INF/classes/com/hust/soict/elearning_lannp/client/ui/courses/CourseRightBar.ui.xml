@@ -30,6 +30,10 @@
 	}
 	</ui:style>
 	<g:HTMLPanel>
+		<b:Breadcrumbs>
+			<b:AnchorListItem text="Course" href="#" />
+			<b:AnchorListItem text="Lecture" href="#" />
+		</b:Breadcrumbs>
 		<div class='{style.gwt-header-course}'>
 			<H1 class='{style.gwt-title-course}'>
 				<b.html:Text ui:field="txtCourseName" />
@@ -43,5 +47,8 @@
 		<div class='{style.gwt-description}'>
 			<b.html:Text ui:field="txtDescription" />
 		</div>
+		<b:PanelGroup ui:field="panelGroup">
+		</b:PanelGroup>
 	</g:HTMLPanel>
+
 </ui:UiBinder> 

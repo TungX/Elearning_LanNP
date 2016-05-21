@@ -74,6 +74,10 @@ public class ServerLectures extends Lecture implements ServerModel {
 		lecture.setDescription(rs.getString("description"));
 		lecture.setPassword(rs.getString("password"));
 		lecture.setCourseId(rs.getInt("course_id"));
+		ServerCourses course = new ServerCourses();
+		lecture.setCourse(course.getCourse(lecture.getCourseId()));
+		ServerAttachFile attachFile = new ServerAttachFile();
+		lecture.setAttachFiles(attachFile.getAttachFilesOfLecture(lecture.getId()));
 		return lecture;
 	}
 
