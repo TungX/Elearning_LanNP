@@ -38,7 +38,7 @@ public class FileAttach extends Composite {
 	
 	@UiHandler("btnEdit")
 	void onBtnEditClick(ClickEvent e){
-		AttachForm form = new AttachForm();
+		AttachForm form = new AttachForm(this);
 		form.setAttachFile(attachFile);
 		form.show();
 	}

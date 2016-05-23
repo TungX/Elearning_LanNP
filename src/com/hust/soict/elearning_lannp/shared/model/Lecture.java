@@ -2,14 +2,6 @@ package com.hust.soict.elearning_lannp.shared.model;
 
 import java.util.ArrayList;
 
-import com.google.gwt.core.shared.GWT;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.hust.soict.elearning_lannp.client.service.AttachFileService;
-import com.hust.soict.elearning_lannp.client.service.AttachFileServiceAsync;
-import com.hust.soict.elearning_lannp.client.service.CoursesService;
-import com.hust.soict.elearning_lannp.client.service.CoursesServiceAsync;
-
 public class Lecture extends Model {
 	protected int id;
 	protected String name;
