@@ -9,7 +9,7 @@ import com.hust.soict.elearning_lannp.client.ui.attach_files.AttachForm;
 import com.hust.soict.elearning_lannp.client.ui.attach_files.FileAttach;
 import com.hust.soict.elearning_lannp.shared.model.AttachFile;
 
-public class EventOfAttachFile {
+public class EventOfAttachFile extends Event{
 	private FileAttach fileAttach;
 	private AttachForm form;
 	private AttachFileServiceAsync attachFileServiceAsync;
@@ -36,6 +36,11 @@ public class EventOfAttachFile {
 								+ caught.getMessage());
 					}
 				});
+	}
+
+	@Override
+	public void delete() {
+		Window.alert("This is method delete");
 	}
 
 }

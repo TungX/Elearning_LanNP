@@ -9,6 +9,8 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.hust.soict.elearning_lannp.client.event.EventOfAttachFile;
+import com.hust.soict.elearning_lannp.client.ui.shared.FormDelete;
 import com.hust.soict.elearning_lannp.shared.model.AttachFile;
 
 public class FileAttach extends Composite {
@@ -40,6 +42,13 @@ public class FileAttach extends Composite {
 	void onBtnEditClick(ClickEvent e){
 		AttachForm form = new AttachForm(this);
 		form.setAttachFile(attachFile);
+		form.show();
+	}
+	
+	@UiHandler("btnRemove")
+	void onBtnRemoveClick(ClickEvent e) {
+		EventOfAttachFile event = new EventOfAttachFile(this, null);
+		FormDelete form = new FormDelete(event);
 		form.show();
 	}
 }
