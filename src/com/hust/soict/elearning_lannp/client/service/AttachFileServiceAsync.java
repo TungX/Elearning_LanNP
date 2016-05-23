@@ -16,4 +16,6 @@ public interface AttachFileServiceAsync {
 
 	void update(AttachFile file, AsyncCallback<AttachFile> callback);
 
+	void deleteAttachFile(int attachfile_id, AsyncCallback<Boolean> callback);
+
 }

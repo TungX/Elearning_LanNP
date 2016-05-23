@@ -45,6 +45,13 @@ public class ServerAttachFile extends AttachFile implements ServerModel {
 			return null;
 		return attachFile;
 	}
+	
+	public boolean delete(int attachfile_id) {
+		this.conn.condition.clear();
+		this.conn.condition.put("id", attachfile_id+"");
+		this.conn.connectDatabase();
+		return this.conn.delete("attach_files");
+	}
 
 	@Override
 	public Model setData(ResultSet rs) throws SQLException {

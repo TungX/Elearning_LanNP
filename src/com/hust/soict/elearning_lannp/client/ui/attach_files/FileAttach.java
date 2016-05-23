@@ -48,7 +48,7 @@ public class FileAttach extends Composite {
 	@UiHandler("btnRemove")
 	void onBtnRemoveClick(ClickEvent e) {
 		EventOfAttachFile event = new EventOfAttachFile(this, null);
-		FormDelete form = new FormDelete(event);
+		FormDelete form = new FormDelete(event, attachFile);
 		form.show();
 	}
 }

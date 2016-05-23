@@ -9,7 +9,7 @@ import com.hust.soict.elearning_lannp.client.ui.attach_files.AttachForm;
 import com.hust.soict.elearning_lannp.client.ui.attach_files.FileAttach;
 import com.hust.soict.elearning_lannp.shared.model.AttachFile;
 
-public class EventOfAttachFile extends Event{
+public class EventOfAttachFile extends Event {
 	private FileAttach fileAttach;
 	private AttachForm form;
 	private AttachFileServiceAsync attachFileServiceAsync;
@@ -21,26 +21,37 @@ public class EventOfAttachFile extends Event{
 	}
 
 	public void doSave(AttachFile attachFile) {
-		this.attachFileServiceAsync.update(attachFile,
-				new AsyncCallback<AttachFile>() {
+		this.attachFileServiceAsync.update(attachFile, new AsyncCallback<AttachFile>() {
 
-					@Override
-					public void onSuccess(AttachFile result) {
-						fileAttach.setFile(result);
-						form.hide();
-					}
+			@Override
+			public void onSuccess(AttachFile result) {
+				fileAttach.setFile(result);
+				form.hide();
+			}
 
-					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert("Sorry, this attach file is errors! Pleas contact with us"
-								+ caught.getMessage());
-					}
-				});
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Sorry, this attach file is errors! Pleas contact with us");
+			}
+		});
 	}
 
 	@Override
-	public void delete() {
-		Window.alert("This is method delete");
+	public void delete(int id) {
+		this.attachFileServiceAsync.deleteAttachFile(id, new AsyncCallback<Boolean>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				Window.alert("Sorry, this attach file is errors! Pleas contact with us");
+			}
+
+			@Override
+			public void onSuccess(Boolean result) {
+				// TODO Auto-generated method stub
+				fileAttach.removeFromParent();
+			}
+		});
 	}
 
 }

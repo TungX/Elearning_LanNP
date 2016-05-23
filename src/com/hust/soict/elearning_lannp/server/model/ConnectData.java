@@ -21,8 +21,7 @@ public class ConnectData {
 	public void connectDatabase() {
 		try {
 			Class.forName(JDBC_DRIVER).newInstance();
-			conn = DriverManager.getConnection(jdbc_url, mysql_user,
-					mysql_password);
+			conn = DriverManager.getConnection(jdbc_url, mysql_user, mysql_password);
 			stmt = conn.createStatement();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -48,9 +47,8 @@ public class ConnectData {
 		int count = 0;
 		try {
 			stmt = conn.createStatement();
-			ResultSet rs = stmt
-					.executeQuery("select * from users where email='" + email
-							+ "'&& encrypted_password='" + password + "'");
+			ResultSet rs = stmt.executeQuery(
+					"select * from users where email='" + email + "'&& encrypted_password='" + password + "'");
 			rs.last();
 			count = rs.getRow();
 			closeDatabase();
@@ -101,7 +99,6 @@ public class ConnectData {
 		if (queryplus == null || queryplus.isEmpty())
 			return false;
 		query += "where " + queryplus;
-		System.out.println("Query: " + query);
 		try {
 			this.stmt.executeUpdate(query);
 		} catch (SQLException e) {
@@ -117,8 +114,7 @@ public class ConnectData {
 		int id;
 		try {
 			String query = "INSERT INTO " + table_name + getQueryInsert();
-			id = this.stmt
-					.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			id = this.stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
 			if (id == 0)
 				return 0;
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -134,6 +130,21 @@ public class ConnectData {
 		return id;
 	}
 
+	public boolean delete(String table_name) {
+		connectDatabase();
+		String query = "DELETE FROM " + table_name + " " + getQuery(condition, "");
+		System.out.println("query: " + query);
+		try {
+			this.stmt.executeUpdate(query);
+			closeDatabase();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
 	private String getQueryUpdate() {
 		if (condition.size() == 0 || condition == null)
 			return null;
@@ -142,8 +153,7 @@ public class ConnectData {
 		for (int i = 0; i < keys.length - 1; i++) {
 			query += keys[i] + "='" + condition.get(keys[i]) + "',";
 		}
-		query += keys[keys.length - 1] + "='"
-				+ condition.get(keys[keys.length - 1]) + "'";
+		query += keys[keys.length - 1] + "='" + condition.get(keys[keys.length - 1]) + "'";
 		return query;
 	}
 
@@ -164,16 +174,14 @@ public class ConnectData {
 	}
 
 	private String getQuery(HashMap<String, String> condition, String queryplus) {
-		if ((condition.size() == 0 || condition == null)
-				&& (queryplus.isEmpty() || queryplus == null))
+		if ((condition.size() == 0 || condition == null) && (queryplus.isEmpty() || queryplus == null))
 			return "";
 		String[] keys = condition.keySet().toArray(new String[0]);
 		String query = " where (";
 		for (int i = 0; i < keys.length - 1; i++) {
 			query += keys[i] + "='" + condition.get(keys[i]) + "' and ";
 		}
-		query += keys[keys.length - 1] + "='"
-				+ condition.get(keys[keys.length - 1]) + "')";
+		query += keys[keys.length - 1] + "='" + condition.get(keys[keys.length - 1]) + "')";
 		if (keys.length > 0 && !queryplus.isEmpty())
 			query += " and ";
 		query += queryplus;
