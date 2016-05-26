@@ -45,6 +45,7 @@ public class ServerUsers extends User implements ServerModel {
 			rs.first();
 			user = (User) setData(rs);
 		} catch (SQLException e) {
+			e.printStackTrace();
 			user = null;
 		}
 		return user;
@@ -57,6 +58,7 @@ public class ServerUsers extends User implements ServerModel {
 		user.setFirstName(rs.getString("first_name"));
 		user.setLasttName(rs.getString("last_name"));
 		user.setType(rs.getInt("type"));
+		user.setAvatar(rs.getString("avatar"));
 		return user;
 	}
 }

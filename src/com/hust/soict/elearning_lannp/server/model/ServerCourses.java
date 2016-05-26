@@ -17,6 +17,23 @@ public class ServerCourses extends Course {
 		this.conn = new ConnectData();
 	}
 
+	public Course update(Course course) {
+		this.conn.condition.clear();
+		this.conn.condition.put("name", course.getName());
+		this.conn.condition.put("description", course.getDescription());
+		String queryplus = "id='" + course.getId() + "'";
+		boolean result = this.conn.updateData("courses", queryplus);
+		if (result == false)
+			return null;
+		return course;
+	}
+	
+	public boolean destroy(int course_id) {
+		this.conn.condition.clear();
+		this.conn.condition.put("id", ""+course_id);
+		return this.conn.delete("courses");
+	}
+
 	public Course getCourse(int course_id) {
 		Course course = null;
 		this.conn.condition.put("id", "" + course_id);
@@ -43,6 +60,7 @@ public class ServerCourses extends Course {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return null;
 		}
 		return tcourses;
@@ -53,11 +71,14 @@ public class ServerCourses extends Course {
 		course.setId(rs.getInt("id"));
 		course.setName(rs.getString("name"));
 		course.setDescription(rs.getString("description"));
-		course.setHomework(rs.getString("homework"));
 		course.setPassword(rs.getString("password"));
 		course.setCategory(new Category(rs.getInt("category_id")));
 		ServerUsers user = new ServerUsers();
 		course.setUser(user.getUser(rs.getInt("user_id")));
+		ServerLectures lectures = new ServerLectures();
+		course.setLectures(lectures.getLectures(course.getId()));
+		ServerAssinment assinments = new ServerAssinment();
+		course.setAssignments(assinments.getAssignmentOfCourse(course.getId()));
 		return course;
 	}
 }

@@ -46,7 +46,7 @@ public class ServerAttachFile extends AttachFile implements ServerModel {
 		return attachFile;
 	}
 	
-	public boolean delete(int attachfile_id) {
+	public boolean destroy(int attachfile_id) {
 		this.conn.condition.clear();
 		this.conn.condition.put("id", attachfile_id+"");
 		this.conn.connectDatabase();

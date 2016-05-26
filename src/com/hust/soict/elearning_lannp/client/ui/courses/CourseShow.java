@@ -1,12 +1,13 @@
 package com.hust.soict.elearning_lannp.client.ui.courses;
 
+import org.gwtbootstrap3.client.ui.Breadcrumbs;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
-import com.hust.soict.elearning_lannp.client.event.EventOfCourseShow;
-import com.hust.soict.elearning_lannp.client.event.EventOfLecuture;
+import com.hust.soict.elearning_lannp.client.event.EventOfCourse;
 
 public class CourseShow extends Composite {
 
@@ -18,18 +19,15 @@ public class CourseShow extends Composite {
 
 	public CourseShow() {
 		initWidget(uiBinder.createAndBindUi(this));
-		EventOfCourseShow event = new EventOfCourseShow(leftbar, rightcontent, 1);
-		event.loadLectures();
-		event.loadAssignments();
-		event.loadCourseName();
+		EventOfCourse event = new EventOfCourse(leftbar, rightcontent,
+				breadCrumbs, 1);
 		event.loadCourseInfo();
-		EventOfLecuture eventOfLecuture = new EventOfLecuture();
-		eventOfLecuture.setRightBar(rightcontent);
-		eventOfLecuture.show(1);
 	}
 
 	@UiField
 	CourseLeftBar leftbar;
 	@UiField
 	CourseRightBar rightcontent;
+	@UiField
+	Breadcrumbs breadCrumbs;
 }

@@ -18,9 +18,7 @@ public class ServerAssinment extends Assignment implements ServerModel{
 		this.conn.condition.clear();
 		this.conn.condition.put("name", result.getName());
 		this.conn.condition.put("description", result.getDescription());
-		this.conn.condition.put("deadline", result.getDeadline());
 		this.conn.condition.put("course_id", ""+result.getCourseId());
-		this.conn.condition.put("type", "1");
 		int id = this.conn.insertData("assignments");
 		if(id == 0){
 			result = null;
@@ -53,8 +51,7 @@ public class ServerAssinment extends Assignment implements ServerModel{
 	public Model setData(ResultSet rs) throws SQLException {
 		Assignment assignment = new Assignment();
 		assignment.setId(rs.getInt("id"));
-		assignment.setCourseId(rs.getInt("course_id"));
-		assignment.setDeadline(rs.getString("deadline"));
+		assignment.setCourseId(rs.getInt("course_id"));		
 		assignment.setName(rs.getString("name"));
 		assignment.setDescription(rs.getString("description"));
 		return assignment;

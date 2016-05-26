@@ -13,23 +13,22 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.event.Event;
-import com.hust.soict.elearning_lannp.shared.model.AttachFile;
 
 public class FormDelete extends Composite {
 
 	private static FormDeleteUiBinder uiBinder = GWT
 			.create(FormDeleteUiBinder.class);
 	private Event event;
-	private AttachFile attachFile;
+	private int id;
 
 	interface FormDeleteUiBinder extends UiBinder<Widget, FormDelete> {
 	}
 
-	public FormDelete(Event event, AttachFile attachFile) {
+	public FormDelete(Event event, int id) {
 		initWidget(uiBinder.createAndBindUi(this));
 		RootPanel.get().add(this);
 		this.event = event;
-		this.attachFile = attachFile;
+		this.id = id;;
 	}
 
 	@UiField
@@ -57,7 +56,7 @@ public class FormDelete extends Composite {
 
 	@UiHandler("btnOk")
 	void onBtnOkClick(ClickEvent e) {
-		this.event.delete(attachFile.getId());
+		this.event.delete(this.id);
 		this.modalDelete.hide();
 	}
 }
