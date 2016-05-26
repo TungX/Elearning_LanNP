@@ -38,9 +38,9 @@ public class AttachFilesSeviceImpl extends RemoteServiceServlet implements Attac
 	}
 
 	@Override
-	public boolean deleteAttachFile(int attachfile_id) {
+	public boolean destroy(int attachfile_id) {
 		ServerAttachFile attachFileS = new ServerAttachFile();
-		return attachFileS.delete(attachfile_id);
+		return attachFileS.destroy(attachfile_id);
 	}
 
 }

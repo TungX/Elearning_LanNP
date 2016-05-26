@@ -38,7 +38,7 @@ public class EventOfAttachFile extends Event {
 
 	@Override
 	public void delete(int id) {
-		this.attachFileServiceAsync.deleteAttachFile(id, new AsyncCallback<Boolean>() {
+		this.attachFileServiceAsync.destroy(id, new AsyncCallback<Boolean>() {
 
 			@Override
 			public void onFailure(Throwable caught) {

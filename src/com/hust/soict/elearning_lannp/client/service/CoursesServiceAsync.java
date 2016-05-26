@@ -9,9 +9,9 @@ import com.hust.soict.elearning_lannp.shared.model.User;
 
 public interface CoursesServiceAsync {
 
-	void addCourse(Course course, AsyncCallback<Course> callback);
+	void add(Course course, AsyncCallback<Course> callback);
 
-	void destroyCourse(Course course, AsyncCallback<Boolean> callback);
+	void destroy(Course course, AsyncCallback<Boolean> callback);
 
 	void getCourses(AsyncCallback<ArrayList<Course>> callback);
 
@@ -19,7 +19,7 @@ public interface CoursesServiceAsync {
 
 	void getCourses(Category user, AsyncCallback<ArrayList<Course>> callback);
 
-	void updateCourse(Course course, AsyncCallback<Course> callback);
+	void update(Course course, AsyncCallback<Course> callback);
 
 	void getCourse(int id, AsyncCallback<Course> callback);
 

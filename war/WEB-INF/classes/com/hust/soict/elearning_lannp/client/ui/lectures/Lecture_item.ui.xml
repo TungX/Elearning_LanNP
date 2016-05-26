@@ -1,9 +1,16 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
 	<ui:style>
-	
+	.mouse-pointer {
+		cursor: pointer;
+	}
 	</ui:style>
-	<g:HTMLPanel>
-	</g:HTMLPanel>
+	<b:Panel type="INFO">
+		<b:PanelHeader>
+			<b:Icon type="BOOK" />
+			<b:Anchor ui:field="url" />
+		</b:PanelHeader>
+	</b:Panel>
+
 </ui:UiBinder> 

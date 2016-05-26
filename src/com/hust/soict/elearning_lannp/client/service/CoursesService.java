@@ -18,9 +18,9 @@ public interface CoursesService extends RemoteService {
 	
 	Course getCourse(int id);
 
-	Course addCourse(Course course);
+	Course add(Course course);
 
-	Course updateCourse(Course course);
+	Course update(Course course);
 
-	boolean destroyCourse(Course course);
+	boolean destroy(Course course);
 }

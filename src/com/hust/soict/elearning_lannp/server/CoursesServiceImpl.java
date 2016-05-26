@@ -36,21 +36,21 @@ CoursesService{
 	}
 
 	@Override
-	public Course addCourse(Course course) {
+	public Course add(Course course) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Course updateCourse(Course course) {
+	public Course update(Course course) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean destroyCourse(Course course) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean destroy(Course course) {
+		ServerCourses courses = new ServerCourses();
+		return courses.destroy(course.getId());
 	}
 
 	@Override
