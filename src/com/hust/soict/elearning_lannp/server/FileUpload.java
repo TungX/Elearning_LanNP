@@ -34,8 +34,15 @@ public class FileUpload extends HttpServlet {
 				while ((len = stream.read(buffer, 0, buffer.length)) != -1) {
 					out.write(buffer, 0, len);
 				}
-				FileOutputStream fos = new FileOutputStream(new File("uploads/"+item.getName()));
+				File forder = new File("uploads");
+				if (!forder.exists()) {
+					forder.mkdir();
+				}
+
+				FileOutputStream fos = new FileOutputStream(new File("uploads/"
+						+ item.getName()));
 				out.writeTo(fos);
+				System.out.println("Complete make file");
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);

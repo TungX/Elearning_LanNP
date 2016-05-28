@@ -1,5 +1,7 @@
 package com.hust.soict.elearning_lannp.shared.model;
 
+import java.util.ArrayList;
+
 public class Course extends Model {
 	protected int id;
 	protected String name;
@@ -8,6 +10,8 @@ public class Course extends Model {
 	protected String password;
 	protected String homework;
 	protected Category category;
+	protected ArrayList<Lecture> lectures;
+	protected ArrayList<Assignment> assignments;
 
 	@Override
 	protected boolean validate() {
@@ -20,6 +24,12 @@ public class Course extends Model {
 	}
 
 	public Course() {
+	}
+		
+	public void updateInfo(String name, String description, String password){
+		this.name = name;
+		this.description = description;
+		this.password = password;
 	}
 
 	public int getId() {
@@ -76,6 +86,22 @@ public class Course extends Model {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public ArrayList<Lecture> getLectures() {
+		return lectures;
+	}
+
+	public void setLectures(ArrayList<Lecture> lectures) {
+		this.lectures = lectures;
+	}
+
+	public ArrayList<Assignment> getAssignments() {
+		return assignments;
+	}
+
+	public void setAssignments(ArrayList<Assignment> assignments) {
+		this.assignments = assignments;
 	}
 
 }

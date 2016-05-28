@@ -11,6 +11,7 @@
 			<lb:CourseLeftBar ui:field="leftbar" />
 		</b:Column>
 		<b:Column size="XS_9">
+			<b:Breadcrumbs ui:field="breadCrumbs" />
 			<lb:CourseRightBar ui:field="rightcontent" />
 		</b:Column>
 	</b:Column>

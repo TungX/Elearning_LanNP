@@ -7,6 +7,7 @@ public class User extends Model {
 	protected String password_confirm;
 	protected String firstName;
 	protected String lasttName;
+	protected String avatar;
 	protected int type;
 
 	public User(String email, String password, String password_confirm,
@@ -23,7 +24,7 @@ public class User extends Model {
 	public User() {
 		super();
 	}
-	
+
 	public User(int id) {
 		super();
 		this.id = id;
@@ -101,5 +102,13 @@ public class User extends Model {
 		if (this.password.compareTo(this.password_confirm) != 0)
 			return false;
 		return this.errors.isEmpty();
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 }

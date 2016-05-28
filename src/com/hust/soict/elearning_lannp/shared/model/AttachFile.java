@@ -1,13 +1,15 @@
 package com.hust.soict.elearning_lannp.shared.model;
 
-import java.sql.Time;
-
-public class AttachFile extends Model{
+public class AttachFile extends Model {
 	protected int id;
 	protected String name;
 	protected int user_id;
+	protected int lecture_id;
 	protected String path;
-	protected Time time;
+
+	public AttachFile() {
+
+	}
 
 	public int getId() {
 		return id;
@@ -41,17 +43,17 @@ public class AttachFile extends Model{
 		this.path = path;
 	}
 
-	public Time getTime() {
-		return time;
-	}
-
-	public void setTime(Time time) {
-		this.time = time;
-	}
-
 	@Override
 	protected boolean validate() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public int getLecture_id() {
+		return lecture_id;
+	}
+
+	public void setLecture_id(int lecture_id) {
+		this.lecture_id = lecture_id;
 	}
 }

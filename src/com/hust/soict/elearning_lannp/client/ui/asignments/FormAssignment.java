@@ -16,7 +16,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DatePicker;
@@ -83,7 +82,6 @@ public class FormAssignment extends Composite {
 
 	@UiHandler("btnSave")
 	void onBtnSaveClick(ClickEvent e) {
-		Window.alert("Save");
 		event.doSave(txtName.getText(), txtDescription.getText(), txtDate.getText(), course_id);
 	}
 

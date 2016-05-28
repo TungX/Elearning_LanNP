@@ -51,6 +51,7 @@
 		<servlet-name>AssigmentsSeviceImpl</servlet-name>
 		<url-pattern>/elearning_lannp/assignmentsservice</url-pattern>
 	</servlet-mapping>
+	<!-- Servlets upload file -->
 	<servlet>
 		<servlet-name>fileUploaderServlet</servlet-name>
 		<servlet-class>com.hust.soict.elearning_lannp.server.FileUpload</servlet-class>
@@ -58,5 +59,14 @@
 	<servlet-mapping>
 		<servlet-name>fileUploaderServlet</servlet-name>
 		<url-pattern>/elearning_lannp/fileupload</url-pattern>
+	</servlet-mapping>
+	<!-- Servlets upload file -->
+	<servlet>
+		<servlet-name>AttachFilesSeviceImpl</servlet-name>
+		<servlet-class>com.hust.soict.elearning_lannp.server.AttachFilesSeviceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AttachFilesSeviceImpl</servlet-name>
+		<url-pattern>/elearning_lannp/attachfileservice</url-pattern>
 	</servlet-mapping>
 </web-app>

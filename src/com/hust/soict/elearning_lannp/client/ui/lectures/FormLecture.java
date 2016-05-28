@@ -26,8 +26,10 @@ public class FormLecture extends Composite {
 	public FormLecture(CourseLeftBar leftBar, int course_id) {
 		initWidget(uiBinder.createAndBindUi(this));
 		RootPanel.get().add(this);
-		event = new EventOfLecuture(this, leftBar);
+		event = new EventOfLecuture();
 		this.course_id = course_id;
+		event.setForm(this);
+		event.setLeftBar(leftBar);
 	}
 
 	@UiField

@@ -14,18 +14,18 @@ public class ServerLectures extends Lecture implements ServerModel {
 		super();
 		this.conn = new ConnectData();
 	}
-	
+
 	public Lecture insertLecuture(Lecture lecture) {
 		Lecture result = lecture;
 		this.conn.condition.clear();
 		this.conn.condition.put("name", lecture.getName());
 		this.conn.condition.put("description", lecture.getDescription());
 		this.conn.condition.put("password", lecture.getPassword());
-		this.conn.condition.put("course_id", ""+lecture.getCourseId());
+		this.conn.condition.put("course_id", "" + lecture.getCourseId());
 		int id = this.conn.insertData("lectures");
-		if(id == 0){
+		if (id == 0) {
 			result = null;
-		}else{
+		} else {
 			result.setId(id);
 		}
 		return result;
@@ -66,6 +66,28 @@ public class ServerLectures extends Lecture implements ServerModel {
 		return lectures;
 	}
 
+	public void destroyWithCourse(int course_id) {
+		this.conn.condition.clear();
+		ServerAttachFile attachFile = new ServerAttachFile();
+		attachFile.destroyWithCourse(course_id);
+		this.conn.condition.put("course_id", course_id + "");
+		this.conn.delete("lectures");
+	}
+
+	public void destroy(int id) {
+		this.conn.condition.clear();
+		this.conn.condition.put("id", id + "");
+		ServerAttachFile attachFile = new ServerAttachFile();
+		attachFile.destroyWithLecture(id);
+		this.conn.delete("lectures");
+		try {
+			this.conn.closeDatabase();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public Model setData(ResultSet rs) throws SQLException {
 		Lecture lecture = new Lecture();
@@ -74,6 +96,8 @@ public class ServerLectures extends Lecture implements ServerModel {
 		lecture.setDescription(rs.getString("description"));
 		lecture.setPassword(rs.getString("password"));
 		lecture.setCourseId(rs.getInt("course_id"));
+		ServerAttachFile attachFile = new ServerAttachFile();
+		lecture.setAttachFiles(attachFile.getAttachFilesOfLecture(lecture.getId()));
 		return lecture;
 	}
 
