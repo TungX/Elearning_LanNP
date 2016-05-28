@@ -14,6 +14,18 @@ public class ServerLectures extends Lecture implements ServerModel {
 		super();
 		this.conn = new ConnectData();
 	}
+	
+	public Lecture update(Lecture lecture) {
+		this.conn.condition.clear();
+		this.conn.condition.put("name", lecture.getName());
+		this.conn.condition.put("description", lecture.getDescription());
+		this.conn.condition.put("password", lecture.getPassword());
+		String queryplus = "id='" + lecture.getId() + "'";
+		boolean result = this.conn.updateData("lectures", queryplus);
+		if (result == false)
+			return null;
+		return lecture;
+	}
 
 	public Lecture insertLecuture(Lecture lecture) {
 		Lecture result = lecture;
@@ -44,7 +56,8 @@ public class ServerLectures extends Lecture implements ServerModel {
 			e.printStackTrace();
 			lecture = null;
 		}
-
+		ServerCourses course = new ServerCourses();
+		lecture.setCourse(course.getCourse(lecture.getCourseId()));
 		return lecture;
 	}
 

@@ -5,7 +5,7 @@
 	<ui:style>
 	</ui:style>
 	<b:Modal title="Add lecture" closable="true" fade="true"
-		dataBackdrop="STATIC" dataKeyboard="true" ui:field="modalAddLecture">
+		dataBackdrop="STATIC" dataKeyboard="true" ui:field="modalLecture">
 
 		<b:ModalBody>
 			<b:Form type="HORIZONTAL">

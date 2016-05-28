@@ -18,4 +18,6 @@ public interface AttachFileServiceAsync {
 
 	void destroy(int attachfile_id, AsyncCallback<Void> callback);
 
+	void add(AttachFile file, AsyncCallback<AttachFile> callback);
+
 }

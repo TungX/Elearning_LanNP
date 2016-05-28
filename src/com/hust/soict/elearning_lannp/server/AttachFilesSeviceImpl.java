@@ -8,7 +8,7 @@ import com.hust.soict.elearning_lannp.server.model.ServerAttachFile;
 import com.hust.soict.elearning_lannp.shared.model.AttachFile;
 import com.hust.soict.elearning_lannp.shared.model.User;
 
-public class AttachFilesSeviceImpl extends RemoteServiceServlet implements AttachFileService{
+public class AttachFilesSeviceImpl extends RemoteServiceServlet implements AttachFileService {
 
 	/**
 	 * 
@@ -17,7 +17,7 @@ public class AttachFilesSeviceImpl extends RemoteServiceServlet implements Attac
 
 	public void uploadAttachFiles(User user, String name) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public ArrayList<AttachFile> getFileOfUser(User user) {
@@ -41,6 +41,12 @@ public class AttachFilesSeviceImpl extends RemoteServiceServlet implements Attac
 	public void destroy(int attachfile_id) {
 		ServerAttachFile attachFileS = new ServerAttachFile();
 		attachFileS.destroy(attachfile_id);
+	}
+
+	@Override
+	public AttachFile add(AttachFile file) {
+		ServerAttachFile attachFileS = new ServerAttachFile();
+		return attachFileS.insert(file);
 	}
 
 }

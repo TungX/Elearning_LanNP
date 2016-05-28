@@ -52,6 +52,7 @@ public class PanelDescription extends Composite {
 	}
 
 	public void setContent(String content) {
+		this.content.clear();
 		HTML html = new HTML(content);
 		this.content.add(html);
 	}

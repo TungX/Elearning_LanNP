@@ -26,21 +26,21 @@ public class LecturesServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public Lecture addLecture(Lecture lecture) {
+	public Lecture add(Lecture lecture) {
 		ServerLectures lectures = new ServerLectures();
 		return lectures.insertLecuture(lecture);
 	}
 
 	@Override
-	public Lecture updateLecture(Lecture lecture) {
-		// TODO Auto-generated method stub
-		return null;
+	public Lecture update(Lecture lecture) {
+		ServerLectures lectures = new ServerLectures();
+		return lectures.update(lecture);
 	}
 
 	@Override
-	public boolean destroyLecture(Lecture lecture) {
-		// TODO Auto-generated method stub
-		return false;
+	public void destroy(int lecture_id) {
+		ServerLectures lectures = new ServerLectures();
+		lectures.destroy(lecture_id);
 	}
 
 }

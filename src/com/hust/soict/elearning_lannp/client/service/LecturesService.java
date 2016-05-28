@@ -12,9 +12,9 @@ public interface LecturesService extends RemoteService {
 
 	ArrayList<Lecture> getLectures(int course_id);
 
-	Lecture addLecture(Lecture lecture);
+	Lecture add(Lecture lecture);
 
-	Lecture updateLecture(Lecture lecture);
+	Lecture update(Lecture lecture);
 
-	boolean destroyLecture(Lecture lecture);
+	void destroy(int lecture_id);
 }

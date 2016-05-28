@@ -28,7 +28,23 @@ public class Lecture extends Model {
 	}
 
 	public Lecture() {
+		this.name = "";
+		this.description = "";
+		this.attachFiles = new ArrayList<AttachFile>();
+	}
 
+	public Lecture(Course course) {
+		this.course = course;
+		this.course_id = course.getId();
+		this.name = "";
+		this.description = "";
+		this.attachFiles = new ArrayList<AttachFile>();
+	}
+
+	public void setInfo(String name, String description, String password) {
+		this.name = name;
+		this.description = description;
+		this.password = password;
 	}
 
 	public int getId() {

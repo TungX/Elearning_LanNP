@@ -27,11 +27,11 @@ public class AttachFile extends Model {
 		this.name = name;
 	}
 
-	public int getUser_id() {
+	public int getUserId() {
 		return user_id;
 	}
 
-	public void setUser_id(int user_id) {
+	public void setUserId(int user_id) {
 		this.user_id = user_id;
 	}
 
@@ -49,11 +49,11 @@ public class AttachFile extends Model {
 		return false;
 	}
 
-	public int getLecture_id() {
+	public int getLectureId() {
 		return lecture_id;
 	}
 
-	public void setLecture_id(int lecture_id) {
+	public void setLectureId(int lecture_id) {
 		this.lecture_id = lecture_id;
 	}
 }

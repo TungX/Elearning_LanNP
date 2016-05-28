@@ -29,6 +29,7 @@
 	}
 	</ui:style>
 	<g:HTMLPanel>
+		<b:Breadcrumbs ui:field="breadCrumbs" />
 		<div class='{style.gwt-header-course}'>
 			<H1 class='{style.gwt-title-course}'>
 				<b.html:Text ui:field="txtCourseName" />
@@ -36,7 +37,7 @@
 		</div>
 		<div class='{style.gwt-description}'>
 			<ls:PanelDescription ui:field="panelDescription" />
-		</div>
+		</div>		
 		<b.html:Div ui:field="content" />
 	</g:HTMLPanel>
 

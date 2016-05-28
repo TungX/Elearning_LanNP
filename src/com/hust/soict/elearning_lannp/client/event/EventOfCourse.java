@@ -1,8 +1,5 @@
 package com.hust.soict.elearning_lannp.client.event;
 
-import org.gwtbootstrap3.client.ui.AnchorListItem;
-import org.gwtbootstrap3.client.ui.Breadcrumbs;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -16,14 +13,12 @@ public class EventOfCourse extends Event {
 	private CoursesServiceAsync coursesServiceAsync;
 	private CourseLeftBar leftbar;
 	private CourseRightBar rightbar;
-	private Breadcrumbs breadCrumbs;
 	private Course course;
 	private EventOfCourse self;
 
-	public EventOfCourse(CourseLeftBar leftbar, CourseRightBar rightbar, Breadcrumbs breadCrumbs, int course_id) {
+	public EventOfCourse(CourseLeftBar leftbar, CourseRightBar rightbar, int course_id) {
 		this.leftbar = leftbar;
 		this.rightbar = rightbar;
-		this.breadCrumbs = breadCrumbs;
 		this.coursesServiceAsync = GWT.create(CoursesService.class);
 		this.self = this;
 		loadCourseInfo(course_id);
@@ -57,8 +52,6 @@ public class EventOfCourse extends Event {
 			@Override
 			public void onSuccess(Course result) {
 				rightbar.loadCourseInfo(result);
-				breadCrumbs.clear();
-				breadCrumbs.add(new AnchorListItem(result.getName()));
 			}
 		});
 	}
@@ -75,7 +68,6 @@ public class EventOfCourse extends Event {
 		this.course = result;
 		rightbar.loadCourseInfo(result, event);
 		leftbar.setCourse(result);
-		breadCrumbs.add(new AnchorListItem(result.getName()));
 		leftbar.setLectures(result.getLectures());
 		leftbar.setAssignments(result.getAssignments());
 	}
@@ -91,7 +83,7 @@ public class EventOfCourse extends Event {
 
 			@Override
 			public void onSuccess(Boolean result) {
-				History.newItem("users/" + course.getUser().getId() + "/courses");
+				History.newItem("courses");
 			}
 		});
 	}

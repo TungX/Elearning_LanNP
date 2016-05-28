@@ -22,8 +22,8 @@ import com.hust.soict.elearning_lannp.shared.model.AttachFile;
 public class AttachForm extends Composite {
 	private AttachFile attachFile;
 	private FileAttach fA;
-	private static AttachFormUiBinder uiBinder = GWT
-			.create(AttachFormUiBinder.class);
+	private FileAttaches fas;
+	private static AttachFormUiBinder uiBinder = GWT.create(AttachFormUiBinder.class);
 	private EventOfAttachFile event;
 
 	interface AttachFormUiBinder extends UiBinder<Widget, AttachForm> {
@@ -53,6 +53,11 @@ public class AttachForm extends Composite {
 	FileUpload uploadFile;
 	@UiField
 	Button btnSave;
+
+	public void setFileAttaches(FileAttaches attach_files, AttachFile af) {
+		this.fas = attach_files;
+		this.attachFile = af;
+	}
 
 	public void submit() {
 		if (!uploadFile.getFilename().isEmpty())
@@ -102,6 +107,9 @@ public class AttachForm extends Composite {
 		this.attachFile.setName(txtName.getText());
 		this.attachFile.setPath(txtPath.getText());
 		submit();
-		this.event.doSave(this.attachFile);
+		if (this.attachFile.getId() == 0)
+			this.event.doSave(attachFile, fas);
+		else
+			this.event.doSave(this.attachFile);
 	}
 }

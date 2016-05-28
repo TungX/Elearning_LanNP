@@ -1,16 +1,23 @@
 package com.hust.soict.elearning_lannp.client.ui.courses;
 
+import org.gwtbootstrap3.client.ui.Anchor;
+import org.gwtbootstrap3.client.ui.AnchorListItem;
+import org.gwtbootstrap3.client.ui.Breadcrumbs;
 import org.gwtbootstrap3.client.ui.html.Div;
 import org.gwtbootstrap3.client.ui.html.Text;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.event.EventOfCourse;
+import com.hust.soict.elearning_lannp.client.event.EventOfLecuture;
 import com.hust.soict.elearning_lannp.client.ui.asignments.Assignment_index;
 import com.hust.soict.elearning_lannp.client.ui.attach_files.FileAttaches;
+import com.hust.soict.elearning_lannp.client.ui.lectures.LectureForm;
 import com.hust.soict.elearning_lannp.client.ui.lectures.Lecture_index;
 import com.hust.soict.elearning_lannp.client.ui.shared.PanelDescription;
 import com.hust.soict.elearning_lannp.shared.model.Course;
@@ -18,8 +25,7 @@ import com.hust.soict.elearning_lannp.shared.model.Lecture;
 
 public class CourseRightBar extends Composite {
 
-	private static CourseRightBarUiBinder uiBinder = GWT
-			.create(CourseRightBarUiBinder.class);
+	private static CourseRightBarUiBinder uiBinder = GWT.create(CourseRightBarUiBinder.class);
 
 	interface CourseRightBarUiBinder extends UiBinder<Widget, CourseRightBar> {
 	}
@@ -34,10 +40,12 @@ public class CourseRightBar extends Composite {
 	PanelDescription panelDescription;
 	@UiField
 	Div content;
-	
+	@UiField
+	Breadcrumbs breadCrumbs;
+
 	public void loadCourseInfo(Course course, EventOfCourse event) {
 		CourseForm form = new CourseForm(event, course);
-		form.setTitle("Update "+course.getName());
+		form.setTitle("Update " + course.getName());
 		txtCourseName.setText(course.getName());
 		panelDescription.setUser(course.getUser());
 		panelDescription.setContent(course.getDescription());
@@ -50,16 +58,56 @@ public class CourseRightBar extends Composite {
 		Assignment_index assignments = new Assignment_index();
 		assignments.setAssignments(course.getAssignments());
 		this.content.add(assignments);
-	}
-	
-	public void loadCourseInfo(Course course){
-		txtCourseName.setText(course.getName());
-		panelDescription.setContent(course.getDescription());
-		
+		loadBreadcrumbs(course);
 	}
 
-	public void setLecture(Lecture lecture) {
+	public void loadCourseInfo(Course course) {
+		txtCourseName.setText(course.getName());
+		panelDescription.setContent(course.getDescription());
+		loadBreadcrumbs(course);
+
+	}
+
+	public FileAttaches setLecture(Lecture lecture) {
 		FileAttaches fas = new FileAttaches();
 		fas.addFiles(lecture.getAttachFiles());
+		return fas;
+	}
+
+	public void loadLectureInfo(Lecture lecture, EventOfLecuture event, CourseLeftBar leftBar) {
+		LectureForm form = new LectureForm(leftBar, lecture);
+		form.setEvent(event);
+		form.setTitle("Update " + lecture.getName());
+		txtCourseName.setText(lecture.getName());
+		panelDescription.setUser(lecture.getCourse().getUser());
+		panelDescription.setContent(lecture.getDescription());
+		panelDescription.setForm(form);
+		panelDescription.setId(lecture.getId());
+		panelDescription.setEvent(event);
+		FileAttaches fas = setLecture(lecture);
+		fas.loadInfo(lecture.getCourse().getUser().getId(), lecture.getId());
+		content.add(fas);
+		event.setForm(form);
+		loadBreadcrumbs(lecture);
+	}
+
+	public void loadLectureInfo(Lecture lecture) {
+		txtCourseName.setText(lecture.getName());
+		panelDescription.setContent(lecture.getDescription());
+		loadBreadcrumbs(lecture);
+	}
+
+	private void loadBreadcrumbs(Course course) {
+		breadCrumbs.clear();
+		AnchorListItem itemCourse = new AnchorListItem(course.getName());
+		itemCourse.setHref("#courses/" + course.getId());
+		breadCrumbs.add(itemCourse);
+	}
+
+	private void loadBreadcrumbs(Lecture lecture) {
+		loadBreadcrumbs(lecture.getCourse());
+		AnchorListItem itemCourse = new AnchorListItem(lecture.getName());
+		itemCourse.setHref("#courses/" + lecture.getCourse().getId() + "/lectures/" + lecture.getId());
+		breadCrumbs.add(itemCourse);
 	}
 }
