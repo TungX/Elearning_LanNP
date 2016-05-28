@@ -7,30 +7,49 @@ import java.util.ArrayList;
 import com.hust.soict.elearning_lannp.shared.model.Assignment;
 import com.hust.soict.elearning_lannp.shared.model.Model;
 
-public class ServerAssinment extends Assignment implements ServerModel{
+public class ServerAssinment extends Assignment implements ServerModel {
 	private ConnectData conn;
+
 	public ServerAssinment() {
 		this.conn = new ConnectData();
 	}
-	
+
 	public Assignment insert(Assignment assignment) {
 		Assignment result = assignment;
 		this.conn.condition.clear();
 		this.conn.condition.put("name", result.getName());
 		this.conn.condition.put("description", result.getDescription());
-		this.conn.condition.put("course_id", ""+result.getCourseId());
+		this.conn.condition.put("course_id", "" + result.getCourseId());
 		int id = this.conn.insertData("assignments");
-		if(id == 0){
+		if (id == 0) {
 			result = null;
-		}else{
+		} else {
 			result.setId(id);
 		}
 		return result;
-	} 
-	
-	public ArrayList<Assignment> getAssignmentOfCourse(int course_id){
+	}
+
+	public void destroy(int id) {
+		this.conn.condition.clear();
+		this.conn.condition.put("id", "" + id);
+		this.conn.delete("assignments");
+		try {
+			this.conn.closeDatabase();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void destroyWithCourse(int course_id) {
+		this.conn.condition.clear();
+		this.conn.condition.put("course_id", "" + course_id);
+		this.conn.delete("assignments");
+	}
+
+	public ArrayList<Assignment> getAssignmentOfCourse(int course_id) {
 		ArrayList<Assignment> assignments = new ArrayList<Assignment>();
-		this.conn.condition.put("course_id", ""+course_id);
+		this.conn.condition.put("course_id", "" + course_id);
 		this.conn.connectDatabase();
 		ResultSet rs = this.conn.getResultSet("assignments", "");
 		try {
@@ -46,12 +65,12 @@ public class ServerAssinment extends Assignment implements ServerModel{
 		}
 		return assignments;
 	}
-	
+
 	@Override
 	public Model setData(ResultSet rs) throws SQLException {
 		Assignment assignment = new Assignment();
 		assignment.setId(rs.getInt("id"));
-		assignment.setCourseId(rs.getInt("course_id"));		
+		assignment.setCourseId(rs.getInt("course_id"));
 		assignment.setName(rs.getString("name"));
 		assignment.setDescription(rs.getString("description"));
 		return assignment;

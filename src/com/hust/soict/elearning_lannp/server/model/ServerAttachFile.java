@@ -18,7 +18,6 @@ public class ServerAttachFile extends AttachFile implements ServerModel {
 	public ArrayList<AttachFile> getAttachFilesOfLecture(int lecture_id) {
 		ArrayList<AttachFile> attachFiles = new ArrayList<AttachFile>();
 		this.conn.condition.put("lecture_id", "" + lecture_id);
-		this.conn.connectDatabase();
 		ResultSet rs = this.conn.getResultSet("attach_files", "");
 		try {
 			while (rs.next()) {
@@ -38,19 +37,35 @@ public class ServerAttachFile extends AttachFile implements ServerModel {
 		this.conn.condition.clear();
 		this.conn.condition.put("name", attachFile.getName());
 		this.conn.condition.put("path", attachFile.getPath());
-		this.conn.connectDatabase();
 		String queryplus = "id='" + attachFile.getId() + "'";
 		boolean result = this.conn.updateData("attach_files", queryplus);
 		if (result == false)
 			return null;
 		return attachFile;
 	}
-	
-	public boolean destroy(int attachfile_id) {
+
+	public void destroyWithCourse(int course_id) {
 		this.conn.condition.clear();
-		this.conn.condition.put("id", attachfile_id+"");
-		this.conn.connectDatabase();
-		return this.conn.delete("attach_files");
+		String query = "id in (select id from lectures where course_id = " + course_id + ")";
+		this.conn.delete("attach_files", query);
+	}
+
+	public void destroyWithLecture(int lecture_id) {
+		this.conn.condition.clear();
+		this.conn.condition.put("lecture_id", lecture_id + "");
+		this.conn.delete("attach_files");
+	}
+
+	public void destroy(int attachfile_id) {
+		this.conn.condition.clear();
+		this.conn.condition.put("id", attachfile_id + "");
+		this.conn.delete("attach_files");
+		try {
+			this.conn.closeDatabase();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

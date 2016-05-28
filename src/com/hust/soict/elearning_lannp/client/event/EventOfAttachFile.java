@@ -38,7 +38,7 @@ public class EventOfAttachFile extends Event {
 
 	@Override
 	public void delete(int id) {
-		this.attachFileServiceAsync.destroy(id, new AsyncCallback<Boolean>() {
+		this.attachFileServiceAsync.destroy(id, new AsyncCallback<Void>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -47,7 +47,7 @@ public class EventOfAttachFile extends Event {
 			}
 
 			@Override
-			public void onSuccess(Boolean result) {
+			public void onSuccess(Void result) {
 				// TODO Auto-generated method stub
 				fileAttach.removeFromParent();
 			}

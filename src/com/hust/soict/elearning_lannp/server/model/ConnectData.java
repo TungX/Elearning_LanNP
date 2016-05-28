@@ -114,6 +114,7 @@ public class ConnectData {
 		int id;
 		try {
 			String query = "INSERT INTO " + table_name + getQueryInsert();
+			System.out.println("Query: " + query);
 			id = this.stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
 			if (id == 0)
 				return 0;
@@ -130,13 +131,28 @@ public class ConnectData {
 		return id;
 	}
 
+	public void delete(String table_name, String queryplus) {
+		connectDatabase();
+		String query = "DELETE FROM " + table_name + " ";
+		if (queryplus == null || queryplus.isEmpty())
+			return;
+		query += "where " + queryplus;
+		System.out.println(query);
+		try {
+			this.stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public boolean delete(String table_name) {
 		connectDatabase();
 		String query = "DELETE FROM " + table_name + " " + getQuery(condition, "");
-		System.out.println("query: " + query);
+		System.out.println(query);
+
 		try {
 			this.stmt.executeUpdate(query);
-			closeDatabase();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

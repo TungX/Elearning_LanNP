@@ -19,9 +19,8 @@ public class CourseShow extends Composite {
 
 	public CourseShow() {
 		initWidget(uiBinder.createAndBindUi(this));
-		EventOfCourse event = new EventOfCourse(leftbar, rightcontent,
+		new EventOfCourse(leftbar, rightcontent,
 				breadCrumbs, 1);
-		event.loadCourseInfo();
 	}
 
 	@UiField

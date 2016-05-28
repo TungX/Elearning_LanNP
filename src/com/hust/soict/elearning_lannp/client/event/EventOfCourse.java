@@ -4,7 +4,7 @@ import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.Breadcrumbs;
 
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.hust.soict.elearning_lannp.client.service.CoursesService;
 import com.hust.soict.elearning_lannp.client.service.CoursesServiceAsync;
@@ -20,48 +20,29 @@ public class EventOfCourse extends Event {
 	private Course course;
 	private EventOfCourse self;
 
-	public EventOfCourse(CourseLeftBar leftbar, CourseRightBar rightbar,
-			Breadcrumbs breadCrumbs, int course_id) {
-		this.course = new Course(course_id);
+	public EventOfCourse(CourseLeftBar leftbar, CourseRightBar rightbar, Breadcrumbs breadCrumbs, int course_id) {
 		this.leftbar = leftbar;
 		this.rightbar = rightbar;
 		this.breadCrumbs = breadCrumbs;
 		this.coursesServiceAsync = GWT.create(CoursesService.class);
 		this.self = this;
+		loadCourseInfo(course_id);
 	}
 
-	public void loadCourseInfo() {
-		this.coursesServiceAsync.getCourse(this.course.getId(),
-				new AsyncCallback<Course>() {
-					@Override
-					public void onSuccess(Course result) {
-						// TODO Auto-generated method stub
-						loadCourse(result, self);
-					}
+	public void loadCourseInfo(int course_id) {
+		this.coursesServiceAsync.getCourse(course_id, new AsyncCallback<Course>() {
+			@Override
+			public void onSuccess(Course result) {
+				// TODO Auto-generated method stub
+				loadCourse(result, self);
+				setCourse(result);
+			}
 
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-					}
-				});
-	}
-
-	public void delete() {
-		this.coursesServiceAsync.destroy(this.course,
-				new AsyncCallback<Boolean>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-
-					}
-
-					@Override
-					public void onSuccess(Boolean result) {
-						// TODO Auto-generated method stub
-
-					}
-				});
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+			}
+		});
 	}
 
 	public void update(Course course) {
@@ -86,8 +67,12 @@ public class EventOfCourse extends Event {
 		return this.course;
 	}
 
+	private void setCourse(Course course) {
+		this.course = course;
+	}
+
 	public void loadCourse(Course result, EventOfCourse event) {
-		course = result;
+		this.course = result;
 		rightbar.loadCourseInfo(result, event);
 		leftbar.setCourse(result);
 		breadCrumbs.add(new AnchorListItem(result.getName()));
@@ -97,7 +82,17 @@ public class EventOfCourse extends Event {
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
-		Window.alert("delete course " + id);
+		this.coursesServiceAsync.destroy(this.course, new AsyncCallback<Boolean>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void onSuccess(Boolean result) {
+				History.newItem("users/" + course.getUser().getId() + "/courses");
+			}
+		});
 	}
 }

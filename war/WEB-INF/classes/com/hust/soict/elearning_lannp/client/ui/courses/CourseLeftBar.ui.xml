@@ -24,7 +24,7 @@
 			<b:PanelHeader dataToggle="COLLAPSE" dataParent="#accordion"
 				dataTarget="#collapseLectures" ui:field="panelLectures">
 				<b:Heading size="H4">
-					<b:Icon type="LIST" fixedWidth="true" />
+					<b:Icon type="BOOK" fixedWidth="true" />
 					<b.html:Text text="Lectures" />
 				</b:Heading>
 			</b:PanelHeader>

@@ -54,6 +54,7 @@ public class ServerUsers extends User implements ServerModel {
 	@Override
 	public Model setData(ResultSet rs) throws SQLException {
 		User user = new User();
+		user.setId(rs.getInt("id"));
 		user.setEmail(rs.getString("email"));
 		user.setFirstName(rs.getString("first_name"));
 		user.setLasttName(rs.getString("last_name"));

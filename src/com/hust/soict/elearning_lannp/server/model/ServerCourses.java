@@ -30,6 +30,10 @@ public class ServerCourses extends Course {
 	
 	public boolean destroy(int course_id) {
 		this.conn.condition.clear();
+		ServerAssinment assinments = new ServerAssinment();
+		assinments.destroyWithCourse(course_id);
+		ServerLectures lectures = new ServerLectures();
+		lectures.destroyWithCourse(course_id);
 		this.conn.condition.put("id", ""+course_id);
 		return this.conn.delete("courses");
 	}

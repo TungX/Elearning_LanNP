@@ -12,5 +12,5 @@ public interface AttachFileService extends RemoteService {
 	ArrayList<AttachFile> getFileOfUser(User user);
 	ArrayList<AttachFile> getFileOfLecture(int lecture_id);
 	AttachFile update(AttachFile file);
-	boolean destroy(int attachfile_id);
+	void destroy(int attachfile_id);
 }
