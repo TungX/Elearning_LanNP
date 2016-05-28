@@ -14,6 +14,22 @@ public class ServerAttachFile extends AttachFile implements ServerModel {
 		super();
 		this.conn = new ConnectData();
 	}
+	
+	public AttachFile insert(AttachFile attachFile) {
+		AttachFile result = attachFile;
+		this.conn.condition.clear();
+		this.conn.condition.put("name", attachFile.getName());
+		this.conn.condition.put("path", attachFile.getPath());
+		this.conn.condition.put("user_id", attachFile.getUserId()+"");
+		this.conn.condition.put("lecture_id", ""+attachFile.getLectureId());
+		int id = this.conn.insertData("attach_files");
+		if (id == 0) {
+			result = null;
+		} else {
+			result.setId(id);
+		}
+		return result;
+	}
 
 	public ArrayList<AttachFile> getAttachFilesOfLecture(int lecture_id) {
 		ArrayList<AttachFile> attachFiles = new ArrayList<AttachFile>();

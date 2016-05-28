@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.ui.asignments.FormAssignment;
-import com.hust.soict.elearning_lannp.client.ui.lectures.FormLecture;
+import com.hust.soict.elearning_lannp.client.ui.lectures.LectureForm;
 import com.hust.soict.elearning_lannp.shared.model.*;
 
 public class CourseLeftBar extends Composite {
@@ -45,17 +45,18 @@ public class CourseLeftBar extends Composite {
 
 	@UiHandler("addLecture")
 	void onItemAddLecutureClick(ClickEvent e) {
-		FormLecture addLecture = new FormLecture(this, this.course.getId());
-		addLecture.setTitleModal(this.course.getName() + "/Add Lecture");
-		addLecture.showModal();
+		LectureForm addLecture = new LectureForm(this, new Lecture(this.course));
+		addLecture.setTitle(this.course.getName() + "/Add Lecture");
+		addLecture.show();
 	}
-	
+
 	@UiHandler("addAssignment")
 	void onItemAddAssignmentClick(ClickEvent e) {
 		FormAssignment addAssignment = new FormAssignment(this, this.course.getId());
 		addAssignment.setTitleModal(this.course.getName() + "/Add Assignment");
 		addAssignment.showModal();
 	}
+
 	public void addLecture(Lecture lecture) {
 		ListGroupItem item = new ListGroupItem();
 		Hyperlink link = new Hyperlink(lecture.getName(),

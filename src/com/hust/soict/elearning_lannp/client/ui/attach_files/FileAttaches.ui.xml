@@ -4,6 +4,13 @@
 	<ui:style>
 	
 	</ui:style>
-	<b:PanelGroup b:id="accordion" ui:field="attach_files">
-	</b:PanelGroup>
+	<g:HTMLPanel>
+		<b:Anchor icon="PLUS" text="Add file" ui:field="linkAddFile"
+			pull="RIGHT" />
+		<br />
+
+		<b:PanelGroup b:id="accordion" ui:field="attach_files">
+		</b:PanelGroup>
+	</g:HTMLPanel>
+
 </ui:UiBinder> 
