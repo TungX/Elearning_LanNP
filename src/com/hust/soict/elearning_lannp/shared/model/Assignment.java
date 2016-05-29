@@ -5,17 +5,22 @@ public class Assignment extends Model {
 	protected String name;
 	protected String description;
 	protected String deadline;
+	protected Course course;
 	protected int course_id;
-	
-	public Assignment(String name, String description, String deadline, int course_id){
+
+	public Assignment(String name, String description, String deadline, int course_id) {
 		this.name = name;
 		this.description = description;
 		this.deadline = deadline;
 		this.course_id = course_id;
 	}
-	
-	public Assignment(){
-		
+
+	public Assignment() {
+		this.description = "";
+	}
+
+	public Assignment(int course_id) {
+		this.description = "";
 	}
 
 	public int getId() {
@@ -52,6 +57,14 @@ public class Assignment extends Model {
 
 	public int getCourseId() {
 		return course_id;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	public void setCourseId(int course_id) {

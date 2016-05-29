@@ -47,6 +47,22 @@ public class ServerAssinment extends Assignment implements ServerModel {
 		this.conn.delete("assignments");
 	}
 
+	public Assignment getAssignment(int id) {
+		Assignment assignment = null;
+		this.conn.condition.clear();
+		this.conn.condition.put("id", "" + id);
+		ResultSet rs = this.conn.getResultSet("assignments", "");
+		try {
+			rs.first();
+			assignment = (Assignment) setData(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return assignment;
+	}
+
 	public ArrayList<Assignment> getAssignmentOfCourse(int course_id) {
 		ArrayList<Assignment> assignments = new ArrayList<Assignment>();
 		this.conn.condition.put("course_id", "" + course_id);

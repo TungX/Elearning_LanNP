@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.hust.soict.elearning_lannp.client.service.AssignmentService;
 import com.hust.soict.elearning_lannp.server.model.ServerAssinment;
+import com.hust.soict.elearning_lannp.server.model.ServerCourses;
 import com.hust.soict.elearning_lannp.shared.model.Assignment;
 
-public class AssigmentsSeviceImpl extends RemoteServiceServlet implements
-		AssignmentService {
+public class AssigmentsSeviceImpl extends RemoteServiceServlet implements AssignmentService {
 
 	/**
 	 * 
@@ -17,8 +17,11 @@ public class AssigmentsSeviceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public Assignment getAssignment(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		ServerAssinment assinments = new ServerAssinment();
+		ServerCourses courses = new ServerCourses();
+		Assignment assinment = assinments.getAssignment(id);
+		assinment.setCourse(courses.getCourse(assinment.getCourseId()));
+		return assinment;
 	}
 
 	@Override
