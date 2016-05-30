@@ -41,10 +41,37 @@ public class ServerAssinment extends Assignment implements ServerModel {
 		}
 	}
 
+	public Assignment update(Assignment assignment) {
+		this.conn.condition.clear();
+		this.conn.condition.put("name", assignment.getName());
+		this.conn.condition.put("description", assignment.getDescription());
+		String queryplus = "id='" + assignment.getId() + "'";
+		boolean result = this.conn.updateData("assignments", queryplus);
+		if (result == false)
+			return null;
+		return assignment;
+	}
+
 	public void destroyWithCourse(int course_id) {
 		this.conn.condition.clear();
 		this.conn.condition.put("course_id", "" + course_id);
 		this.conn.delete("assignments");
+	}
+
+	public Assignment getAssignment(int id) {
+		Assignment assignment = null;
+		this.conn.condition.clear();
+		this.conn.condition.put("id", "" + id);
+		ResultSet rs = this.conn.getResultSet("assignments", "");
+		try {
+			rs.first();
+			assignment = (Assignment) setData(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return assignment;
 	}
 
 	public ArrayList<Assignment> getAssignmentOfCourse(int course_id) {

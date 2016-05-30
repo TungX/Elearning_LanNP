@@ -9,7 +9,7 @@ public interface AssignmentServiceAsync {
 
 	void addAssignment(Assignment assignment, AsyncCallback<Assignment> callback);
 
-	void destroyAssigment(Assignment assignment, AsyncCallback<Boolean> callback);
+	void destroyAssigment(int id, AsyncCallback<Void> callback);
 
 	void getAssignment(int id, AsyncCallback<Assignment> callback);
 

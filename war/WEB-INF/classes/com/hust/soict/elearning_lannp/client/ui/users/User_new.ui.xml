@@ -1,7 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
-	<b:Modal title="Sign up" closable="true" fade="true"
+	<b:Modal title="Update Yin Long" closable="true" fade="true"
 		dataBackdrop="STATIC" dataKeyboard="true" b:id="myModal" ui:field="modalSignUp">
 
 		<b:ModalBody>
@@ -40,6 +40,17 @@
 					</g:FlowPanel>
 				</b:FormGroup>
 				<b:FormGroup>
+					<b:FormLabel for="formPasswordConfirmation"
+						addStyleNames="col-lg-2">
+						Avatar
+					</b:FormLabel>
+					<g:FlowPanel addStyleNames="col-lg-10">
+						<g:VerticalPanel>
+							<g:FileUpload name="uploadFile" ui:field="uploadFile" />
+						</g:VerticalPanel>
+					</g:FlowPanel>
+				</b:FormGroup>
+				<b:FormGroup>
 					<g:FlowPanel addStyleNames="col-lg-offset-2 col-lg-10">
 						<b:InlineRadio name="radio_type" formValue="teacher"
 							text="Teacher" />
@@ -51,7 +62,7 @@
 		</b:ModalBody>
 		<b:ModalFooter>
 			<b:Button type="DEFAULT" dataDismiss="MODAL">Cancel</b:Button>
-			<b:Button type="PRIMARY">Login</b:Button>
+			<b:Button type="PRIMARY" ui:field="btnSave">Save</b:Button>
 		</b:ModalFooter>
 
 	</b:Modal>

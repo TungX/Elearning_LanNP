@@ -42,8 +42,6 @@ public class EventOfLecuture extends Event {
 	}
 
 	public void doCreate(Lecture lecture) {
-		// Lecture lecture = new Lecture(name, description, password,
-		// course_id);
 		lecturesServic.add(lecture, new AsyncCallback<Lecture>() {
 
 			@Override
@@ -111,7 +109,7 @@ public class EventOfLecuture extends Event {
 			@Override
 			public void onSuccess(Void result) {
 				// TODO Auto-generated method stub
-				History.newItem("courses/"+course.getId());
+				History.newItem("courses/" + course.getId());
 			}
 		});
 	}
