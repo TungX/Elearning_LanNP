@@ -45,14 +45,14 @@ public class AssigmentsSeviceImpl extends RemoteServiceServlet implements Assign
 
 	@Override
 	public Assignment updateAssignment(Assignment assignment) {
-		// TODO Auto-generated method stub
-		return null;
+		ServerAssinment assinments = new ServerAssinment();
+		return assinments.update(assignment);
 	}
 
 	@Override
-	public boolean destroyAssigment(Assignment assignment) {
-		// TODO Auto-generated method stub
-		return false;
+	public void destroyAssigment(int id) {
+		ServerAssinment assinments = new ServerAssinment();
+		assinments.destroy(id);
 	}
 
 }

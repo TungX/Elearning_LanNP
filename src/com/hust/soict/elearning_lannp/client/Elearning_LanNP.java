@@ -2,6 +2,7 @@ package com.hust.soict.elearning_lannp.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.*;
+import com.hust.soict.elearning_lannp.client.ui.courses.CourseIndex;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseShow;
 import com.hust.soict.elearning_lannp.client.ui.navtab.NavTab;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -19,9 +20,8 @@ public class Elearning_LanNP implements EntryPoint {
 
 	public void onModuleLoad() {
 		NavTab navTab = new NavTab();
-
-		// Course_index course_index = new Course_index();
-		CourseShow course_show = new CourseShow();
+//		CourseIndex course_index = new CourseIndex();
+		 CourseShow course_show = new CourseShow();
 		History.addValueChangeHandler(new ValueChangeHandler<String>() {
 			public void onValueChange(ValueChangeEvent<String> event) {
 				// String historyToken = event.getValue();

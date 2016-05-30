@@ -18,5 +18,5 @@ public interface AssignmentService extends RemoteService {
 
 	Assignment updateAssignment(Assignment assignment);
 
-	boolean destroyAssigment(Assignment assignment);
+	void destroyAssigment(int id);
 }

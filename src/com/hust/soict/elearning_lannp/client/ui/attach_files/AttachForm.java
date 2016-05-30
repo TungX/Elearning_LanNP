@@ -83,7 +83,7 @@ public class AttachForm extends Composite {
 	}
 
 	private void loadInfo() {
-		if (this.attachFile != null) {
+		if (this.attachFile.getId() != 0) {
 			this.setTitle("Edit " + this.attachFile.getName());
 			this.txtName.setText(this.attachFile.getName());
 			this.txtPath.setText(this.attachFile.getPath());

@@ -24,6 +24,7 @@ public class PanelDescription extends Composite {
 	private FormInputAbastract form;
 	private Event event;
 	private int id;
+	private String titleDelete;
 
 	interface PanelDescriptionUiBinder extends UiBinder<Widget, PanelDescription> {
 	}
@@ -73,6 +74,10 @@ public class PanelDescription extends Composite {
 	public void setId(int id){
 		this.id = id;
 	}
+	
+	public void setTitleDelete(String title){
+		this.titleDelete = title;
+	}
 
 	@UiHandler("btnEdit")
 	void onBtnEditClick(ClickEvent e) {
@@ -83,5 +88,6 @@ public class PanelDescription extends Composite {
 	void onBtnRemoveClick(ClickEvent e){
 		FormDelete form = new FormDelete(event, id);
 		form.show();
+		form.setTitle(this.titleDelete);
 	}
 }

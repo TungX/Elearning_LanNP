@@ -42,6 +42,10 @@ public class AssignmentForm extends FormInputAbastract {
 	TextBox txtName;
 	@UiField
 	TextArea txtDescription;
+	
+	public void setEvent(EventOfAssignment event){
+		this.event = event;
+	}
 
 	public void setTitleModal(String title) {
 		this.modalAddAssignment.setTitle(title);
@@ -53,7 +57,10 @@ public class AssignmentForm extends FormInputAbastract {
 		String description = txtDescription.getText().replaceAll("\n", "<br/>");
 		this.assignment.setName(name);
 		this.assignment.setDescription(description);
-		event.doCreate(assignment);
+		if (assignment.getId() == 0)
+			event.doCreate(assignment);
+		else
+			event.doUpdate(assignment);
 	}
 
 	public void loadAssignment() {

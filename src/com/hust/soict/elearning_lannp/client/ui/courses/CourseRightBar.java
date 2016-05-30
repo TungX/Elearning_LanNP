@@ -45,13 +45,14 @@ public class CourseRightBar extends Composite {
 
 	public void loadCourseInfo(Course course, EventOfCourse event) {
 		CourseForm form = new CourseForm(event, course);
-		form.setTitle("Update " + course.getName());
+		form.setTitle("Add " + course.getName());
 		txtCourseName.setText(course.getName());
 		panelDescription.setUser(course.getUser());
 		panelDescription.setContent(course.getDescription());
 		panelDescription.setForm(form);
 		panelDescription.setId(course.getId());
 		panelDescription.setEvent(event);
+		panelDescription.setTitleDelete("Delete " + course.getName());
 		Lecture_index lectures = new Lecture_index();
 		lectures.setLectures(course.getLectures());
 		this.content.add(lectures);
@@ -84,6 +85,7 @@ public class CourseRightBar extends Composite {
 		panelDescription.setForm(form);
 		panelDescription.setId(lecture.getId());
 		panelDescription.setEvent(event);
+		panelDescription.setTitleDelete("Delete " + lecture.getName());
 		FileAttaches fas = setLecture(lecture);
 		fas.loadInfo(lecture.getCourse().getUser().getId(), lecture.getId());
 		content.add(fas);
@@ -99,12 +101,22 @@ public class CourseRightBar extends Composite {
 
 	public void loadAssignmentInfo(Assignment assignment, EventOfAssignment event, CourseLeftBar leftbar) {
 		AssignmentForm form = new AssignmentForm(leftbar, assignment);
+		form.setEvent(event);
+		event.setForm(form);
+		event.setAssignment(assignment);
 		txtCourseName.setText(assignment.getName());
 		panelDescription.setUser(assignment.getCourse().getUser());
 		panelDescription.setContent(assignment.getDescription());
 		panelDescription.setForm(form);
 		panelDescription.setId(assignment.getId());
 		panelDescription.setEvent(event);
+		panelDescription.setTitleDelete("Delete " + assignment.getName());
+		loadBreadcrumbs(assignment);
+	}
+
+	public void loadAssignmentInfo(Assignment assignment) {
+		panelDescription.setContent(assignment.getDescription());
+		txtCourseName.setText(assignment.getName());
 		loadBreadcrumbs(assignment);
 	}
 

@@ -1,6 +1,7 @@
 package com.hust.soict.elearning_lannp.client.event;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.hust.soict.elearning_lannp.client.service.AssignmentService;
@@ -16,12 +17,21 @@ public class EventOfAssignment extends Event {
 	private AssignmentServiceAsync assignmentService;
 	private CourseRightBar rightBar;
 	private EventOfAssignment self;
+	private Assignment assignment;
 
 	public EventOfAssignment(CourseLeftBar leftBar, AssignmentForm form) {
 		this.leftBar = leftBar;
 		this.form = form;
 		this.assignmentService = GWT.create(AssignmentService.class);
 		this.self = this;
+	}
+
+	public void setAssignment(Assignment assignment) {
+		this.assignment = assignment;
+	}
+
+	public void setForm(AssignmentForm form) {
+		this.form = form;
 	}
 
 	public void setRightBar(CourseRightBar rightBar) {
@@ -45,20 +55,21 @@ public class EventOfAssignment extends Event {
 			}
 		});
 	}
-	
+
 	public void doUpdate(Assignment assignment) {
 		this.assignmentService.updateAssignment(assignment, new AsyncCallback<Assignment>() {
-			
+
 			@Override
 			public void onSuccess(Assignment result) {
 				// TODO Auto-generated method stub
-				
+				rightBar.loadAssignmentInfo(result);
+				form.hide();
 			}
-			
+
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 	}
@@ -82,7 +93,19 @@ public class EventOfAssignment extends Event {
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+		this.assignmentService.destroyAssigment(id, new AsyncCallback<Void>() {
 
+			@Override
+			public void onSuccess(Void result) {
+				// TODO Auto-generated method stub
+				History.newItem("Courses/" + assignment.getCourseId());
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 	}
 }

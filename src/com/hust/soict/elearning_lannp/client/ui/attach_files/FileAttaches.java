@@ -58,6 +58,7 @@ public class FileAttaches extends Composite {
 		af.setUserId(user_id);
 		form.setFileAttaches(this, af);
 		form.setAttachFile(af);
+		form.setTitle("Add file");
 		form.show();
 	}
 }
