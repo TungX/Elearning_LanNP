@@ -8,11 +8,7 @@
 	}
 	</ui:style>
 	<b:Column size="XS_12">
-		<b:Column size="XS_4">
-			<b:ListGroup ui:field="categories">
-			</b:ListGroup>
-		</b:Column>
-		<b:Column size="XS_8">
+		<b:Column size="XS_12">
 			<b:PanelGroup ui:field="courses"></b:PanelGroup>
 		</b:Column>
 	</b:Column>

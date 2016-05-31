@@ -75,6 +75,8 @@ public class NavTab extends Composite {
 				showTagLogin();
 				Store.setUser(null);
 				Cookies.removeCookie("isAutoLogin");
+				Cookies.removeCookie("id");
+				Cookies.removeCookie("password");
 			}
 
 			@Override

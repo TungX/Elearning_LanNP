@@ -62,9 +62,9 @@ public class EventOfLogin {
 		});
 	}
 
-	public User loginWithCookies() {
+	public void loginWithCookies() {
 		if (Cookies.getCookie("isAutoLogin") != "1")
-			return null;
+			return;
 		try {
 			int id = Integer.parseInt(Cookies.getCookie("id"));
 			String password = Cookies.getCookie("password");
@@ -77,18 +77,20 @@ public class EventOfLogin {
 					nav.hideTagLogin();
 					nav.showProperty();
 					nav.setProperty(result);
+					Store.setUser(result);
+					return;
 				}
 
 				@Override
 				public void onFailure(Throwable caught) {
 					// TODO Auto-generated method stub
-					user = null;
+					Store.setUser(null);
+					return;
 				}
 			});
 		} catch (Exception e) {
-			return null;
+			Store.setUser(null);
+			return;
 		}
-
-		return user;
 	}
 }
