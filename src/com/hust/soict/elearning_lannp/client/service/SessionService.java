@@ -7,5 +7,6 @@ import com.hust.soict.elearning_lannp.shared.model.User;
 public interface SessionService extends RemoteService {
 	User loginServer(String email, String password);
 	User loginFromSessionServer();
+	User loginWithCookies(int id, String password);
 	void logout();
 }

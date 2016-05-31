@@ -7,9 +7,10 @@ public interface SessionServiceAsync {
 
 	void loginFromSessionServer(AsyncCallback<User> callback);
 
-	void loginServer(String email, String password,
-			AsyncCallback<User> asyncCallback);
+	void loginServer(String email, String password, AsyncCallback<User> asyncCallback);
 
 	void logout(AsyncCallback<Void> callback);
+
+	void loginWithCookies(int id, String password, AsyncCallback<User> callback);
 
 }

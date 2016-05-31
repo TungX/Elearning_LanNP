@@ -22,7 +22,6 @@ public class SessionServiceImpl extends RemoteServiceServlet implements
 		User user = getUserAlreadyFromSession();
 		if (user == null)
 			storeUserInSession(suser.getUserFromServer());
-//		Users user = suser.getUserFromServer();
 		return getUserAlreadyFromSession();
 	}
 
@@ -57,6 +56,14 @@ public class SessionServiceImpl extends RemoteServiceServlet implements
 		HttpServletRequest httpServletRequest = this.getThreadLocalRequest();
 		HttpSession session = httpServletRequest.getSession();
 		session.removeAttribute("user");
+	}
+
+	@Override
+	public User loginWithCookies(int id, String password) {
+		ServerUsers suser = new ServerUsers();
+		User user = suser.getUser(id, password);
+		storeUserInSession(user);
+		return user;
 	}
 
 }

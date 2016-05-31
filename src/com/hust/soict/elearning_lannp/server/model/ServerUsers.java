@@ -20,7 +20,7 @@ public class ServerUsers extends User implements ServerModel {
 		this.password = password;
 		this.conn = new ConnectData();
 	}
-
+	
 	public User getUserFromServer() {
 		User user = null;
 		this.conn.condition.put("email", this.getEmail());
@@ -35,10 +35,26 @@ public class ServerUsers extends User implements ServerModel {
 		}
 		return user;
 	}
-
-	public User getUser(int id) {
+	
+	public User getUser(int id){
 		User user = null;
 		this.conn.condition.put("id", id + "");
+		this.conn.connectDatabase();
+		ResultSet rs = this.conn.getResultSet("users", "");
+		try {
+			rs.first();
+			user = (User) setData(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			user = null;
+		}
+		return user;
+	}
+
+	public User getUser(int id, String password) {
+		User user = null;
+		this.conn.condition.put("id", id + "");
+		this.conn.condition.put("encrypted_password", password);
 		this.conn.connectDatabase();
 		ResultSet rs = this.conn.getResultSet("users", "");
 		try {

@@ -24,7 +24,7 @@
 
 				<b:FormGroup>
 					<g:FlowPanel addStyleNames="col-lg-offset-2 col-lg-10">
-						<b:CheckBox text="Remember me" />
+						<b:CheckBox text="Remember me" ui:field="isAutoLogin"/>
 					</g:FlowPanel>
 				</b:FormGroup>
 
