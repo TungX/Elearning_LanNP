@@ -40,4 +40,9 @@ public class CourseIndex extends Composite {
 			addCourse(course);
 		}
 	}
+	
+	public CourseIndex reload(){
+		event.loadCourses();
+		return this;
+	}
 }

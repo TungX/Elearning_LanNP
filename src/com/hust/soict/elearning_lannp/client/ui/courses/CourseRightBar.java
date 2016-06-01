@@ -8,6 +8,7 @@ import org.gwtbootstrap3.client.ui.html.Text;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.event.EventOfAssignment;
@@ -43,9 +44,14 @@ public class CourseRightBar extends Composite {
 	@UiField
 	Breadcrumbs breadCrumbs;
 
+	public void clearContent() {
+		this.content.clear();
+	}
+
 	public void loadCourseInfo(Course course, EventOfCourse event) {
 		CourseForm form = new CourseForm(event, course);
 		form.setTitle("Add " + course.getName());
+		clearContent();
 		txtCourseName.setText(course.getName());
 		panelDescription.setUser(course.getUser());
 		panelDescription.setContent(course.getDescription());
@@ -78,6 +84,7 @@ public class CourseRightBar extends Composite {
 	public void loadLectureInfo(Lecture lecture, EventOfLecuture event, CourseLeftBar leftBar) {
 		LectureForm form = new LectureForm(leftBar, lecture);
 		form.setEvent(event);
+		clearContent();
 		form.setTitle("Update " + lecture.getName());
 		txtCourseName.setText(lecture.getName());
 		panelDescription.setUser(lecture.getCourse().getUser());
@@ -100,7 +107,9 @@ public class CourseRightBar extends Composite {
 	}
 
 	public void loadAssignmentInfo(Assignment assignment, EventOfAssignment event, CourseLeftBar leftbar) {
-		AssignmentForm form = new AssignmentForm(leftbar, assignment);
+		clearContent();
+		AssignmentForm form = new AssignmentForm(leftbar);
+		form.setAssignment(assignment);
 		form.setEvent(event);
 		event.setForm(form);
 		event.setAssignment(assignment);

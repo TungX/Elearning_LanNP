@@ -7,6 +7,7 @@ import com.hust.soict.elearning_lannp.client.service.CoursesService;
 import com.hust.soict.elearning_lannp.client.service.CoursesServiceAsync;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseLeftBar;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseRightBar;
+import com.hust.soict.elearning_lannp.client.ui.shared.Store;
 import com.hust.soict.elearning_lannp.shared.model.*;
 
 public class EventOfCourse extends Event {
@@ -61,6 +62,7 @@ public class EventOfCourse extends Event {
 	}
 
 	private void setCourse(Course course) {
+		Store.setCourse(course);
 		this.course = course;
 	}
 
