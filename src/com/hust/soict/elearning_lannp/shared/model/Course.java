@@ -9,9 +9,9 @@ public class Course extends Model {
 	protected User user;
 	protected String password;
 	protected String homework;
-	protected Category category;
 	protected ArrayList<Lecture> lectures;
 	protected ArrayList<Assignment> assignments;
+	protected int user_id;
 
 	@Override
 	protected boolean validate() {
@@ -21,12 +21,18 @@ public class Course extends Model {
 
 	public Course(int id) {
 		this.id = id;
+		this.name = "";
+		this.description = "";
+		this.password = "";
 	}
 
 	public Course() {
+		this.name = "";
+		this.description = "";
+		this.password = "";
 	}
-		
-	public void updateInfo(String name, String description, String password){
+
+	public void updateInfo(String name, String description, String password) {
 		this.name = name;
 		this.description = description;
 		this.password = password;
@@ -61,6 +67,7 @@ public class Course extends Model {
 	}
 
 	public void setUser(User user) {
+		setUserId(user.getId());
 		this.user = user;
 	}
 
@@ -80,14 +87,6 @@ public class Course extends Model {
 		this.homework = homework;
 	}
 
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
 	public ArrayList<Lecture> getLectures() {
 		return lectures;
 	}
@@ -102,6 +101,14 @@ public class Course extends Model {
 
 	public void setAssignments(ArrayList<Assignment> assignments) {
 		this.assignments = assignments;
+	}
+
+	public int getUserId() {
+		return user_id;
+	}
+
+	public void setUserId(int user_id) {
+		this.user_id = user_id;
 	}
 
 }

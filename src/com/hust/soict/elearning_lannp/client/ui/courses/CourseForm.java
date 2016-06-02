@@ -67,7 +67,11 @@ public class CourseForm extends FormInputAbastract {
 		String description = txtDescription.getText().replaceAll("\n", "<br/>");
 		String password = txtPassword.getText();
 		course.updateInfo(name, description, password);
-		event.update(course);
+		if(course.getId() == 0){
+			event.create(course);
+		}else{
+			event.update(course);
+		}
 		hide();
 	}
 

@@ -8,21 +8,22 @@
 	}
 	
 	.courses {
-		
+		margin: 0 auto;
+		max-width: 1300px;
 	}
 	
-	.courses h3 {
+	.courses h2 {
 		margin-left: 5px;
 		margin-bottom: 0;
 		border-bottom: 1px solid gray;
 	}
-
 	</ui:style>
 	<g:HTMLPanel styleName="{style.courses}">
-		<H3>
+		<H2>
 			Courses
-		</H3>
-		<b:Anchor text="Add course" pull="RIGHT" icon="PLUS"/>
+		</H2>
+		<b:Anchor text="Add course" pull="RIGHT" icon="PLUS"
+			ui:field="linkAddCourse" />
 		<b:Column size="XS_12">
 			<b:Column size="XS_12">
 				<b:PanelGroup ui:field="courses"></b:PanelGroup>
