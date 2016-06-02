@@ -52,11 +52,13 @@ public class LoginForm extends Composite {
 	Input txtPassword;
 	@UiField
 	TextBox txtEmail;
+	@UiField
+	CheckBox isAutoLogin;
 
 	@UiHandler("btnLogin")
 	void onBtnLogin(ClickEvent e) {
 		String email = txtEmail.getValue();
 		String password = txtPassword.getValue();
-		event.doLogin(email, password);
+		event.doLogin(email, password, isAutoLogin.getValue());
 	}
 }

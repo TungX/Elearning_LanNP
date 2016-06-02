@@ -9,9 +9,9 @@ public class User extends Model {
 	protected String lasttName;
 	protected String avatar;
 	protected int type;
+	private boolean isAutoLogin;
 
-	public User(String email, String password, String password_confirm,
-			String firstName, String lastName, int type) {
+	public User(String email, String password, String password_confirm, String firstName, String lastName, int type) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -19,15 +19,26 @@ public class User extends Model {
 		this.firstName = firstName;
 		this.lasttName = lastName;
 		this.type = type;
+		this.isAutoLogin = false;
 	}
 
 	public User() {
 		super();
+		this.isAutoLogin = false;
 	}
 
 	public User(int id) {
 		super();
 		this.id = id;
+		this.isAutoLogin = false;
+	}
+
+	public boolean isAutoLogin() {
+		return isAutoLogin;
+	}
+
+	public void setAutoLogin(boolean isAutoLogin) {
+		this.isAutoLogin = isAutoLogin;
 	}
 
 	public String getPassword() {

@@ -15,9 +15,9 @@
 		<b:Panel>
 			<b:PanelHeader>
 				<b:Heading size="H4">
-					<b:Icon type="HOME" fixedWidth="true" />
-					<b.html:Text text="Home" />
+					<b:Anchor ui:field="btnHome" icon="HOME" text="Home" />
 				</b:Heading>
+
 			</b:PanelHeader>
 		</b:Panel>
 		<b:Panel>

@@ -26,11 +26,11 @@ public class AssignmentForm extends FormInputAbastract {
 	interface FormAssignmentUiBinder extends UiBinder<Widget, AssignmentForm> {
 	}
 
-	public AssignmentForm(CourseLeftBar leftBar, Assignment assignment) {
+	public AssignmentForm(CourseLeftBar leftBar) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.event = new EventOfAssignment(leftBar, this);
 		RootPanel.get().add(this);
-		this.assignment = assignment;
+		this.assignment = new Assignment();
 		loadAssignment();
 	}
 
@@ -42,6 +42,11 @@ public class AssignmentForm extends FormInputAbastract {
 	TextBox txtName;
 	@UiField
 	TextArea txtDescription;
+	
+	public void setAssignment(Assignment assignment){
+		this.assignment = assignment;
+		loadAssignment();
+	}
 	
 	public void setEvent(EventOfAssignment event){
 		this.event = event;

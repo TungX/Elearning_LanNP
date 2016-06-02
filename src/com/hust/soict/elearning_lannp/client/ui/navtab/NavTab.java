@@ -7,12 +7,14 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.service.SessionService;
 import com.hust.soict.elearning_lannp.client.service.SessionServiceAsync;
 import com.hust.soict.elearning_lannp.client.ui.login.LoginForm;
+import com.hust.soict.elearning_lannp.client.ui.shared.Store;
 import com.hust.soict.elearning_lannp.shared.model.User;
 
 public class NavTab extends Composite {
@@ -71,6 +73,10 @@ public class NavTab extends Composite {
 				disableProperty();
 				hideProperty();
 				showTagLogin();
+				Store.setUser(null);
+				Cookies.removeCookie("isAutoLogin");
+				Cookies.removeCookie("id");
+				Cookies.removeCookie("password");
 			}
 
 			@Override

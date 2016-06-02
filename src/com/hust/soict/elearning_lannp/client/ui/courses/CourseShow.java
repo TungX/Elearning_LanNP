@@ -19,21 +19,30 @@ public class CourseShow extends Composite {
 
 	public CourseShow() {
 		initWidget(uiBinder.createAndBindUi(this));
-//		new EventOfCourse(leftbar, rightcontent, 1);
-//		Course course = new Course(1);
-//		EventOfLecuture event = new EventOfLecuture();
-//		event.setRightBar(this.rightcontent);
-//		event.setLeftBar(this.leftbar);
-//		event.setCourse(course);
-//		event.show(13);
-		EventOfAssignment event = new EventOfAssignment(leftbar, null);
-		event.setRightBar(rightcontent);
-		event.show(4);
+
 	}
 
 	@UiField
 	CourseLeftBar leftbar;
 	@UiField
 	CourseRightBar rightcontent;
+
+	public void showCourse(int id) {
+		new EventOfCourse(leftbar, rightcontent, id);
+	}
+
+	public void showLecture(Course course, int id) {
+		EventOfLecuture event = new EventOfLecuture();
+		event.setRightBar(this.rightcontent);
+		event.setLeftBar(this.leftbar);
+		event.setCourse(course);
+		event.show(id);
+	}
+
+	public void showAssignment(int id) {
+		EventOfAssignment event = new EventOfAssignment(leftbar, null);
+		event.setRightBar(rightcontent);
+		event.show(id);
+	}
 
 }

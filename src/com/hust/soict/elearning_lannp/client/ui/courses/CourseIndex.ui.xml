@@ -6,15 +6,29 @@
 	.table-style {
 		border: 1px solid black;
 	}
+	
+	.courses {
+		
+	}
+	
+	.courses h3 {
+		margin-left: 5px;
+		margin-bottom: 0;
+		border-bottom: 1px solid gray;
+	}
+
 	</ui:style>
-	<b:Column size="XS_12">
-		<b:Column size="XS_4">
-			<b:ListGroup ui:field="categories">
-			</b:ListGroup>
+	<g:HTMLPanel styleName="{style.courses}">
+		<H3>
+			Courses
+		</H3>
+		<b:Anchor text="Add course" pull="RIGHT" icon="PLUS"/>
+		<b:Column size="XS_12">
+			<b:Column size="XS_12">
+				<b:PanelGroup ui:field="courses"></b:PanelGroup>
+			</b:Column>
 		</b:Column>
-		<b:Column size="XS_8">
-			<b:PanelGroup ui:field="courses"></b:PanelGroup>
-		</b:Column>
-	</b:Column>
+	</g:HTMLPanel>
+
 
 </ui:UiBinder> 

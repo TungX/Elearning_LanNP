@@ -9,7 +9,9 @@ import com.hust.soict.elearning_lannp.client.service.AssignmentServiceAsync;
 import com.hust.soict.elearning_lannp.client.ui.asignments.AssignmentForm;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseLeftBar;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseRightBar;
+import com.hust.soict.elearning_lannp.client.ui.shared.Store;
 import com.hust.soict.elearning_lannp.shared.model.Assignment;
+import com.hust.soict.elearning_lannp.shared.model.Course;
 
 public class EventOfAssignment extends Event {
 	private CourseLeftBar leftBar;
@@ -24,10 +26,16 @@ public class EventOfAssignment extends Event {
 		this.form = form;
 		this.assignmentService = GWT.create(AssignmentService.class);
 		this.self = this;
+		this.assignment = new Assignment();
 	}
 
 	public void setAssignment(Assignment assignment) {
 		this.assignment = assignment;
+	}
+
+	public void setCourse(Course course) {
+		this.assignment.setCourse(course);
+		this.assignment.setCourseId(course.getId());
 	}
 
 	public void setForm(AssignmentForm form) {
@@ -39,56 +47,62 @@ public class EventOfAssignment extends Event {
 	}
 
 	public void doCreate(Assignment assignment) {
-		this.assignmentService.addAssignment(assignment, new AsyncCallback<Assignment>() {
+		assignment.setCourseId(Store.course.getId());
+		this.assignmentService.addAssignment(assignment,
+				new AsyncCallback<Assignment>() {
 
-			@Override
-			public void onSuccess(Assignment result) {
-				// TODO Auto-generated method stub
-				leftBar.addAssinment(result);
-				form.hide();
-			}
+					@Override
+					public void onSuccess(Assignment result) {
+						// TODO Auto-generated method stub
+						leftBar.addAssinment(result);
+						form.hide();
+						History.newItem("courses/" + result.getCourseId()
+								+ "/assignments/" + result.getId());
+					}
 
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				Window.alert("errors, please contact with us");
-			}
-		});
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						Window.alert("errors, please contact with us");
+					}
+				});
 	}
 
 	public void doUpdate(Assignment assignment) {
-		this.assignmentService.updateAssignment(assignment, new AsyncCallback<Assignment>() {
+		this.assignmentService.updateAssignment(assignment,
+				new AsyncCallback<Assignment>() {
 
-			@Override
-			public void onSuccess(Assignment result) {
-				// TODO Auto-generated method stub
-				rightBar.loadAssignmentInfo(result);
-				form.hide();
-			}
+					@Override
+					public void onSuccess(Assignment result) {
+						// TODO Auto-generated method stub
+						rightBar.loadAssignmentInfo(result);
+						form.hide();
+					}
 
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
 
-			}
-		});
+					}
+				});
 	}
 
 	public void show(int id) {
-		this.assignmentService.getAssignment(id, new AsyncCallback<Assignment>() {
+		this.assignmentService.getAssignment(id,
+				new AsyncCallback<Assignment>() {
 
-			@Override
-			public void onSuccess(Assignment result) {
-				// TODO Auto-generated method stub
-				rightBar.loadAssignmentInfo(result, self, leftBar);
-			}
+					@Override
+					public void onSuccess(Assignment result) {
+						// TODO Auto-generated method stub
+						rightBar.loadAssignmentInfo(result, self, leftBar);
+					}
 
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
 
-			}
-		});
+					}
+				});
 	}
 
 	@Override
