@@ -17,24 +17,36 @@ public class ServerCourses extends Course {
 		this.conn = new ConnectData();
 	}
 
+	public Course insert(Course course) {
+		this.conn.condition.clear();
+		this.conn.condition.put("name", course.getName());
+		this.conn.condition.put("description", course.getDescription());
+		this.conn.condition.put("password", course.getPassword());
+		this.conn.condition.put("user_id", course.getUserId() + "");
+		int id = this.conn.insertData("courses");
+		course.setId(id);
+		return course;
+	}
+
 	public Course update(Course course) {
 		this.conn.condition.clear();
 		this.conn.condition.put("name", course.getName());
 		this.conn.condition.put("description", course.getDescription());
+		this.conn.condition.put("password", course.getPassword());
 		String queryplus = "id='" + course.getId() + "'";
 		boolean result = this.conn.updateData("courses", queryplus);
 		if (result == false)
 			return null;
 		return course;
 	}
-	
+
 	public boolean destroy(int course_id) {
 		this.conn.condition.clear();
 		ServerAssinment assinments = new ServerAssinment();
 		assinments.destroyWithCourse(course_id);
 		ServerLectures lectures = new ServerLectures();
 		lectures.destroyWithCourse(course_id);
-		this.conn.condition.put("id", ""+course_id);
+		this.conn.condition.put("id", "" + course_id);
 		return this.conn.delete("courses");
 	}
 
@@ -76,7 +88,6 @@ public class ServerCourses extends Course {
 		course.setName(rs.getString("name"));
 		course.setDescription(rs.getString("description"));
 		course.setPassword(rs.getString("password"));
-		course.setCategory(new Category(rs.getInt("category_id")));
 		ServerUsers user = new ServerUsers();
 		course.setUser(user.getUser(rs.getInt("user_id")));
 		ServerLectures lectures = new ServerLectures();

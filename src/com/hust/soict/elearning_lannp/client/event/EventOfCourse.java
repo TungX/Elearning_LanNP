@@ -17,7 +17,8 @@ public class EventOfCourse extends Event {
 	private Course course;
 	private EventOfCourse self;
 
-	public EventOfCourse(CourseLeftBar leftbar, CourseRightBar rightbar, int course_id) {
+	public EventOfCourse(CourseLeftBar leftbar, CourseRightBar rightbar,
+			int course_id) {
 		this.leftbar = leftbar;
 		this.rightbar = rightbar;
 		this.coursesServiceAsync = GWT.create(CoursesService.class);
@@ -25,18 +26,42 @@ public class EventOfCourse extends Event {
 		loadCourseInfo(course_id);
 	}
 
+	public EventOfCourse() {
+		this.coursesServiceAsync = GWT.create(CoursesService.class);
+	}
+
 	public void loadCourseInfo(int course_id) {
-		this.coursesServiceAsync.getCourse(course_id, new AsyncCallback<Course>() {
+		this.coursesServiceAsync.getCourse(course_id,
+				new AsyncCallback<Course>() {
+					@Override
+					public void onSuccess(Course result) {
+						// TODO Auto-generated method stub
+						loadCourse(result, self);
+						setCourse(result);
+					}
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+					}
+				});
+	}
+
+	public void create(Course course) {
+		course.setUser(Store.user);
+		this.coursesServiceAsync.add(course, new AsyncCallback<Course>() {
+
 			@Override
 			public void onSuccess(Course result) {
+
 				// TODO Auto-generated method stub
-				loadCourse(result, self);
-				setCourse(result);
+				History.newItem("courses/" + result.getId());
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
+
 			}
 		});
 	}
@@ -76,17 +101,18 @@ public class EventOfCourse extends Event {
 
 	@Override
 	public void delete(int id) {
-		this.coursesServiceAsync.destroy(this.course, new AsyncCallback<Boolean>() {
+		this.coursesServiceAsync.destroy(this.course,
+				new AsyncCallback<Boolean>() {
 
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-			}
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+					}
 
-			@Override
-			public void onSuccess(Boolean result) {
-				History.newItem("courses");
-			}
-		});
+					@Override
+					public void onSuccess(Boolean result) {
+						History.newItem("courses");
+					}
+				});
 	}
 }

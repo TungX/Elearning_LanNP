@@ -37,8 +37,8 @@ CoursesService{
 
 	@Override
 	public Course add(Course course) {
-		// TODO Auto-generated method stub
-		return null;
+		ServerCourses courses = new ServerCourses();
+		return courses.insert(course);
 	}
 
 	@Override

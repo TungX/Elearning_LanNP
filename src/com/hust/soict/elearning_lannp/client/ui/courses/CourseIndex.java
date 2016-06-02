@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import org.gwtbootstrap3.client.ui.*;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.hust.soict.elearning_lannp.client.event.EventOfCourse;
 import com.hust.soict.elearning_lannp.client.event.EventOfCourseIndex;
 import com.hust.soict.elearning_lannp.shared.model.Course;
 
@@ -24,7 +27,7 @@ public class CourseIndex extends Composite {
 	PanelGroup courses;
 
 	public CourseIndex() {
-		initWidget(uiBinder.createAndBindUi(this));		
+		initWidget(uiBinder.createAndBindUi(this));
 		event = new EventOfCourseIndex(this);
 		event.loadCourses();
 	}
@@ -40,9 +43,19 @@ public class CourseIndex extends Composite {
 			addCourse(course);
 		}
 	}
-	
-	public CourseIndex reload(){
+
+	public CourseIndex reload() {
 		event.loadCourses();
 		return this;
+	}
+
+	@UiField
+	Anchor linkAddCourse;
+
+	@UiHandler("linkAddCourse")
+	void onLinkAddCourseClick(ClickEvent e) {
+		CourseForm form = new CourseForm(new EventOfCourse(), new Course());
+		form.setTitle("Add course");
+		form.show();
 	}
 }
