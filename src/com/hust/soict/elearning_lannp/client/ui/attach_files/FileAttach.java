@@ -11,12 +11,14 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.event.EventOfAttachFile;
 import com.hust.soict.elearning_lannp.client.ui.shared.FormDelete;
+import com.hust.soict.elearning_lannp.client.ui.shared.Store;
 import com.hust.soict.elearning_lannp.shared.model.AttachFile;
 
 public class FileAttach extends Composite {
 
 	private static FileAttachUiBinder uiBinder = GWT.create(FileAttachUiBinder.class);
 	private AttachFile attachFile;
+
 	interface FileAttachUiBinder extends UiBinder<Widget, FileAttach> {
 	}
 
@@ -36,19 +38,31 @@ public class FileAttach extends Composite {
 		url.setHref(file.getPath());
 		url.setText(file.getName());
 		this.attachFile = file;
+		try {
+			if (Store.user.getId() != file.getUserId())
+				removeBtn();
+		} catch (Exception e) {
+			removeBtn();
+		}
+
 	}
-	
+
 	@UiHandler("btnEdit")
-	void onBtnEditClick(ClickEvent e){
+	void onBtnEditClick(ClickEvent e) {
 		AttachForm form = new AttachForm(this);
 		form.setAttachFile(attachFile);
 		form.show();
 	}
-	
+
 	@UiHandler("btnRemove")
 	void onBtnRemoveClick(ClickEvent e) {
 		EventOfAttachFile event = new EventOfAttachFile(this, null);
 		FormDelete form = new FormDelete(event, attachFile.getId());
 		form.show();
+	}
+
+	private void removeBtn() {
+		this.btnEdit.removeFromParent();
+		this.btnRemove.removeFromParent();
 	}
 }

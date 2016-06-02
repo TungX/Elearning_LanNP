@@ -8,6 +8,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.hust.soict.elearning_lannp.client.service.SessionService;
 import com.hust.soict.elearning_lannp.client.service.SessionServiceAsync;
+import com.hust.soict.elearning_lannp.client.ui.courses.CourseIndex;
 import com.hust.soict.elearning_lannp.client.ui.login.LoginForm;
 import com.hust.soict.elearning_lannp.client.ui.navtab.NavTab;
 import com.hust.soict.elearning_lannp.client.ui.shared.Store;
@@ -19,6 +20,11 @@ public class EventOfLogin {
 	private NavTab nav;
 	private LoginForm form;
 	private User user;
+	private CourseIndex courseIndex;
+
+	public void setCourseIndex(CourseIndex courseIndex) {
+		this.courseIndex = courseIndex;
+	}
 
 	public EventOfLogin(LoginForm loginForm, NavTab nav) {
 		sessionService = GWT.create(SessionService.class);
@@ -60,11 +66,42 @@ public class EventOfLogin {
 				}
 			}
 		});
+		try {
+			if (Store.user.getType() != 1)
+				this.courseIndex.hideAddCourse();
+			else
+				this.courseIndex.showAddCourse();
+		} catch (Exception e) {
+			this.courseIndex.hideAddCourse();
+		}
+	}
+
+	public void autoLogin() {
+		this.sessionService.loginFromSessionServer(new AsyncCallback<User>() {
+
+			@Override
+			public void onSuccess(User result) {
+				// TODO Auto-generated method stub
+				if (result != null) {
+					loadUserInfo(result);
+					return;
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				Window.alert("login fail");
+			}
+		});
+		loginWithCookies();
 	}
 
 	public void loginWithCookies() {
-		if (Cookies.getCookie("isAutoLogin") != "1")
+		if (Cookies.getCookie("isAutoLogin") != "1") {
+			Store.setUser(null);
 			return;
+		}
 		try {
 			int id = Integer.parseInt(Cookies.getCookie("id"));
 			String password = Cookies.getCookie("password");
@@ -73,24 +110,66 @@ public class EventOfLogin {
 				@Override
 				public void onSuccess(User result) {
 					// TODO Auto-generated method stub
-					user = result;
-					nav.hideTagLogin();
-					nav.showProperty();
-					nav.setProperty(result);
-					Store.setUser(result);
-					return;
+					loadUserInfo(result);
 				}
 
 				@Override
 				public void onFailure(Throwable caught) {
 					// TODO Auto-generated method stub
 					Store.setUser(null);
-					return;
 				}
 			});
 		} catch (Exception e) {
 			Store.setUser(null);
-			return;
+		}
+		try {
+			if (Store.user.getType() != 1)
+				this.courseIndex.hideAddCourse();
+			else
+				this.courseIndex.showAddCourse();
+		} catch (Exception e) {
+			this.courseIndex.hideAddCourse();
+		}
+	}
+
+	public void logout() {
+		sessionService.logout(new AsyncCallback<Void>() {
+			@Override
+			public void onSuccess(Void result) {
+				nav.changeDisplayName("User");
+				nav.disableProperty();
+				nav.hideProperty();
+				nav.showTagLogin();
+				Store.setUser(null);
+				Cookies.removeCookie("isAutoLogin");
+				Cookies.removeCookie("id");
+				Cookies.removeCookie("password");
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+			}
+		});
+		this.courseIndex.hideAddCourse();
+	}
+
+	private void loadUserInfo(User user) {
+		nav.hideTagLogin();
+		nav.showProperty();
+		nav.setProperty(user);
+		Store.setUser(user);
+		
+	}
+	
+	private void loadCourseAdd(User user){
+		try {
+			if (user.getType() != 1)
+				this.courseIndex.hideAddCourse();
+			else
+				this.courseIndex.showAddCourse();
+		} catch (Exception e) {
+			this.courseIndex.hideAddCourse();
 		}
 	}
 }

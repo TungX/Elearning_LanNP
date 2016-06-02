@@ -7,18 +7,16 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
-import com.hust.soict.elearning_lannp.client.service.SessionService;
-import com.hust.soict.elearning_lannp.client.service.SessionServiceAsync;
+import com.hust.soict.elearning_lannp.client.event.EventOfLogin;
+import com.hust.soict.elearning_lannp.client.ui.courses.CourseIndex;
 import com.hust.soict.elearning_lannp.client.ui.login.LoginForm;
-import com.hust.soict.elearning_lannp.client.ui.shared.Store;
 import com.hust.soict.elearning_lannp.shared.model.User;
 
 public class NavTab extends Composite {
-	private SessionServiceAsync sessionService;
+	private EventOfLogin event;
+	private LoginForm login;
 	@UiField
 	AnchorListItem btnCourses;
 	@UiField
@@ -43,7 +41,8 @@ public class NavTab extends Composite {
 
 	public NavTab() {
 		initWidget(uiBinder.createAndBindUi(this));
-		sessionService = GWT.create(SessionService.class);
+		event = new EventOfLogin(null, this);
+		this.login = new LoginForm(this);
 	}
 
 	@UiHandler("btnCourses")
@@ -60,30 +59,18 @@ public class NavTab extends Composite {
 
 	@UiHandler("urlLogin")
 	void onUrlLoginClick(ClickEvent e) {
-		LoginForm login = new LoginForm(this);
+
 		login.showModal();
 	}
 
 	@UiHandler("urlLogout")
 	void onUrlLogoutClick(ClickEvent e) {
-		sessionService.logout(new AsyncCallback<Void>() {
-			@Override
-			public void onSuccess(Void result) {
-				changeDisplayName("User");
-				disableProperty();
-				hideProperty();
-				showTagLogin();
-				Store.setUser(null);
-				Cookies.removeCookie("isAutoLogin");
-				Cookies.removeCookie("id");
-				Cookies.removeCookie("password");
-			}
+		this.event.logout();
+	}
 
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-			}
-		});
+	public void setCourseIndex(CourseIndex courseIndex) {
+		this.event.setCourseIndex(courseIndex);
+		this.login.setCourseIndex(courseIndex);
 	}
 
 	public void changeDisplayName(String displayName) {

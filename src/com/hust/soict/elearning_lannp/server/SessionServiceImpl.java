@@ -56,6 +56,7 @@ public class SessionServiceImpl extends RemoteServiceServlet implements
 		HttpServletRequest httpServletRequest = this.getThreadLocalRequest();
 		HttpSession session = httpServletRequest.getSession();
 		session.removeAttribute("user");
+		System.out.println(session.getAttribute("user"));
 	}
 
 	@Override

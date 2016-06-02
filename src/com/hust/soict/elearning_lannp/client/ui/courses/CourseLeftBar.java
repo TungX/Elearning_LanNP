@@ -3,7 +3,6 @@ package com.hust.soict.elearning_lannp.client.ui.courses;
 import java.util.ArrayList;
 
 import org.gwtbootstrap3.client.ui.*;
-import org.gwtbootstrap3.client.ui.html.Text;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

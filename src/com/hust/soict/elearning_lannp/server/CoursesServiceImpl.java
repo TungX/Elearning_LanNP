@@ -7,10 +7,8 @@ import com.hust.soict.elearning_lannp.client.service.CoursesService;
 import com.hust.soict.elearning_lannp.server.model.ServerCourses;
 import com.hust.soict.elearning_lannp.shared.model.Category;
 import com.hust.soict.elearning_lannp.shared.model.Course;
-import com.hust.soict.elearning_lannp.shared.model.User;
 
-public class CoursesServiceImpl extends RemoteServiceServlet implements
-CoursesService{
+public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesService {
 
 	/**
 	 * 
@@ -20,13 +18,13 @@ CoursesService{
 	@Override
 	public ArrayList<Course> getCourses() {
 		ServerCourses courses = new ServerCourses();
-		return courses.getCourses(null);
+		return courses.getCourses(0);
 	}
 
 	@Override
-	public ArrayList<Course> getCourses(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Course> getCourses(int user_id) {
+		ServerCourses courses = new ServerCourses();
+		return courses.getCourses(user_id);
 	}
 
 	@Override
