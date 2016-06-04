@@ -62,30 +62,37 @@ public class PanelDescription extends Composite {
 		setName(user.getDisplayName());
 		setAvatar(user.getAvatar());
 	}
-	
-	public void setEvent(Event e){
+
+	public void setEvent(Event e) {
 		this.event = e;
 	}
 
 	public void setForm(FormInputAbastract form) {
 		this.form = form;
 	}
-	
-	public void setId(int id){
+
+	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public void setTitleDelete(String title){
+
+	public void setTitleDelete(String title) {
 		this.titleDelete = title;
+	}
+
+	public void checkAdmin() {
+		if (!Store.isAdmin()) {
+			this.btnEdit.removeFromParent();
+			this.btnRemove.removeFromParent();
+		}
 	}
 
 	@UiHandler("btnEdit")
 	void onBtnEditClick(ClickEvent e) {
 		this.form.show();
 	}
-	
+
 	@UiHandler("btnRemove")
-	void onBtnRemoveClick(ClickEvent e){
+	void onBtnRemoveClick(ClickEvent e) {
 		FormDelete form = new FormDelete(event, id);
 		form.show();
 		form.setTitle(this.titleDelete);

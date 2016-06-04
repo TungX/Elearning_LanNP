@@ -10,6 +10,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.hust.soict.elearning_lannp.client.Elearning_LanNP;
 import com.hust.soict.elearning_lannp.client.event.EventOfLogin;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseIndex;
 import com.hust.soict.elearning_lannp.client.ui.navtab.NavTab;
@@ -63,7 +64,8 @@ public class LoginForm extends Composite {
 		event.doLogin(email, password, isAutoLogin.getValue());
 	}
 	
-	public void setCourseIndex(CourseIndex courseIndex){
+	public void setCourseIndex(CourseIndex courseIndex, Elearning_LanNP homepage){
 		event.setCourseIndex(courseIndex);
+		event.setHomePage(homepage);
 	}
 }

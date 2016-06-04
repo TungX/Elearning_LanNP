@@ -4,8 +4,10 @@ import java.util.Date;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.hust.soict.elearning_lannp.client.Elearning_LanNP;
 import com.hust.soict.elearning_lannp.client.service.SessionService;
 import com.hust.soict.elearning_lannp.client.service.SessionServiceAsync;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseIndex;
@@ -21,9 +23,14 @@ public class EventOfLogin {
 	private LoginForm form;
 	private User user;
 	private CourseIndex courseIndex;
+	private Elearning_LanNP homepage;
 
 	public void setCourseIndex(CourseIndex courseIndex) {
 		this.courseIndex = courseIndex;
+	}
+
+	public void setHomePage(Elearning_LanNP homepage) {
+		this.homepage = homepage;
 	}
 
 	public EventOfLogin(LoginForm loginForm, NavTab nav) {
@@ -63,17 +70,11 @@ public class EventOfLogin {
 					}
 					user = result;
 					Store.setUser(user);
+					loadCourseAdd();
+					homepage.loadContent(History.getToken());
 				}
 			}
 		});
-		try {
-			if (Store.user.getType() != 1)
-				this.courseIndex.hideAddCourse();
-			else
-				this.courseIndex.showAddCourse();
-		} catch (Exception e) {
-			this.courseIndex.hideAddCourse();
-		}
 	}
 
 	public void autoLogin() {
@@ -84,22 +85,25 @@ public class EventOfLogin {
 				// TODO Auto-generated method stub
 				if (result != null) {
 					loadUserInfo(result);
-					return;
+					loadCourseAdd();
+					homepage.loadContent(History.getToken());
+				} else {
+					loginWithCookies();
 				}
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
-				Window.alert("login fail");
+				loginWithCookies();
 			}
 		});
-		loginWithCookies();
 	}
 
 	public void loginWithCookies() {
 		if (Cookies.getCookie("isAutoLogin") != "1") {
 			Store.setUser(null);
+			homepage.loadContent(History.getToken());
 			return;
 		}
 		try {
@@ -111,6 +115,7 @@ public class EventOfLogin {
 				public void onSuccess(User result) {
 					// TODO Auto-generated method stub
 					loadUserInfo(result);
+					homepage.loadContent(History.getToken());
 				}
 
 				@Override
@@ -122,14 +127,8 @@ public class EventOfLogin {
 		} catch (Exception e) {
 			Store.setUser(null);
 		}
-		try {
-			if (Store.user.getType() != 1)
-				this.courseIndex.hideAddCourse();
-			else
-				this.courseIndex.showAddCourse();
-		} catch (Exception e) {
-			this.courseIndex.hideAddCourse();
-		}
+		loadCourseAdd();
+		homepage.loadContent(History.getToken());
 	}
 
 	public void logout() {
@@ -151,7 +150,11 @@ public class EventOfLogin {
 				// TODO Auto-generated method stub
 			}
 		});
+		Store.setCourse(null);
+		Store.setUser(null);
 		this.courseIndex.hideAddCourse();
+		History.newItem("");
+		homepage.loadContent(History.getToken());
 	}
 
 	private void loadUserInfo(User user) {
@@ -159,12 +162,11 @@ public class EventOfLogin {
 		nav.showProperty();
 		nav.setProperty(user);
 		Store.setUser(user);
-		
 	}
-	
-	private void loadCourseAdd(User user){
+
+	private void loadCourseAdd() {
 		try {
-			if (user.getType() != 1)
+			if (Store.user.getType() != 1)
 				this.courseIndex.hideAddCourse();
 			else
 				this.courseIndex.showAddCourse();

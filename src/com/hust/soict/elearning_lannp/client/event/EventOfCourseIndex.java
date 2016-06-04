@@ -43,7 +43,8 @@ public class EventOfCourseIndex {
 	}
 
 	public void loadCourses(int user_id) {
-		coursesServiceAsync.getCourses(new AsyncCallback<ArrayList<Course>>() {
+		coursesServiceAsync.getCourses(user_id, new AsyncCallback<ArrayList<Course>>() {
+
 			@Override
 			public void onSuccess(ArrayList<Course> result) {
 				// TODO Auto-generated method stub

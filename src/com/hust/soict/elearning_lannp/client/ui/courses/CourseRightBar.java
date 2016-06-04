@@ -58,6 +58,7 @@ public class CourseRightBar extends Composite {
 		panelDescription.setId(course.getId());
 		panelDescription.setEvent(event);
 		panelDescription.setTitleDelete("Delete " + course.getName());
+		panelDescription.checkAdmin();
 		Lecture_index lectures = new Lecture_index();
 		lectures.setLectures(course.getLectures());
 		this.content.add(lectures);
@@ -92,6 +93,7 @@ public class CourseRightBar extends Composite {
 		panelDescription.setId(lecture.getId());
 		panelDescription.setEvent(event);
 		panelDescription.setTitleDelete("Delete " + lecture.getName());
+		panelDescription.checkAdmin();
 		FileAttaches fas = setLecture(lecture);
 		fas.loadInfo(lecture.getCourse().getUser().getId(), lecture.getId());
 		content.add(fas);
@@ -119,6 +121,7 @@ public class CourseRightBar extends Composite {
 		panelDescription.setId(assignment.getId());
 		panelDescription.setEvent(event);
 		panelDescription.setTitleDelete("Delete " + assignment.getName());
+		panelDescription.checkAdmin();
 		loadBreadcrumbs(assignment);
 	}
 

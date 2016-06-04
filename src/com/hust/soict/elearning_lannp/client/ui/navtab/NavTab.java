@@ -9,6 +9,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.hust.soict.elearning_lannp.client.Elearning_LanNP;
 import com.hust.soict.elearning_lannp.client.event.EventOfLogin;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseIndex;
 import com.hust.soict.elearning_lannp.client.ui.login.LoginForm;
@@ -68,9 +69,10 @@ public class NavTab extends Composite {
 		this.event.logout();
 	}
 
-	public void setCourseIndex(CourseIndex courseIndex) {
+	public void setCourseIndex(CourseIndex courseIndex, Elearning_LanNP homepage) {
 		this.event.setCourseIndex(courseIndex);
-		this.login.setCourseIndex(courseIndex);
+		this.event.setHomePage(homepage);
+		this.login.setCourseIndex(courseIndex, homepage);
 	}
 
 	public void changeDisplayName(String displayName) {

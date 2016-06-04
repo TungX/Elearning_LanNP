@@ -12,6 +12,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.hust.soict.elearning_lannp.client.ui.shared.Store;
 import com.hust.soict.elearning_lannp.shared.model.AttachFile;
 
 public class FileAttaches extends Composite {
@@ -25,6 +26,9 @@ public class FileAttaches extends Composite {
 
 	public FileAttaches() {
 		initWidget(uiBinder.createAndBindUi(this));
+		if(Store.course.getUserId() != Store.user.getId()){
+			this.linkAddFile.removeFromParent();
+		}
 	}
 
 	@UiField

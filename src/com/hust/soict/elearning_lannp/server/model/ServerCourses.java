@@ -87,6 +87,7 @@ public class ServerCourses extends Course {
 		course.setName(rs.getString("name"));
 		course.setDescription(rs.getString("description"));
 		course.setPassword(rs.getString("password"));
+		course.setUserId(rs.getInt("user_id"));
 		ServerUsers user = new ServerUsers();
 		course.setUser(user.getUser(rs.getInt("user_id")));
 		ServerLectures lectures = new ServerLectures();

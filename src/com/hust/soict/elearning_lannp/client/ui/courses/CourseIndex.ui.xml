@@ -17,13 +17,19 @@
 		margin-bottom: 0;
 		border-bottom: 1px solid gray;
 	}
+	
+	.courses .gwttitle {
+		margin-bottom: 40px;
+	}
 	</ui:style>
 	<g:HTMLPanel styleName="{style.courses}">
-		<H2>
-			Courses
-		</H2>
-		<b:Anchor text="Add course" pull="RIGHT" icon="PLUS"
-			ui:field="linkAddCourse" />
+		<div class="{style.gwttitle}">
+			<H2>
+				Courses
+			</H2>
+			<b:Anchor text="Add course" pull="RIGHT" icon="PLUS"
+				ui:field="linkAddCourse" />
+		</div>
 		<b:Column size="XS_12">
 			<b:Column size="XS_12">
 				<b:PanelGroup ui:field="courses"></b:PanelGroup>

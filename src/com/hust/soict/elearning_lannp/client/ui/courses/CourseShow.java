@@ -19,7 +19,6 @@ public class CourseShow extends Composite {
 
 	public CourseShow() {
 		initWidget(uiBinder.createAndBindUi(this));
-
 	}
 
 	@UiField

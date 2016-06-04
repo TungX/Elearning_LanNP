@@ -43,11 +43,13 @@ public class CourseIndex extends Composite {
 	}
 
 	public CourseIndex loadCourse() {
+		this.courses.clear();
 		event.loadCourses();
 		return this;
 	}
 
 	public CourseIndex loadCourse(int user_id) {
+		this.courses.clear();
 		event.loadCourses(user_id);
 		return this;
 	}

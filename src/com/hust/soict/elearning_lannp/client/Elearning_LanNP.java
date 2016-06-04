@@ -24,12 +24,12 @@ public class Elearning_LanNP implements EntryPoint {
 		NavTab navTab = new NavTab();
 		this.courseShow = new CourseShow();
 		this.courseIndex = new CourseIndex();
-		navTab.setCourseIndex(courseIndex);
+		navTab.setCourseIndex(courseIndex, this);
+		RootPanel.get("header").add(navTab);
 		EventOfLogin eventLogin = new EventOfLogin(null, navTab);
 		eventLogin.setCourseIndex(courseIndex);
+		eventLogin.setHomePage(this);
 		eventLogin.autoLogin();
-		RootPanel.get("header").add(navTab);
-		loadContent(History.getToken());
 
 		History.addValueChangeHandler(new ValueChangeHandler<String>() {
 			public void onValueChange(ValueChangeEvent<String> event) {
@@ -39,8 +39,9 @@ public class Elearning_LanNP implements EntryPoint {
 		});
 	}
 
-	private void loadContent(String historyToken) {
+	public void loadContent(String historyToken) {
 		if (historyToken.isEmpty()) {
+			RootPanel.get("wrapper").clear();
 			try {
 				RootPanel.get("wrapper").add(this.courseIndex.loadCourse(Store.user.getId()));
 			} catch (Exception e) {
@@ -49,16 +50,19 @@ public class Elearning_LanNP implements EntryPoint {
 			return;
 		}
 
-		if (Store.user == null) {
-			History.newItem("");
-			Window.alert("Please login befor show it");
-			RootPanel.get("wrapper").add(this.courseIndex.loadCourse());
-			return;
-		}
 		if (historyToken.matches("courses")) {
 			RootPanel.get("wrapper").clear();
 			RootPanel.get("wrapper").add(this.courseIndex.loadCourse());
-		} else if (historyToken.matches("courses/[1-9]+")) {
+			return;
+		}
+
+		if (Store.user == null) {
+			Window.alert("please login before show it!");
+			History.newItem("");
+			return;
+		}
+
+		if (historyToken.matches("courses/[1-9]+")) {
 			loadCourse(historyToken);
 		} else if (historyToken.matches("courses/[1-9]+/lectures/[1-9]+")) {
 			if (Store.course == null) {
