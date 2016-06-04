@@ -14,16 +14,22 @@ import com.hust.soict.elearning_lannp.client.ui.courses.CourseIndex;
 import com.hust.soict.elearning_lannp.client.ui.login.LoginForm;
 import com.hust.soict.elearning_lannp.client.ui.navtab.NavTab;
 import com.hust.soict.elearning_lannp.client.ui.shared.Store;
+import com.hust.soict.elearning_lannp.client.ui.users.SignupForm;
 import com.hust.soict.elearning_lannp.shared.model.User;
 
-public class EventOfLogin {
+public class EventOfUser {
 	final private long DURATION = 1000 * 60 * 60 * 24 * 14;
 	private SessionServiceAsync sessionService;
 	private NavTab nav;
 	private LoginForm form;
+	private SignupForm signupForm;
 	private User user;
 	private CourseIndex courseIndex;
 	private Elearning_LanNP homepage;
+
+	public void setSignupForm(SignupForm form) {
+		this.signupForm = form;
+	}
 
 	public void setCourseIndex(CourseIndex courseIndex) {
 		this.courseIndex = courseIndex;
@@ -33,11 +39,53 @@ public class EventOfLogin {
 		this.homepage = homepage;
 	}
 
-	public EventOfLogin(LoginForm loginForm, NavTab nav) {
+	public EventOfUser(LoginForm loginForm, NavTab nav) {
 		sessionService = GWT.create(SessionService.class);
 		this.nav = nav;
 		this.form = loginForm;
 		this.user = new User();
+	}
+
+	public void doUpdate(User user) {
+		this.sessionService.update(user, new AsyncCallback<User>() {
+
+			@Override
+			public void onSuccess(User result) {
+				// TODO Auto-generated method stub
+				nav.setProperty(result);
+				if (user.isAutoLogin()) {
+					Date expires = new Date(System.currentTimeMillis() + DURATION);
+					Cookies.setCookie("password", user.getPassword(), expires);
+				}
+				Store.setUser(result);
+				homepage.loadContent(History.getToken());
+				signupForm.hide();
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
+
+	public void doCreate(User user) {
+		this.sessionService.signup(user, new AsyncCallback<User>() {
+
+			@Override
+			public void onSuccess(User result) {
+				// TODO Auto-generated method stub
+				loadNavInfo(result);
+				signupForm.hide();
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 	}
 
 	public void doLogin(String email, String password, boolean isAutoLogin) {
@@ -58,20 +106,8 @@ public class EventOfLogin {
 				if (result == null) {
 					Window.alert("can't login");
 				} else {
-					nav.hideTagLogin();
-					nav.showProperty();
-					nav.setProperty(result);
+					loadNavInfo(result);
 					form.hideModal();
-					if (user.isAutoLogin()) {
-						Date expires = new Date(System.currentTimeMillis() + DURATION);
-						Cookies.setCookie("id", result.getId() + "", expires);
-						Cookies.setCookie("password", user.getPassword(), expires);
-						Cookies.setCookie("isAutoLogin", "1", expires);
-					}
-					user = result;
-					Store.setUser(user);
-					loadCourseAdd();
-					homepage.loadContent(History.getToken());
 				}
 			}
 		});
@@ -173,5 +209,21 @@ public class EventOfLogin {
 		} catch (Exception e) {
 			this.courseIndex.hideAddCourse();
 		}
+	}
+
+	private void loadNavInfo(User result) {
+		nav.hideTagLogin();
+		nav.showProperty();
+		nav.setProperty(result);
+		if (user.isAutoLogin()) {
+			Date expires = new Date(System.currentTimeMillis() + DURATION);
+			Cookies.setCookie("id", result.getId() + "", expires);
+			Cookies.setCookie("password", user.getPassword(), expires);
+			Cookies.setCookie("isAutoLogin", "1", expires);
+		}
+		user = result;
+		Store.setUser(user);
+		loadCourseAdd();
+		homepage.loadContent(History.getToken());
 	}
 }

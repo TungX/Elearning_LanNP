@@ -9,4 +9,6 @@ public interface SessionService extends RemoteService {
 	User loginFromSessionServer();
 	User loginWithCookies(int id, String password);
 	void logout();
+	User signup(User user);
+	User update(User user);
 }

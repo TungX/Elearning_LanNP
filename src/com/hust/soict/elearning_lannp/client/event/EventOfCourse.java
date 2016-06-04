@@ -2,7 +2,6 @@ package com.hust.soict.elearning_lannp.client.event;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.hust.soict.elearning_lannp.client.service.CoursesService;
 import com.hust.soict.elearning_lannp.client.service.CoursesServiceAsync;

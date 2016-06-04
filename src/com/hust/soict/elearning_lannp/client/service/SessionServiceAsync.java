@@ -13,4 +13,8 @@ public interface SessionServiceAsync {
 
 	void loginWithCookies(int id, String password, AsyncCallback<User> callback);
 
+	void signup(User user, AsyncCallback<User> callback);
+
+	void update(User user, AsyncCallback<User> callback);
+
 }

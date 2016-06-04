@@ -10,13 +10,13 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.Elearning_LanNP;
-import com.hust.soict.elearning_lannp.client.event.EventOfLogin;
+import com.hust.soict.elearning_lannp.client.event.EventOfUser;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseIndex;
 import com.hust.soict.elearning_lannp.client.ui.login.LoginForm;
 import com.hust.soict.elearning_lannp.shared.model.User;
 
 public class NavTab extends Composite {
-	private EventOfLogin event;
+	private EventOfUser event;
 	private LoginForm login;
 	@UiField
 	AnchorListItem btnCourses;
@@ -42,7 +42,7 @@ public class NavTab extends Composite {
 
 	public NavTab() {
 		initWidget(uiBinder.createAndBindUi(this));
-		event = new EventOfLogin(null, this);
+		event = new EventOfUser(null, this);
 		this.login = new LoginForm(this);
 	}
 

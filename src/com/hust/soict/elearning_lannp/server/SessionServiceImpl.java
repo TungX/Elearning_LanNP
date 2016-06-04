@@ -8,8 +8,7 @@ import com.hust.soict.elearning_lannp.client.service.SessionService;
 import com.hust.soict.elearning_lannp.server.model.ServerUsers;
 import com.hust.soict.elearning_lannp.shared.model.User;
 
-public class SessionServiceImpl extends RemoteServiceServlet implements
-		SessionService {
+public class SessionServiceImpl extends RemoteServiceServlet implements SessionService {
 
 	/**
 	 * 
@@ -65,6 +64,18 @@ public class SessionServiceImpl extends RemoteServiceServlet implements
 		User user = suser.getUser(id, password);
 		storeUserInSession(user);
 		return user;
+	}
+
+	@Override
+	public User signup(User user) {
+		ServerUsers suser = new ServerUsers();
+		return suser.insert(user);
+	}
+
+	@Override
+	public User update(User user) {
+		ServerUsers suser = new ServerUsers();
+		return suser.update(user);
 	}
 
 }
