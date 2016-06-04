@@ -2,7 +2,7 @@ package com.hust.soict.elearning_lannp.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.*;
-import com.hust.soict.elearning_lannp.client.event.EventOfLogin;
+import com.hust.soict.elearning_lannp.client.event.EventOfUser;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseIndex;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseShow;
 import com.hust.soict.elearning_lannp.client.ui.navtab.NavTab;
@@ -26,7 +26,7 @@ public class Elearning_LanNP implements EntryPoint {
 		this.courseIndex = new CourseIndex();
 		navTab.setCourseIndex(courseIndex, this);
 		RootPanel.get("header").add(navTab);
-		EventOfLogin eventLogin = new EventOfLogin(null, navTab);
+		EventOfUser eventLogin = new EventOfUser(null, navTab);
 		eventLogin.setCourseIndex(courseIndex);
 		eventLogin.setHomePage(this);
 		eventLogin.autoLogin();

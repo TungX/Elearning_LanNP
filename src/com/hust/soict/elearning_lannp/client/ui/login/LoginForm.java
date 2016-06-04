@@ -11,13 +11,13 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.Elearning_LanNP;
-import com.hust.soict.elearning_lannp.client.event.EventOfLogin;
+import com.hust.soict.elearning_lannp.client.event.EventOfUser;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseIndex;
 import com.hust.soict.elearning_lannp.client.ui.navtab.NavTab;
-import com.hust.soict.elearning_lannp.client.ui.users.User_new;
+import com.hust.soict.elearning_lannp.client.ui.users.SignupForm;
 
 public class LoginForm extends Composite {
-	private EventOfLogin event;
+	private EventOfUser event;
 	private static LoginUiBinder uiBinder = GWT.create(LoginUiBinder.class);
 
 	interface LoginUiBinder extends UiBinder<Widget, LoginForm> {
@@ -26,7 +26,7 @@ public class LoginForm extends Composite {
 	public LoginForm(NavTab nav) {
 		initWidget(uiBinder.createAndBindUi(this));
 		RootPanel.get().add(this);
-		event = new EventOfLogin(this, nav);
+		event = new EventOfUser(this, nav);
 	}
 
 	@UiField
@@ -43,8 +43,11 @@ public class LoginForm extends Composite {
 	@UiHandler("urlSignUp")
 	void onUrlSignUpClick(ClickEvent e) {
 		this.modalLogin.hide();
-		User_new signupForm = new User_new();
-		signupForm.showModal();
+		SignupForm signupForm = new SignupForm();
+		signupForm.show();
+		event.setSignupForm(signupForm);
+		signupForm.setEvent(this.event);
+		signupForm.setTitle("Signup");
 	}
 
 	@UiField
@@ -63,8 +66,8 @@ public class LoginForm extends Composite {
 		String password = txtPassword.getValue();
 		event.doLogin(email, password, isAutoLogin.getValue());
 	}
-	
-	public void setCourseIndex(CourseIndex courseIndex, Elearning_LanNP homepage){
+
+	public void setCourseIndex(CourseIndex courseIndex, Elearning_LanNP homepage) {
 		event.setCourseIndex(courseIndex);
 		event.setHomePage(homepage);
 	}

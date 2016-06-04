@@ -20,7 +20,35 @@ public class ServerUsers extends User implements ServerModel {
 		this.password = password;
 		this.conn = new ConnectData();
 	}
-	
+
+	public User insert(User user) {
+		this.conn.condition.clear();
+		this.conn.condition.put("email", user.getEmail());
+		this.conn.condition.put("first_name", user.getFirstName());
+		this.conn.condition.put("last_name", user.getLastName());
+		this.conn.condition.put("encrypted_password", user.getPassword());
+		this.conn.condition.put("avatar", user.getAvatar());
+		this.conn.condition.put("type", user.getType() + "");
+		int id = this.conn.insertData("users");
+		user.setId(id);
+		return user;
+	}
+
+	public User update(User user) {
+		this.conn.condition.clear();
+		this.conn.condition.put("email", user.getEmail());
+		this.conn.condition.put("first_name", user.getFirstName());
+		this.conn.condition.put("last_name", user.getLastName());
+		if (!user.getPassword().isEmpty())
+			this.conn.condition.put("encrypted_password", user.getPassword());
+		this.conn.condition.put("avatar", user.getAvatar());
+		String queryplus = "id='" + user.getId() + "'";
+		boolean result = this.conn.updateData("users", queryplus);
+		if (result == false)
+			return null;
+		return user;
+	}
+
 	public User getUserFromServer() {
 		User user = null;
 		this.conn.condition.put("email", this.getEmail());
@@ -35,8 +63,8 @@ public class ServerUsers extends User implements ServerModel {
 		}
 		return user;
 	}
-	
-	public User getUser(int id){
+
+	public User getUser(int id) {
 		User user = null;
 		this.conn.condition.put("id", id + "");
 		this.conn.connectDatabase();

@@ -1,0 +1,74 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
+	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html">
+	<ui:style>
+	.spacing {
+		margin-top: 8px;
+		max-height: 50px;
+		max-width: 50px;
+	}
+	
+	table {
+		width: 100%;
+	}
+	
+	tr {
+		border-bottom: 1px solid graytext;
+	}
+	
+	th {
+		width: 40%;
+		text-align: right;
+	}
+	
+	td {
+		padding-left: 20px;
+	}
+	</ui:style>
+	<b:Modal title="Info Yin Long" closable="true" fade="true"
+		dataBackdrop="STATIC" dataKeyboard="true" b:id="myModal" ui:field="modalProperty">
+		<b:ModalBody>
+			<g:HTMLPanel>
+				<table>
+					<tr>
+						<th>
+							Avatar
+						</th>
+						<td>
+							<b:Image addStyleNames="{style.spacing}" type="CIRCLE"
+								url="uploads/avatar-default.jpg" ui:field="avatar" />
+						</td>
+					</tr>
+					<tr>
+						<th>Email</th>
+						<td>
+							<b.html:Text ui:field="txtEmail" />
+						</td>
+					</tr>
+					<tr>
+						<th>First name</th>
+						<td>
+							<b.html:Text ui:field="txtFirstName" />
+						</td>
+					</tr>
+					<tr>
+						<th>Last name</th>
+						<td>
+							<b.html:Text ui:field="txtLastName" />
+						</td>
+					</tr>
+					<tr>
+						<th>Type</th>
+						<td>
+							<b.html:Text ui:field="txtType" />
+						</td>
+					</tr>
+				</table>
+			</g:HTMLPanel>
+		</b:ModalBody>
+		<b:ModalFooter>
+			<b:Button type="DEFAULT" dataDismiss="MODAL">Close</b:Button>
+		</b:ModalFooter>
+	</b:Modal>
+</ui:UiBinder>

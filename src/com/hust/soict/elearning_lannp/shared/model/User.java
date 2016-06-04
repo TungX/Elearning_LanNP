@@ -33,6 +33,17 @@ public class User extends Model {
 		this.isAutoLogin = false;
 	}
 
+	public void setInfo(String email, String password, String password_confirm, String name, int type,
+			String filename) {
+		this.email = email;
+		this.password = password;
+		this.password_confirm = password_confirm;
+		this.firstName = name.substring(0, name.lastIndexOf(" "));
+		this.lasttName = name.substring(name.lastIndexOf(" ") + 1);
+		this.type = type;
+		this.avatar = "uploads/" + filename.substring(filename.lastIndexOf("\\") + 1);
+	}
+
 	public boolean isAutoLogin() {
 		return isAutoLogin;
 	}
@@ -65,7 +76,7 @@ public class User extends Model {
 		this.firstName = firstName;
 	}
 
-	public String getLasttName() {
+	public String getLastName() {
 		return lasttName;
 	}
 
