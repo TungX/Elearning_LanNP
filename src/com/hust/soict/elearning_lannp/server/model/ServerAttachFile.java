@@ -90,6 +90,7 @@ public class ServerAttachFile extends AttachFile implements ServerModel {
 		attachFile.setId(rs.getInt("id"));
 		attachFile.setName(rs.getString("name"));
 		attachFile.setPath(rs.getString("path"));
+		attachFile.setUserId(rs.getInt("user_id"));
 		return attachFile;
 	}
 

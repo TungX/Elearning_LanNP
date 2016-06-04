@@ -17,8 +17,7 @@ import com.hust.soict.elearning_lannp.shared.model.Course;
 
 public class CourseIndex extends Composite {
 	private EventOfCourseIndex event;
-	private static Course_indexUiBinder uiBinder = GWT
-			.create(Course_indexUiBinder.class);
+	private static Course_indexUiBinder uiBinder = GWT.create(Course_indexUiBinder.class);
 
 	interface Course_indexUiBinder extends UiBinder<Widget, CourseIndex> {
 	}
@@ -29,7 +28,6 @@ public class CourseIndex extends Composite {
 	public CourseIndex() {
 		initWidget(uiBinder.createAndBindUi(this));
 		event = new EventOfCourseIndex(this);
-		event.loadCourses();
 	}
 
 	void addCourse(Course course) {
@@ -44,8 +42,15 @@ public class CourseIndex extends Composite {
 		}
 	}
 
-	public CourseIndex reload() {
+	public CourseIndex loadCourse() {
+		this.courses.clear();
 		event.loadCourses();
+		return this;
+	}
+
+	public CourseIndex loadCourse(int user_id) {
+		this.courses.clear();
+		event.loadCourses(user_id);
 		return this;
 	}
 
@@ -57,5 +62,13 @@ public class CourseIndex extends Composite {
 		CourseForm form = new CourseForm(new EventOfCourse(), new Course());
 		form.setTitle("Add course");
 		form.show();
+	}
+
+	public void hideAddCourse() {
+		this.linkAddCourse.setVisible(false);
+	}
+
+	public void showAddCourse() {
+		this.linkAddCourse.setVisible(true);
 	}
 }

@@ -3,7 +3,6 @@ package com.hust.soict.elearning_lannp.client.ui.courses;
 import java.util.ArrayList;
 
 import org.gwtbootstrap3.client.ui.*;
-import org.gwtbootstrap3.client.ui.html.Text;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -11,11 +10,13 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.ui.asignments.AssignmentForm;
 import com.hust.soict.elearning_lannp.client.ui.lectures.LectureForm;
+import com.hust.soict.elearning_lannp.client.ui.shared.Store;
 import com.hust.soict.elearning_lannp.shared.model.*;
 
 public class CourseLeftBar extends Composite {
@@ -46,6 +47,20 @@ public class CourseLeftBar extends Composite {
 	Anchor addAssignment;
 	@UiField
 	Anchor btnHome;
+	@UiField
+	Anchor btnLeave;
+	@UiField
+	Panel panelLeave;
+
+	public void checkAdmin() {
+		if (!Store.isAdmin()) {
+			Window.alert("check admin");
+			this.addAssignment.removeFromParent();
+			this.addLecture.removeFromParent();
+		} else {
+			this.panelLeave.removeFromParent();
+		}
+	}
 
 	@UiHandler("btnHome")
 	void onBtnHomeClick(ClickEvent e) {

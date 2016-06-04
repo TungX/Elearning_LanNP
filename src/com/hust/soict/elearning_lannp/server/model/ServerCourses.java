@@ -3,9 +3,7 @@ package com.hust.soict.elearning_lannp.server.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import com.hust.soict.elearning_lannp.shared.model.Category;
 import com.hust.soict.elearning_lannp.shared.model.Course;
 import com.hust.soict.elearning_lannp.shared.model.Model;
 
@@ -64,10 +62,11 @@ public class ServerCourses extends Course {
 		return course;
 	}
 
-	public ArrayList<Course> getCourses(HashMap<String, String> condition) {
+	public ArrayList<Course> getCourses(int user_id) {
+		this.conn.condition.clear();
+		if (user_id != 0)
+			this.conn.condition.put("user_id", user_id + "");
 		ArrayList<Course> tcourses = new ArrayList<Course>();
-		if (condition != null)
-			this.conn.condition = condition;
 		ResultSet rs = this.conn.getResultSet("courses", "");
 		try {
 			while (rs.next()) {
@@ -88,6 +87,7 @@ public class ServerCourses extends Course {
 		course.setName(rs.getString("name"));
 		course.setDescription(rs.getString("description"));
 		course.setPassword(rs.getString("password"));
+		course.setUserId(rs.getInt("user_id"));
 		ServerUsers user = new ServerUsers();
 		course.setUser(user.getUser(rs.getInt("user_id")));
 		ServerLectures lectures = new ServerLectures();

@@ -58,11 +58,10 @@
 				</b:ListGroupItem>
 			</b:PanelCollapse>
 		</b:Panel>
-		<b:Panel>
+		<b:Panel ui:field="panelLeave">
 			<b:PanelHeader>
 				<b:Heading size="H4">
-					<b:Icon type="USER_TIMES" fixedWidth="true" />
-					<b.html:Text text="Leave course" />
+					<b:Anchor icon="USER_TIMES" text="Leave course" ui:field="btnLeave" />
 				</b:Heading>
 			</b:PanelHeader>
 		</b:Panel>
