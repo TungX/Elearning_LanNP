@@ -53,12 +53,12 @@ public class EventOfUser {
 			public void onSuccess(User result) {
 				// TODO Auto-generated method stub
 				nav.setProperty(result);
-				if (user.isAutoLogin()) {
+				if (result.isAutoLogin()) {
 					Date expires = new Date(System.currentTimeMillis() + DURATION);
-					Cookies.setCookie("password", user.getPassword(), expires);
+					if (!result.getPassword().isEmpty())
+						Cookies.setCookie("password", result.getPassword(), expires);
 				}
 				Store.setUser(result);
-				homepage.loadContent(History.getToken());
 				signupForm.hide();
 			}
 
@@ -76,7 +76,7 @@ public class EventOfUser {
 			@Override
 			public void onSuccess(User result) {
 				// TODO Auto-generated method stub
-				loadNavInfo(result);
+				doLogin(result.getEmail(), result.getPassword(), false);
 				signupForm.hide();
 			}
 
@@ -189,8 +189,11 @@ public class EventOfUser {
 		Store.setCourse(null);
 		Store.setUser(null);
 		this.courseIndex.hideAddCourse();
-		History.newItem("");
-		homepage.loadContent(History.getToken());
+		if (History.getToken().isEmpty()) {
+			homepage.loadContent(History.getToken());
+		} else {
+			History.newItem("");
+		}
 	}
 
 	private void loadUserInfo(User user) {
@@ -222,7 +225,7 @@ public class EventOfUser {
 			Cookies.setCookie("isAutoLogin", "1", expires);
 		}
 		user = result;
-		Store.setUser(user);
+		Store.setUser(result);
 		loadCourseAdd();
 		homepage.loadContent(History.getToken());
 	}

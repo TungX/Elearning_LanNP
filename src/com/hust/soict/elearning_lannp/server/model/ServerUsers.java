@@ -24,9 +24,9 @@ public class ServerUsers extends User implements ServerModel {
 	public User insert(User user) {
 		this.conn.condition.clear();
 		this.conn.condition.put("email", user.getEmail());
-		this.conn.condition.put("firstName", user.getFirstName());
-		this.conn.condition.put("lastName", user.getLasttName());
-		this.conn.condition.put("password", user.getPassword());
+		this.conn.condition.put("first_name", user.getFirstName());
+		this.conn.condition.put("last_name", user.getLastName());
+		this.conn.condition.put("encrypted_password", user.getPassword());
 		this.conn.condition.put("avatar", user.getAvatar());
 		this.conn.condition.put("type", user.getType() + "");
 		int id = this.conn.insertData("users");
@@ -37,12 +37,13 @@ public class ServerUsers extends User implements ServerModel {
 	public User update(User user) {
 		this.conn.condition.clear();
 		this.conn.condition.put("email", user.getEmail());
-		this.conn.condition.put("firstName", user.getFirstName());
-		this.conn.condition.put("lastName", user.getLasttName());
-		this.conn.condition.put("password", user.getPassword());
+		this.conn.condition.put("first_name", user.getFirstName());
+		this.conn.condition.put("last_name", user.getLastName());
+		if (!user.getPassword().isEmpty())
+			this.conn.condition.put("encrypted_password", user.getPassword());
 		this.conn.condition.put("avatar", user.getAvatar());
 		String queryplus = "id='" + user.getId() + "'";
-		boolean result = this.conn.updateData("courses", queryplus);
+		boolean result = this.conn.updateData("users", queryplus);
 		if (result == false)
 			return null;
 		return user;

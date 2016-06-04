@@ -45,6 +45,9 @@ public class LoginForm extends Composite {
 		this.modalLogin.hide();
 		SignupForm signupForm = new SignupForm();
 		signupForm.show();
+		event.setSignupForm(signupForm);
+		signupForm.setEvent(this.event);
+		signupForm.setTitle("Signup");
 	}
 
 	@UiField
@@ -63,8 +66,8 @@ public class LoginForm extends Composite {
 		String password = txtPassword.getValue();
 		event.doLogin(email, password, isAutoLogin.getValue());
 	}
-	
-	public void setCourseIndex(CourseIndex courseIndex, Elearning_LanNP homepage){
+
+	public void setCourseIndex(CourseIndex courseIndex, Elearning_LanNP homepage) {
 		event.setCourseIndex(courseIndex);
 		event.setHomePage(homepage);
 	}

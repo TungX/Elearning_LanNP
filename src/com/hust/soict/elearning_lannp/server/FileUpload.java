@@ -15,8 +15,7 @@ public class FileUpload extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletFileUpload upload = new ServletFileUpload();
 
 		try {
@@ -39,8 +38,7 @@ public class FileUpload extends HttpServlet {
 					forder.mkdir();
 				}
 
-				FileOutputStream fos = new FileOutputStream(new File("uploads/"
-						+ item.getName()));
+				FileOutputStream fos = new FileOutputStream(new File("uploads/" + item.getName()));
 				out.writeTo(fos);
 				System.out.println("Complete make file");
 			}

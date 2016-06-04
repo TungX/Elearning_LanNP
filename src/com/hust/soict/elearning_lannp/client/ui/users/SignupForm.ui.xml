@@ -45,17 +45,20 @@
 						Avatar
 					</b:FormLabel>
 					<g:FlowPanel addStyleNames="col-lg-10">
-						<g:VerticalPanel>
-							<g:FileUpload name="uploadFile" ui:field="uploadFile" />
-						</g:VerticalPanel>
+						<g:FormPanel ui:field="avatarForm">
+							<g:VerticalPanel>
+								<g:FileUpload name="uploadFile" ui:field="uploadFile" />
+							</g:VerticalPanel>
+						</g:FormPanel>
 					</g:FlowPanel>
 				</b:FormGroup>
 				<b:FormGroup>
-					<g:FlowPanel addStyleNames="col-lg-offset-2 col-lg-10">
+					<g:FlowPanel addStyleNames="col-lg-offset-2 col-lg-10"
+						ui:field="panelRadio">
+						<b:InlineRadio name="radio_type" formValue="student"
+							text="Student" value="true" ui:field="radioStudent" />
 						<b:InlineRadio name="radio_type" formValue="teacher"
 							text="Teacher" />
-						<b:InlineRadio name="radio_type" formValue="student"
-							text="Student" />
 					</g:FlowPanel>
 				</b:FormGroup>
 			</b:Form>

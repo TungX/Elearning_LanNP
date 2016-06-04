@@ -11,7 +11,7 @@
 	</ui:style>
 	<b:Navbar>
 		<b:NavbarHeader>
-			<b:NavbarBrand ui:field="btnHome">Elearning LanNP</b:NavbarBrand>
+			<b:NavbarBrand ui:field="btnHome" href="">Elearning LanNP</b:NavbarBrand>
 			<b:NavbarCollapseButton dataTarget="#navbar-collapse" />
 		</b:NavbarHeader>
 
