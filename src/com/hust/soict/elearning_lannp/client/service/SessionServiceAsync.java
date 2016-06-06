@@ -17,4 +17,8 @@ public interface SessionServiceAsync {
 
 	void update(User user, AsyncCallback<User> callback);
 
+	void join(int user_id, int course_id, AsyncCallback<Void> callback);
+
+	void leave(int user_id, int course_id, AsyncCallback<Void> callback);
+	
 }

@@ -101,9 +101,11 @@ public class ServerUsers extends User implements ServerModel {
 		user.setId(rs.getInt("id"));
 		user.setEmail(rs.getString("email"));
 		user.setFirstName(rs.getString("first_name"));
-		user.setLasttName(rs.getString("last_name"));
+		user.setLastName(rs.getString("last_name"));
 		user.setType(rs.getInt("type"));
 		user.setAvatar(rs.getString("avatar"));
+		ServerUserInCourses userInCourses = new ServerUserInCourses();
+		user.setCourseIds(userInCourses.getCourses(user.getId()));
 		return user;
 	}
 }

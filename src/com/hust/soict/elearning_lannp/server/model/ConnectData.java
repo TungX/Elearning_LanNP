@@ -83,6 +83,7 @@ public class ConnectData {
 		try {
 			String query = "select * from " + table_name;
 			query += getQuery(condition, queryplus);
+			System.out.println(query);
 			rs = stmt.executeQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace();

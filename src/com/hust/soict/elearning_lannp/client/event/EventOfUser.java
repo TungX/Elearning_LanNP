@@ -196,6 +196,40 @@ public class EventOfUser {
 		}
 	}
 
+	public void join(int user_id, int course_id) {
+		this.sessionService.join(user_id, course_id, new AsyncCallback<Void>() {
+
+			@Override
+			public void onSuccess(Void result) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
+
+	public void leave(int user_id, int course_id) {
+		this.sessionService.leave(user_id, course_id, new AsyncCallback<Void>() {
+
+			@Override
+			public void onSuccess(Void result) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
+
 	private void loadUserInfo(User user) {
 		nav.hideTagLogin();
 		nav.showProperty();
@@ -229,4 +263,5 @@ public class EventOfUser {
 		loadCourseAdd();
 		homepage.loadContent(History.getToken());
 	}
+
 }

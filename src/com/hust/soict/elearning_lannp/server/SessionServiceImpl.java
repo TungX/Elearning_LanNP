@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.hust.soict.elearning_lannp.client.service.SessionService;
+import com.hust.soict.elearning_lannp.server.model.ServerUserInCourses;
 import com.hust.soict.elearning_lannp.server.model.ServerUsers;
 import com.hust.soict.elearning_lannp.shared.model.User;
 
@@ -76,6 +77,18 @@ public class SessionServiceImpl extends RemoteServiceServlet implements SessionS
 	public User update(User user) {
 		ServerUsers suser = new ServerUsers();
 		return suser.update(user);
+	}
+
+	@Override
+	public void join(int user_id, int course_id) {
+		ServerUserInCourses users = new ServerUserInCourses();
+		users.joinCourse(user_id, course_id);
+	}
+
+	@Override
+	public void leave(int user_id, int course_id) {
+		ServerUserInCourses users = new ServerUserInCourses();
+		users.leaveCourse(user_id, course_id);
 	}
 
 }

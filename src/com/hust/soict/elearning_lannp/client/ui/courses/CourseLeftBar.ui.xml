@@ -65,5 +65,12 @@
 				</b:Heading>
 			</b:PanelHeader>
 		</b:Panel>
+		<b:Panel ui:field="panelJoin">
+			<b:PanelHeader>
+				<b:Heading size="H4">
+					<b:Anchor icon="USER" text="Join course" ui:field="btnJoin" />
+				</b:Heading>
+			</b:PanelHeader>
+		</b:Panel>
 	</b:PanelGroup>
 </ui:UiBinder> 

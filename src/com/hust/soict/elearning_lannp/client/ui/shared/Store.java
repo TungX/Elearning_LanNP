@@ -22,4 +22,14 @@ public class Store {
 			return false;
 		}
 	}
+
+	public static boolean isInCourse() {
+		try {
+			if (Store.user.getType() == 1)
+				return false;
+			return Store.user.getCourseIds().indexOf(Store.course.getId()) > -1;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }
