@@ -2,6 +2,8 @@ package com.hust.soict.elearning_lannp.shared.model;
 
 import java.util.ArrayList;
 
+import com.google.gwt.user.client.Window;
+
 public class User extends Model {
 	protected int id;
 	protected String email;
@@ -29,12 +31,14 @@ public class User extends Model {
 	public User() {
 		super();
 		this.isAutoLogin = false;
+		this.courseIds = new ArrayList<Integer>();
 	}
 
 	public User(int id) {
 		super();
 		this.id = id;
 		this.isAutoLogin = false;
+		this.courseIds = new ArrayList<Integer>();
 	}
 
 	public void setInfo(String email, String password, String password_confirm, String name, int type,
@@ -148,5 +152,17 @@ public class User extends Model {
 
 	public boolean isTeacher() {
 		return this.type == 1;
+	}
+
+	public void addCourse(int course_id) {
+		int index = this.courseIds.indexOf(course_id);
+		if (index == -1) {
+			this.courseIds.add(course_id);
+		}
+	}
+
+	public void removeCourse(int course_id) {
+		Window.alert(this.courseIds.remove((Integer) course_id) + "");
+		;
 	}
 }

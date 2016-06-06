@@ -1,5 +1,6 @@
 package com.hust.soict.elearning_lannp.client.ui.shared;
 
+import com.google.gwt.user.client.Window;
 import com.hust.soict.elearning_lannp.shared.model.Course;
 import com.hust.soict.elearning_lannp.shared.model.User;
 
@@ -8,6 +9,11 @@ public class Store {
 	public static Course course;
 
 	public static void setUser(User user) {
+//		try {
+//			Window.alert(user.getId() + "");
+//		} catch (Exception e) {
+//			Window.alert(user + "");
+//		}
 		Store.user = user;
 	}
 

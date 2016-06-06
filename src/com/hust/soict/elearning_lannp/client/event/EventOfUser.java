@@ -17,7 +17,7 @@ import com.hust.soict.elearning_lannp.client.ui.shared.Store;
 import com.hust.soict.elearning_lannp.client.ui.users.SignupForm;
 import com.hust.soict.elearning_lannp.shared.model.User;
 
-public class EventOfUser {
+public class EventOfUser extends Event {
 	final private long DURATION = 1000 * 60 * 60 * 24 * 14;
 	private SessionServiceAsync sessionService;
 	private NavTab nav;
@@ -179,21 +179,22 @@ public class EventOfUser {
 				Cookies.removeCookie("isAutoLogin");
 				Cookies.removeCookie("id");
 				Cookies.removeCookie("password");
+				Store.setCourse(null);
+				Store.setUser(null);
+				courseIndex.hideAddCourse();
+				if (History.getToken().isEmpty()) {
+					homepage.loadContent(History.getToken());
+				} else {
+					History.newItem("");
+				}
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
+				Window.alert("Error, please contact with us");
 			}
 		});
-		Store.setCourse(null);
-		Store.setUser(null);
-		this.courseIndex.hideAddCourse();
-		if (History.getToken().isEmpty()) {
-			homepage.loadContent(History.getToken());
-		} else {
-			History.newItem("");
-		}
+
 	}
 
 	public void join(int user_id, int course_id) {
@@ -202,13 +203,12 @@ public class EventOfUser {
 			@Override
 			public void onSuccess(Void result) {
 				// TODO Auto-generated method stub
-
+				Store.user.addCourse(Store.course.getId());
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
-
 			}
 		});
 	}
@@ -219,7 +219,7 @@ public class EventOfUser {
 			@Override
 			public void onSuccess(Void result) {
 				// TODO Auto-generated method stub
-
+				Store.user.removeCourse(Store.course.getId());
 			}
 
 			@Override
@@ -262,6 +262,11 @@ public class EventOfUser {
 		Store.setUser(result);
 		loadCourseAdd();
 		homepage.loadContent(History.getToken());
+	}
+
+	@Override
+	public void delete(int id) {
+		this.leave(Store.user.getId(), Store.course.getId());
 	}
 
 }

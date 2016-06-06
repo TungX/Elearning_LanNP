@@ -67,7 +67,11 @@ public class ServerCourses extends Course {
 		if (user_id != 0)
 			this.conn.condition.put("user_id", user_id + "");
 		ArrayList<Course> tcourses = new ArrayList<Course>();
-		ResultSet rs = this.conn.getResultSet("courses", "");
+		String queryplus = "";
+		if (user_id != 0) {
+			queryplus = "true or id in (select course_id from user_in_course where user_id='" + user_id + "')";
+		}
+		ResultSet rs = this.conn.getResultSet("courses", queryplus);
 		try {
 			while (rs.next()) {
 				Course course = (Course) setData(rs);

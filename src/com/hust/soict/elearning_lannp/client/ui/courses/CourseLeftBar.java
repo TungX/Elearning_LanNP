@@ -10,13 +10,13 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.event.EventOfUser;
 import com.hust.soict.elearning_lannp.client.ui.asignments.AssignmentForm;
 import com.hust.soict.elearning_lannp.client.ui.lectures.LectureForm;
+import com.hust.soict.elearning_lannp.client.ui.shared.FormDelete;
 import com.hust.soict.elearning_lannp.client.ui.shared.Store;
 import com.hust.soict.elearning_lannp.shared.model.*;
 
@@ -78,10 +78,12 @@ public class CourseLeftBar extends Composite {
 		this.event.join(Store.user.getId(), Store.course.getId());
 		joinCourse(true);
 	}
-	
+
 	@UiHandler("btnLeave")
-	void onBtnLeaveClick(ClickEvent e){
-		this.event.leave(Store.user.getId(), Store.course.getId());
+	void onBtnLeaveClick(ClickEvent e) {
+		FormDelete form = new FormDelete(event, 0);
+		form.setTitle("Leave " + Store.course.getName());
+		form.show();
 	}
 
 	@UiHandler("btnHome")
