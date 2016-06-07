@@ -11,6 +11,7 @@ import com.hust.soict.elearning_lannp.client.Elearning_LanNP;
 import com.hust.soict.elearning_lannp.client.service.SessionService;
 import com.hust.soict.elearning_lannp.client.service.SessionServiceAsync;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseIndex;
+import com.hust.soict.elearning_lannp.client.ui.courses.CourseLeftBar;
 import com.hust.soict.elearning_lannp.client.ui.login.LoginForm;
 import com.hust.soict.elearning_lannp.client.ui.navtab.NavTab;
 import com.hust.soict.elearning_lannp.client.ui.shared.Store;
@@ -26,6 +27,7 @@ public class EventOfUser extends Event {
 	private User user;
 	private CourseIndex courseIndex;
 	private Elearning_LanNP homepage;
+	private CourseLeftBar leftBar;
 
 	public void setSignupForm(SignupForm form) {
 		this.signupForm = form;
@@ -37,6 +39,10 @@ public class EventOfUser extends Event {
 
 	public void setHomePage(Elearning_LanNP homepage) {
 		this.homepage = homepage;
+	}
+
+	public void setLeftBar(CourseLeftBar leftBar) {
+		this.leftBar = leftBar;
 	}
 
 	public EventOfUser(LoginForm loginForm, NavTab nav) {
@@ -175,7 +181,6 @@ public class EventOfUser extends Event {
 				nav.disableProperty();
 				nav.hideProperty();
 				nav.showTagLogin();
-				Store.setUser(null);
 				Cookies.removeCookie("isAutoLogin");
 				Cookies.removeCookie("id");
 				Cookies.removeCookie("password");
@@ -204,11 +209,13 @@ public class EventOfUser extends Event {
 			public void onSuccess(Void result) {
 				// TODO Auto-generated method stub
 				Store.user.addCourse(Store.course.getId());
+				leftBar.joinCourse(true);
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
+				leftBar.joinCourse(false);
 			}
 		});
 	}
@@ -220,12 +227,13 @@ public class EventOfUser extends Event {
 			public void onSuccess(Void result) {
 				// TODO Auto-generated method stub
 				Store.user.removeCourse(Store.course.getId());
+				leftBar.joinCourse(false);
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
-
+				leftBar.joinCourse(true);
 			}
 		});
 	}

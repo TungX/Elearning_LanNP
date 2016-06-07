@@ -60,6 +60,7 @@ public class CourseLeftBar extends Composite {
 
 	public void setEvent(EventOfUser event) {
 		this.event = event;
+		this.event.setLeftBar(this);
 	}
 
 	public void checkAdmin() {
@@ -76,7 +77,6 @@ public class CourseLeftBar extends Composite {
 	@UiHandler("btnJoin")
 	void onBtnJoinClick(ClickEvent e) {
 		this.event.join(Store.user.getId(), Store.course.getId());
-		joinCourse(true);
 	}
 
 	@UiHandler("btnLeave")

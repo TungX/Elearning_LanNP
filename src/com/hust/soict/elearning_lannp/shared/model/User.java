@@ -2,8 +2,6 @@ package com.hust.soict.elearning_lannp.shared.model;
 
 import java.util.ArrayList;
 
-import com.google.gwt.user.client.Window;
-
 public class User extends Model {
 	protected int id;
 	protected String email;
@@ -162,7 +160,6 @@ public class User extends Model {
 	}
 
 	public void removeCourse(int course_id) {
-		Window.alert(this.courseIds.remove((Integer) course_id) + "");
-		;
+		this.courseIds.remove((Integer) course_id);
 	}
 }

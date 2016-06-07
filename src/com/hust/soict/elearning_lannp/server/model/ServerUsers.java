@@ -105,7 +105,7 @@ public class ServerUsers extends User implements ServerModel {
 		user.setType(rs.getInt("type"));
 		user.setAvatar(rs.getString("avatar"));
 		ServerUserInCourses userInCourses = new ServerUserInCourses();
-		System.out.println("User_id: " + user.getId());
+		System.out.println("Course_ids: " + userInCourses.getCourses(user.getId()).toString());
 		user.setCourseIds(userInCourses.getCourses(user.getId()));
 		return user;
 	}
