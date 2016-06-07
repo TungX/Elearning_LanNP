@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.event.EventOfAssignment;
 import com.hust.soict.elearning_lannp.client.event.EventOfCourse;
 import com.hust.soict.elearning_lannp.client.event.EventOfLecuture;
+import com.hust.soict.elearning_lannp.client.event.EventOfUser;
 import com.hust.soict.elearning_lannp.shared.model.Course;
 
 public class CourseShow extends Composite {
@@ -43,5 +44,8 @@ public class CourseShow extends Composite {
 		event.setRightBar(rightcontent);
 		event.show(id);
 	}
-
+	
+	public void setEventOfUser(EventOfUser event){
+		leftbar.setEvent(event);
+	}
 }

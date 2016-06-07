@@ -27,6 +27,7 @@ public class Elearning_LanNP implements EntryPoint {
 		navTab.setCourseIndex(courseIndex, this);
 		RootPanel.get("header").add(navTab);
 		EventOfUser eventLogin = new EventOfUser(null, navTab);
+		courseShow.setEventOfUser(eventLogin);
 		eventLogin.setCourseIndex(courseIndex);
 		eventLogin.setHomePage(this);
 		eventLogin.autoLogin();

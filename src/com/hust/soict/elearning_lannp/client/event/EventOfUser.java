@@ -11,13 +11,14 @@ import com.hust.soict.elearning_lannp.client.Elearning_LanNP;
 import com.hust.soict.elearning_lannp.client.service.SessionService;
 import com.hust.soict.elearning_lannp.client.service.SessionServiceAsync;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseIndex;
+import com.hust.soict.elearning_lannp.client.ui.courses.CourseLeftBar;
 import com.hust.soict.elearning_lannp.client.ui.login.LoginForm;
 import com.hust.soict.elearning_lannp.client.ui.navtab.NavTab;
 import com.hust.soict.elearning_lannp.client.ui.shared.Store;
 import com.hust.soict.elearning_lannp.client.ui.users.SignupForm;
 import com.hust.soict.elearning_lannp.shared.model.User;
 
-public class EventOfUser {
+public class EventOfUser extends Event {
 	final private long DURATION = 1000 * 60 * 60 * 24 * 14;
 	private SessionServiceAsync sessionService;
 	private NavTab nav;
@@ -26,6 +27,7 @@ public class EventOfUser {
 	private User user;
 	private CourseIndex courseIndex;
 	private Elearning_LanNP homepage;
+	private CourseLeftBar leftBar;
 
 	public void setSignupForm(SignupForm form) {
 		this.signupForm = form;
@@ -37,6 +39,10 @@ public class EventOfUser {
 
 	public void setHomePage(Elearning_LanNP homepage) {
 		this.homepage = homepage;
+	}
+
+	public void setLeftBar(CourseLeftBar leftBar) {
+		this.leftBar = leftBar;
 	}
 
 	public EventOfUser(LoginForm loginForm, NavTab nav) {
@@ -175,25 +181,61 @@ public class EventOfUser {
 				nav.disableProperty();
 				nav.hideProperty();
 				nav.showTagLogin();
-				Store.setUser(null);
 				Cookies.removeCookie("isAutoLogin");
 				Cookies.removeCookie("id");
 				Cookies.removeCookie("password");
+				Store.setCourse(null);
+				Store.setUser(null);
+				courseIndex.hideAddCourse();
+				if (History.getToken().isEmpty()) {
+					homepage.loadContent(History.getToken());
+				} else {
+					History.newItem("");
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Error, please contact with us");
+			}
+		});
+
+	}
+
+	public void join(int user_id, int course_id) {
+		this.sessionService.join(user_id, course_id, new AsyncCallback<Void>() {
+
+			@Override
+			public void onSuccess(Void result) {
+				// TODO Auto-generated method stub
+				Store.user.addCourse(Store.course.getId());
+				leftBar.joinCourse(true);
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
+				leftBar.joinCourse(false);
 			}
 		});
-		Store.setCourse(null);
-		Store.setUser(null);
-		this.courseIndex.hideAddCourse();
-		if (History.getToken().isEmpty()) {
-			homepage.loadContent(History.getToken());
-		} else {
-			History.newItem("");
-		}
+	}
+
+	public void leave(int user_id, int course_id) {
+		this.sessionService.leave(user_id, course_id, new AsyncCallback<Void>() {
+
+			@Override
+			public void onSuccess(Void result) {
+				// TODO Auto-generated method stub
+				Store.user.removeCourse(Store.course.getId());
+				leftBar.joinCourse(false);
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				leftBar.joinCourse(true);
+			}
+		});
 	}
 
 	private void loadUserInfo(User user) {
@@ -229,4 +271,10 @@ public class EventOfUser {
 		loadCourseAdd();
 		homepage.loadContent(History.getToken());
 	}
+
+	@Override
+	public void delete(int id) {
+		this.leave(Store.user.getId(), Store.course.getId());
+	}
+
 }

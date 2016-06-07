@@ -13,14 +13,17 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Widget;
+import com.hust.soict.elearning_lannp.client.event.EventOfUser;
 import com.hust.soict.elearning_lannp.client.ui.asignments.AssignmentForm;
 import com.hust.soict.elearning_lannp.client.ui.lectures.LectureForm;
+import com.hust.soict.elearning_lannp.client.ui.shared.FormDelete;
 import com.hust.soict.elearning_lannp.client.ui.shared.Store;
 import com.hust.soict.elearning_lannp.shared.model.*;
 
 public class CourseLeftBar extends Composite {
 
 	private Course course;
+	private EventOfUser event;
 
 	private static Course_left_barUiBinder uiBinder = GWT.create(Course_left_barUiBinder.class);
 
@@ -49,15 +52,38 @@ public class CourseLeftBar extends Composite {
 	@UiField
 	Anchor btnLeave;
 	@UiField
+	Anchor btnJoin;
+	@UiField
 	Panel panelLeave;
+	@UiField
+	Panel panelJoin;
+
+	public void setEvent(EventOfUser event) {
+		this.event = event;
+		this.event.setLeftBar(this);
+	}
 
 	public void checkAdmin() {
-		if (!Store.isAdmin()) {
-			this.addAssignment.removeFromParent();
-			this.addLecture.removeFromParent();
-		} else {
+		if (Store.user.isTeacher() || Store.isAdmin()) {
 			this.panelLeave.removeFromParent();
+			this.panelJoin.removeFromParent();
+		} else {
+			this.addAssignment.getParent().removeFromParent();
+			this.addLecture.getParent().removeFromParent();
+			joinCourse(Store.isInCourse());
 		}
+	}
+
+	@UiHandler("btnJoin")
+	void onBtnJoinClick(ClickEvent e) {
+		this.event.join(Store.user.getId(), Store.course.getId());
+	}
+
+	@UiHandler("btnLeave")
+	void onBtnLeaveClick(ClickEvent e) {
+		FormDelete form = new FormDelete(event, 0);
+		form.setTitle("Leave " + Store.course.getName());
+		form.show();
 	}
 
 	@UiHandler("btnHome")
@@ -79,6 +105,11 @@ public class CourseLeftBar extends Composite {
 		addAssignment.show();
 	}
 
+	public void joinCourse(boolean value) {
+		this.panelJoin.setVisible(!value);
+		this.panelLeave.setVisible(value);
+	}
+
 	public void addLecture(Lecture lecture) {
 		ListGroupItem item = new ListGroupItem();
 		Hyperlink link = new Hyperlink(lecture.getName(),
@@ -89,9 +120,10 @@ public class CourseLeftBar extends Composite {
 
 	public void setLectures(ArrayList<Lecture> olectures) {
 		this.lectures.clear();
+		this.lectures.add(itemAssignmentEmpty);
 		for (Lecture lecture : olectures)
 			addLecture(lecture);
-		itemLectureEmpty.setVisible(olectures.isEmpty());
+		itemLectureEmpty.setVisible(olectures.isEmpty() && !Store.isAdmin());
 	}
 
 	public void addAssinment(Assignment assignment) {
@@ -104,9 +136,10 @@ public class CourseLeftBar extends Composite {
 
 	public void setAssignments(ArrayList<Assignment> assignments) {
 		this.assignments.clear();
+		this.assignments.add(itemAssignmentEmpty);
 		for (Assignment assignment : assignments)
 			addAssinment(assignment);
-		itemAssignmentEmpty.setVisible(assignments.isEmpty());
+		itemAssignmentEmpty.setVisible(assignments.isEmpty() && !Store.isAdmin());
 	}
 
 	public void setCourse(Course course) {
