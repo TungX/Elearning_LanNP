@@ -38,8 +38,13 @@ public class ConnectData {
 		}
 	}
 
-	public void closeDatabase() throws SQLException {
-		this.conn.close();
+	public void closeDatabase() {
+		try {
+			this.conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public boolean checkUserExist(String email, String password) {
@@ -83,8 +88,9 @@ public class ConnectData {
 		try {
 			String query = "select * from " + table_name;
 			query += getQuery(condition, queryplus);
-			System.out.println(query);
+
 			rs = stmt.executeQuery(query);
+			System.out.println(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -102,6 +108,7 @@ public class ConnectData {
 		query += "where " + queryplus;
 		try {
 			this.stmt.executeUpdate(query);
+			closeDatabase();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -138,7 +145,6 @@ public class ConnectData {
 		if (queryplus == null || queryplus.isEmpty())
 			return;
 		query += "where " + queryplus;
-		System.out.println(query);
 		try {
 			this.stmt.executeUpdate(query);
 		} catch (SQLException e) {
@@ -150,10 +156,9 @@ public class ConnectData {
 	public boolean delete(String table_name) {
 		connectDatabase();
 		String query = "DELETE FROM " + table_name + " " + getQuery(condition, "");
-		System.out.println(query);
-
 		try {
 			this.stmt.executeUpdate(query);
+			closeDatabase();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

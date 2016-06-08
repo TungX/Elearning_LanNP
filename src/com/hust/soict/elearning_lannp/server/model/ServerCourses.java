@@ -55,6 +55,7 @@ public class ServerCourses extends Course {
 		try {
 			rs.first();
 			course = (Course) setData(rs);
+			this.conn.closeDatabase();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			course = null;
@@ -77,6 +78,7 @@ public class ServerCourses extends Course {
 				Course course = (Course) setData(rs);
 				tcourses.add(course);
 			}
+			this.conn.closeDatabase();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

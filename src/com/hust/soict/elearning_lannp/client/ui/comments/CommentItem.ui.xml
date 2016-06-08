@@ -16,13 +16,18 @@
 	.comments .content {
 		margin-bottom: 10px;
 	}
+	
+	.comments .name {
+		margin-right: 5px;
+	}
 	</ui:style>
 	<b:Panel>
 		<b:PanelBody addStyleNames="{style.comments}">
 			<b.html:Div addStyleNames="{style.content}">
 				<b:Image addStyleNames="{style.spacing}" type="CIRCLE"
 					url="uploads/anhdep.jpg" ui:field="avatar" />
-				<b.html:Strong ui:field="name" text="Yin Long" />
+				<b.html:Strong ui:field="name" text="Yin Long"
+					addStyleNames="{style.name}" />
 				<b.html:Text ui:field="content" />
 			</b.html:Div>
 		</b:PanelBody>

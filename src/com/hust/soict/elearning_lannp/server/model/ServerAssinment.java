@@ -33,12 +33,6 @@ public class ServerAssinment extends Assignment implements ServerModel {
 		this.conn.condition.clear();
 		this.conn.condition.put("id", "" + id);
 		this.conn.delete("assignments");
-		try {
-			this.conn.closeDatabase();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public Assignment update(Assignment assignment) {
@@ -66,6 +60,7 @@ public class ServerAssinment extends Assignment implements ServerModel {
 		try {
 			rs.first();
 			assignment = (Assignment) setData(rs);
+			this.conn.closeDatabase();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,14 +72,12 @@ public class ServerAssinment extends Assignment implements ServerModel {
 	public ArrayList<Assignment> getAssignmentOfCourse(int course_id) {
 		ArrayList<Assignment> assignments = new ArrayList<Assignment>();
 		this.conn.condition.put("course_id", "" + course_id);
-		this.conn.connectDatabase();
 		ResultSet rs = this.conn.getResultSet("assignments", "");
 		try {
 			while (rs.next()) {
 				Assignment assignment = (Assignment) setData(rs);
 				assignments.add(assignment);
 			}
-			this.conn.closeDatabase();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -29,6 +29,7 @@ public class ServerComment extends Comment implements ServerModel {
 					+ "");
 		this.conn.connectDatabase();
 		int id = this.conn.insertData("comments");
+		this.conn.closeDatabase();
 		comment.setId(id);
 		return comment;
 	}
@@ -49,6 +50,7 @@ public class ServerComment extends Comment implements ServerModel {
 				Comment comment = (Comment) setData(rs);
 				comments.add(comment);
 			}
+			this.conn.closeDatabase();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

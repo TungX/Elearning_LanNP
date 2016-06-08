@@ -61,6 +61,7 @@ public class ServerUsers extends User implements ServerModel {
 		} catch (SQLException e) {
 			user = null;
 		}
+		this.conn.closeDatabase();
 		return user;
 	}
 
@@ -92,6 +93,7 @@ public class ServerUsers extends User implements ServerModel {
 			e.printStackTrace();
 			user = null;
 		}
+		this.conn.closeDatabase();
 		return user;
 	}
 

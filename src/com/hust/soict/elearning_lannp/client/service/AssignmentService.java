@@ -10,8 +10,6 @@ import com.hust.soict.elearning_lannp.shared.model.Assignment;
 public interface AssignmentService extends RemoteService {
 	Assignment getAssignment(int id);
 
-	ArrayList<Assignment> getAssignmentOfCourse(int course_id);
-
 	ArrayList<Assignment> getAssignmentOfLecture(int lecture_id);
 
 	Assignment addAssignment(Assignment assignment);
