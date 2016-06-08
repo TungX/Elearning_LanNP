@@ -26,12 +26,6 @@ public class AttachFilesSeviceImpl extends RemoteServiceServlet implements Attac
 	}
 
 	@Override
-	public ArrayList<AttachFile> getFileOfLecture(int lecture_id) {
-		ServerAttachFile attachFileS = new ServerAttachFile();
-		return attachFileS.getAttachFilesOfLecture(lecture_id);
-	}
-
-	@Override
 	public AttachFile update(AttachFile file) {
 		ServerAttachFile attachFileS = new ServerAttachFile();
 		return attachFileS.update(file);

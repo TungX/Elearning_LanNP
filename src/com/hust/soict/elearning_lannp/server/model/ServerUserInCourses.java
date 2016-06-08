@@ -31,13 +31,13 @@ public class ServerUserInCourses {
 		ArrayList<Integer> courses = new ArrayList<Integer>();
 		this.conn.condition.clear();
 		this.conn.condition.put("user_id", user_id + "");
-		this.conn.connectDatabase();
 		ResultSet rs = this.conn.getResultSet("user_in_course", "");
 		try {
 			while (rs.next()) {
 				int course_id = rs.getInt("course_id");
 				courses.add(course_id);
 			}
+			this.conn.closeDatabase();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

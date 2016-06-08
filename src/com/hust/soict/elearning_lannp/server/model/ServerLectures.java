@@ -50,7 +50,6 @@ public class ServerLectures extends Lecture implements ServerModel {
 		try {
 			rs.first();
 			lecture = (Lecture) setData(rs);
-			this.conn.closeDatabase();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,7 +63,6 @@ public class ServerLectures extends Lecture implements ServerModel {
 	public ArrayList<Lecture> getLectures(int course_id) {
 		ArrayList<Lecture> lectures = new ArrayList<Lecture>();
 		this.conn.condition.put("course_id", course_id + "");
-		this.conn.connectDatabase();
 		ResultSet rs = this.conn.getResultSet("lectures", "");
 		try {
 			while (rs.next()) {
@@ -93,12 +91,6 @@ public class ServerLectures extends Lecture implements ServerModel {
 		ServerAttachFile attachFile = new ServerAttachFile();
 		attachFile.destroyWithLecture(id);
 		this.conn.delete("lectures");
-		try {
-			this.conn.closeDatabase();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override

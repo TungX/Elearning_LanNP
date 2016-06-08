@@ -9,25 +9,30 @@
 		max-width: 50px;
 	}
 	
+	.property {
+		
+	}
+	
 	table {
 		width: 100%;
 	}
 	
-	tr {
+	.property tr {
 		border-bottom: 1px solid graytext;
 	}
 	
-	th {
+	.property th {
 		width: 40%;
 		text-align: right;
 	}
 	
-	td {
+	.property td {
 		padding-left: 20px;
 	}
 	</ui:style>
 	<b:Modal title="Info Yin Long" closable="true" fade="true"
-		dataBackdrop="STATIC" dataKeyboard="true" b:id="myModal" ui:field="modalProperty">
+		dataBackdrop="STATIC" dataKeyboard="true" b:id="myModal" ui:field="modalProperty"
+		addStyleNames="{style.property}">
 		<b:ModalBody>
 			<g:HTMLPanel>
 				<table>

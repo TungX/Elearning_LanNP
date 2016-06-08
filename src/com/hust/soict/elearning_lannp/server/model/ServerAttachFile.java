@@ -76,12 +76,6 @@ public class ServerAttachFile extends AttachFile implements ServerModel {
 		this.conn.condition.clear();
 		this.conn.condition.put("id", attachfile_id + "");
 		this.conn.delete("attach_files");
-		try {
-			this.conn.closeDatabase();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override

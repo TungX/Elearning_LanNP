@@ -13,13 +13,8 @@ public interface AssignmentServiceAsync {
 
 	void getAssignment(int id, AsyncCallback<Assignment> callback);
 
-	void getAssignmentOfCourse(int course_id,
-			AsyncCallback<ArrayList<Assignment>> callback);
+	void getAssignmentOfLecture(int lecture_id, AsyncCallback<ArrayList<Assignment>> callback);
 
-	void getAssignmentOfLecture(int lecture_id,
-			AsyncCallback<ArrayList<Assignment>> callback);
-
-	void updateAssignment(Assignment assignment,
-			AsyncCallback<Assignment> callback);
+	void updateAssignment(Assignment assignment, AsyncCallback<Assignment> callback);
 
 }
