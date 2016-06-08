@@ -6,6 +6,13 @@ import com.hust.soict.elearning_lannp.shared.model.User;
 public class Store {
 	public static User user;
 	public static Course course;
+	public static int type;
+	public static int id;
+
+	public static void loadInfoComment(int type, int id) {
+		Store.type = type;
+		Store.id = id;
+	}
 
 	public static void setUser(User user) {
 		Store.user = user;

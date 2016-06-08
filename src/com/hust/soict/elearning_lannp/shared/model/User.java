@@ -14,7 +14,8 @@ public class User extends Model {
 	private boolean isAutoLogin;
 	private ArrayList<Integer> courseIds;
 
-	public User(String email, String password, String password_confirm, String firstName, String lastName, int type) {
+	public User(String email, String password, String password_confirm,
+			String firstName, String lastName, int type) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -39,15 +40,16 @@ public class User extends Model {
 		this.courseIds = new ArrayList<Integer>();
 	}
 
-	public void setInfo(String email, String password, String password_confirm, String name, int type,
-			String filename) {
+	public void setInfo(String email, String password, String password_confirm,
+			String name, int type, String filename) {
 		this.email = email;
 		this.password = password;
 		this.password_confirm = password_confirm;
 		this.firstName = name.substring(0, name.lastIndexOf(" "));
 		this.lastName = name.substring(name.lastIndexOf(" ") + 1);
 		this.type = type;
-		this.avatar = "uploads/" + filename.substring(filename.lastIndexOf("\\") + 1);
+		this.avatar = "uploads/"
+				+ filename.substring(filename.lastIndexOf("\\") + 1);
 	}
 
 	public ArrayList<Integer> getCourseIds() {
@@ -127,7 +129,7 @@ public class User extends Model {
 	}
 
 	@Override
-	protected boolean validate() {
+	public boolean validate() {
 		this.errors.clear();
 		if (this.email.isEmpty())
 			this.errors.add("email error");

@@ -2,17 +2,26 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
-	xmlns:lb="urn:import:com.hust.soict.elearning_lannp.client.ui.courses">
+	xmlns:lb="urn:import:com.hust.soict.elearning_lannp.client.ui.courses"
+	xmlns:c="urn:import:com.hust.soict.elearning_lannp.client.ui.comments">
 	<ui:style>
+	.page-root {
+		min-width: 1200px;
+	}
 	
+	.page-right {
+		min-width: 700px;
+	}
 	</ui:style>
-	<b:Column size="XS_12">
+	<b:Column size="XS_12" addStyleNames="{style.page-root}">
 		<b:Column size="XS_3">
 			<lb:CourseLeftBar ui:field="leftbar" />
 		</b:Column>
-		<b:Column size="XS_9">
+		<b:Column size="XS_9" addStyleNames="{style.page-right}">
 			<lb:CourseRightBar ui:field="rightcontent" />
+			<b:Column size="XS_12">
+				<c:Comments ui:field="comments"></c:Comments>
+			</b:Column>
 		</b:Column>
 	</b:Column>
-
 </ui:UiBinder> 

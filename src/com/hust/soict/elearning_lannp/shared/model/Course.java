@@ -14,7 +14,7 @@ public class Course extends Model {
 	protected int user_id;
 
 	@Override
-	protected boolean validate() {
+	public boolean validate() {
 		// TODO Auto-generated method stub
 		return false;
 	}

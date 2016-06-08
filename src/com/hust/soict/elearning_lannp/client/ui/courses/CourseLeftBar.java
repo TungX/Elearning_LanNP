@@ -120,7 +120,7 @@ public class CourseLeftBar extends Composite {
 
 	public void setLectures(ArrayList<Lecture> olectures) {
 		this.lectures.clear();
-		this.lectures.add(itemAssignmentEmpty);
+		this.lectures.add(itemLectureEmpty);
 		for (Lecture lecture : olectures)
 			addLecture(lecture);
 		itemLectureEmpty.setVisible(olectures.isEmpty() && !Store.isAdmin());

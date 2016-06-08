@@ -11,7 +11,7 @@ public abstract class Model implements IsSerializable {
 		this.errors = new ArrayList<String>();
 	}
 
-	protected abstract boolean validate();
+	public abstract boolean validate();
 
 	public ArrayList<String> getErros() {
 		return this.errors;

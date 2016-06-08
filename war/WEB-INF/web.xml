@@ -69,4 +69,13 @@
 		<servlet-name>AttachFilesSeviceImpl</servlet-name>
 		<url-pattern>/elearning_lannp/attachfileservice</url-pattern>
 	</servlet-mapping>
+	<!-- Servlets comment -->
+	<servlet>
+		<servlet-name>CommentsSeviceImpl</servlet-name>
+		<servlet-class>com.hust.soict.elearning_lannp.server.CommentsSeviceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommentsSeviceImpl</servlet-name>
+		<url-pattern>/elearning_lannp/commentsservice</url-pattern>
+	</servlet-mapping>
 </web-app>

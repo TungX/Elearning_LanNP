@@ -12,7 +12,7 @@ public class Lecture extends Model {
 	protected ArrayList<AttachFile> attachFiles;
 
 	@Override
-	protected boolean validate() {
+	public boolean validate() {
 		// TODO Auto-generated method stub
 		return false;
 	}
