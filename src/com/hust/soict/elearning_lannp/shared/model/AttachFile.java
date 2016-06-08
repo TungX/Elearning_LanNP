@@ -44,7 +44,7 @@ public class AttachFile extends Model {
 	}
 
 	@Override
-	protected boolean validate() {
+	public boolean validate() {
 		// TODO Auto-generated method stub
 		return false;
 	}

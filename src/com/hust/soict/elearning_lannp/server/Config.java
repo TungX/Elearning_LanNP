@@ -2,5 +2,5 @@ package com.hust.soict.elearning_lannp.server;
 
 public class Config {
 	public static String MYSQLUSER = "root";
-	public static String MYSQLPASSWORD = "";
+	public static String MYSQLPASSWORD = "123456";
 }

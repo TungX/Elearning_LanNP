@@ -1,0 +1,40 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
+	<ui:style>
+	.comments {
+		width: 100%;
+		min-width: 700px;
+	}
+	
+	.comments img {
+		max-width: 35px;
+		max-height: 35px;
+		margin-right: 5px;
+	}
+	
+	.comments input {
+		margin-right: 5px;
+	}
+	
+	.comments .content {
+		width: 750px;
+	}
+	</ui:style>
+	<g:HTMLPanel>
+		<b:Form type="INLINE" addStyleNames="{style.comments}">
+			<b:FieldSet>
+				<b:FormGroup>
+					<b:Image url="uploads/anhdep.jpg" ui:field="avatar" />
+				</b:FormGroup>
+				<b:FormGroup>
+					<b:TextBox placeholder="Enter your comment"
+						addStyleNames="{style.content}" ui:field="txtContent" />
+				</b:FormGroup>
+				<b:FormGroup>
+					<b:Button text="Comment" type="PRIMARY" ui:field="btnSubmit" />
+				</b:FormGroup>
+			</b:FieldSet>
+		</b:Form>
+	</g:HTMLPanel>
+</ui:UiBinder> 
