@@ -13,11 +13,16 @@ public class Lecture extends Model {
 
 	@Override
 	public boolean validate() {
-		// TODO Auto-generated method stub
-		return false;
+		this.errors.clear();
+		if (this.name.isEmpty())
+			addError("name", "Lecture's name can't empty");
+		if (this.description.isEmpty())
+			addError("description", "Lecture's description can't empty");
+		return this.errors.isEmpty();
 	}
 
-	public Lecture(String name, String description, String password, int course_id) {
+	public Lecture(String name, String description, String password,
+			int course_id) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -41,10 +46,9 @@ public class Lecture extends Model {
 		this.attachFiles = new ArrayList<AttachFile>();
 	}
 
-	public void setInfo(String name, String description, String password) {
+	public void setInfo(String name, String description) {
 		this.name = name;
 		this.description = description;
-		this.password = password;
 	}
 
 	public int getId() {

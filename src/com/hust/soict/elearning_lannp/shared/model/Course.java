@@ -15,8 +15,12 @@ public class Course extends Model {
 
 	@Override
 	public boolean validate() {
-		// TODO Auto-generated method stub
-		return false;
+		this.errors.clear();
+		if (this.name.isEmpty())
+			addError("name", "Course's name can't empty");
+		if (this.description.isEmpty())
+			addError("description", "Course's description can't empty");
+		return this.errors.isEmpty();
 	}
 
 	public Course(int id) {
@@ -32,10 +36,9 @@ public class Course extends Model {
 		this.password = "";
 	}
 
-	public void updateInfo(String name, String description, String password) {
+	public void updateInfo(String name, String description) {
 		this.name = name;
 		this.description = description;
-		this.password = password;
 	}
 
 	public int getId() {

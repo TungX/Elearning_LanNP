@@ -1,10 +1,12 @@
 package com.hust.soict.elearning_lannp.client.ui.courses;
 
+import java.util.HashMap;
+
 import org.gwtbootstrap3.client.ui.Button;
-import org.gwtbootstrap3.client.ui.Input;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.TextArea;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.html.Span;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -31,16 +33,22 @@ public class CourseForm extends FormInputAbastract {
 		RootPanel.get().add(this);
 		this.event = event;
 		this.course = course;
-		this.txtDescription.setText(course.getDescription().replaceAll("<br/>", "\n"));
+		this.txtDescription.setText(course.getDescription().replaceAll("<br/>",
+				"\n"));
 		this.txtName.setText(course.getName());
+		this.errors = new HashMap<String, Span>();
+		this.errors.put("name", requiredName);
+		this.errors.put("description", requiredDescription);
 	}
 
+	@UiField
+	Span requiredName;
+	@UiField
+	Span requiredDescription;
 	@UiField
 	TextBox txtName;
 	@UiField
 	TextArea txtDescription;
-	@UiField
-	Input txtPassword;
 	@UiField
 	Modal modalInputCourse;
 	@UiField
@@ -60,16 +68,20 @@ public class CourseForm extends FormInputAbastract {
 	public void setTitle(String title) {
 		this.modalInputCourse.setTitle(title);
 	}
-	
+
 	@UiHandler("btnSave")
-	void onBtnSaveClick(ClickEvent e){
+	void onBtnSaveClick(ClickEvent e) {
+		clearError();
 		String name = txtName.getText();
 		String description = txtDescription.getText().replaceAll("\n", "<br/>");
-		String password = txtPassword.getText();
-		course.updateInfo(name, description, password);
-		if(course.getId() == 0){
+		course.updateInfo(name, description);
+		if (!course.validate()) {
+			printError(this.course.getErros());
+			return;
+		}
+		if (course.getId() == 0) {
 			event.create(course);
-		}else{
+		} else {
 			event.update(course);
 		}
 		hide();
