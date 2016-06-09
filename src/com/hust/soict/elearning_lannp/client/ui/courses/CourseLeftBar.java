@@ -1,6 +1,7 @@
 package com.hust.soict.elearning_lannp.client.ui.courses;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.gwtbootstrap3.client.ui.*;
 
@@ -24,8 +25,11 @@ public class CourseLeftBar extends Composite {
 
 	private Course course;
 	private EventOfUser event;
+	private HashMap<Integer, ListGroupItem> hashAssignments;
+	private HashMap<Integer, ListGroupItem> hashLectures;
 
-	private static Course_left_barUiBinder uiBinder = GWT.create(Course_left_barUiBinder.class);
+	private static Course_left_barUiBinder uiBinder = GWT
+			.create(Course_left_barUiBinder.class);
 
 	interface Course_left_barUiBinder extends UiBinder<Widget, CourseLeftBar> {
 	}
@@ -33,6 +37,8 @@ public class CourseLeftBar extends Composite {
 	public CourseLeftBar() {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.course = new Course();
+		this.hashAssignments = new HashMap<Integer, ListGroupItem>();
+		this.hashLectures = new HashMap<Integer, ListGroupItem>();
 	}
 
 	@UiField
@@ -112,9 +118,10 @@ public class CourseLeftBar extends Composite {
 
 	public void addLecture(Lecture lecture) {
 		ListGroupItem item = new ListGroupItem();
-		Hyperlink link = new Hyperlink(lecture.getName(),
-				"courses/" + lecture.getCourseId() + "/lectures/" + lecture.getId());
+		Hyperlink link = new Hyperlink(lecture.getName(), "courses/"
+				+ lecture.getCourseId() + "/lectures/" + lecture.getId());
 		item.add(link);
+		this.hashLectures.put(lecture.getId(), item);
 		lectures.add(item);
 	}
 
@@ -128,10 +135,12 @@ public class CourseLeftBar extends Composite {
 
 	public void addAssinment(Assignment assignment) {
 		ListGroupItem item = new ListGroupItem();
-		Hyperlink link = new Hyperlink(assignment.getName(),
-				"courses/" + assignment.getCourseId() + "/assignments/" + assignment.getId());
+		Hyperlink link = new Hyperlink(assignment.getName(), "courses/"
+				+ assignment.getCourseId() + "/assignments/"
+				+ assignment.getId());
 		item.add(link);
 		assignments.add(item);
+		this.hashAssignments.put(assignment.getId(), item);
 	}
 
 	public void setAssignments(ArrayList<Assignment> assignments) {
@@ -139,10 +148,34 @@ public class CourseLeftBar extends Composite {
 		this.assignments.add(itemAssignmentEmpty);
 		for (Assignment assignment : assignments)
 			addAssinment(assignment);
-		itemAssignmentEmpty.setVisible(assignments.isEmpty() && !Store.isAdmin());
+		itemAssignmentEmpty.setVisible(assignments.isEmpty()
+				&& !Store.isAdmin());
 	}
 
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+
+	public void updateUi(Assignment assignment) {
+		ListGroupItem item;
+		if ((item = this.hashAssignments.get(assignment.getId())) == null)
+			return;
+
+		item.clear();
+		Hyperlink link = new Hyperlink(assignment.getName(), "courses/"
+				+ assignment.getCourseId() + "/assignments/"
+				+ assignment.getId());
+		item.add(link);
+	}
+
+	public void updateUi(Lecture lecture) {
+		ListGroupItem item;
+		if ((item = this.hashLectures.get(lecture.getId())) == null)
+			return;
+
+		item.clear();
+		Hyperlink link = new Hyperlink(lecture.getName(), "courses/"
+				+ lecture.getCourseId() + "/lectures/" + lecture.getId());
+		item.add(link);
 	}
 }

@@ -51,7 +51,8 @@ public class EventOfLecuture extends Event {
 					Window.alert("Error when insert");
 				} else {
 					leftBar.addLecture(result);
-					History.newItem("courses/" + result.getCourseId() + "/lectures/" + result.getId());
+					History.newItem("courses/" + result.getCourseId()
+							+ "/lectures/" + result.getId());
 				}
 			}
 
@@ -76,6 +77,7 @@ public class EventOfLecuture extends Event {
 				// TODO Auto-generated method stub
 				rightBar.loadLectureInfo(result);
 				form.hide();
+				leftBar.updateUi(result);
 			}
 		});
 	}
