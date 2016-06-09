@@ -1,6 +1,9 @@
 package com.hust.soict.elearning_lannp.client.ui.lectures;
 
+import java.util.HashMap;
+
 import org.gwtbootstrap3.client.ui.*;
+import org.gwtbootstrap3.client.ui.html.Span;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -16,7 +19,8 @@ import com.hust.soict.elearning_lannp.shared.model.Lecture;
 
 public class LectureForm extends FormInputAbastract {
 
-	private static FormAddLectureUiBinder uiBinder = GWT.create(FormAddLectureUiBinder.class);
+	private static FormAddLectureUiBinder uiBinder = GWT
+			.create(FormAddLectureUiBinder.class);
 	private EventOfLecuture event;
 	private Lecture lecture;
 
@@ -31,20 +35,26 @@ public class LectureForm extends FormInputAbastract {
 		this.lecture = lecture;
 		event.setLeftBar(leftBar);
 		this.txtName.setText(this.lecture.getName());
-		this.txtDescription.setText((this.lecture.getDescription()).replaceAll("<br/>", "\n"));
-		this.txtPassword.setText(this.lecture.getPassword());
+		this.txtDescription.setText((this.lecture.getDescription()).replaceAll(
+				"<br/>", "\n"));
+		this.errors = new HashMap<String, Span>();
+		this.errors.put("name", requiredName);
+		this.errors.put("description", requiredDescription);
 	}
+
+	@UiField
+	Span requiredName;
+	@UiField
+	Span requiredDescription;
 
 	@UiField
 	TextBox txtName;
 	@UiField
-	TextArea txtDescription;
-	@UiField
-	Input txtPassword;
+	TextArea txtDescription;;
 	@UiField
 	Modal modalLecture;
-	
-	public void setEvent(EventOfLecuture event){
+
+	public void setEvent(EventOfLecuture event) {
 		this.event = event;
 	}
 
@@ -57,10 +67,14 @@ public class LectureForm extends FormInputAbastract {
 
 	@UiHandler("btnSave")
 	void onBtnSaveClick(ClickEvent e) {
+		clearError();
 		String name = txtName.getText();
 		String description = txtDescription.getText().replaceAll("\n", "<br/>");
-		String password = txtPassword.getText();
-		this.lecture.setInfo(name, description, password);
+		this.lecture.setInfo(name, description);
+		if (!this.lecture.validate()) {
+			printError(this.lecture.getErros());
+			return;
+		}
 		if (this.lecture.getId() == 0)
 			event.doCreate(this.lecture);
 		else

@@ -1,9 +1,12 @@
 package com.hust.soict.elearning_lannp.client.ui.asignments;
 
+import java.util.HashMap;
+
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.TextArea;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.html.Span;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -11,7 +14,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.*;
-import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.event.EventOfAssignment;
 import com.hust.soict.elearning_lannp.client.ui.courses.CourseLeftBar;
 import com.hust.soict.elearning_lannp.shared.model.Assignment;
@@ -19,7 +21,8 @@ import com.hust.soict.elearning_lannp.shared.model.FormInputAbastract;
 
 public class AssignmentForm extends FormInputAbastract {
 
-	private static FormAssignmentUiBinder uiBinder = GWT.create(FormAssignmentUiBinder.class);
+	private static FormAssignmentUiBinder uiBinder = GWT
+			.create(FormAssignmentUiBinder.class);
 	private EventOfAssignment event;
 	private Assignment assignment;
 
@@ -32,6 +35,9 @@ public class AssignmentForm extends FormInputAbastract {
 		RootPanel.get().add(this);
 		this.assignment = new Assignment();
 		loadAssignment();
+		this.errors = new HashMap<String, Span>();
+		this.errors.put("name", requiredName);
+		this.errors.put("password_confirm", requiredDescription);
 	}
 
 	@UiField
@@ -42,13 +48,17 @@ public class AssignmentForm extends FormInputAbastract {
 	TextBox txtName;
 	@UiField
 	TextArea txtDescription;
-	
-	public void setAssignment(Assignment assignment){
+	@UiField
+	Span requiredName;
+	@UiField
+	Span requiredDescription;
+
+	public void setAssignment(Assignment assignment) {
 		this.assignment = assignment;
 		loadAssignment();
 	}
-	
-	public void setEvent(EventOfAssignment event){
+
+	public void setEvent(EventOfAssignment event) {
 		this.event = event;
 	}
 
@@ -58,10 +68,15 @@ public class AssignmentForm extends FormInputAbastract {
 
 	@UiHandler("btnSave")
 	void onBtnSaveClick(ClickEvent e) {
+		this.clearError();
 		String name = txtName.getText();
 		String description = txtDescription.getText().replaceAll("\n", "<br/>");
 		this.assignment.setName(name);
 		this.assignment.setDescription(description);
+		if (!this.assignment.validate()) {
+			this.printError(this.assignment.getErros());
+			return;
+		}
 		if (assignment.getId() == 0)
 			event.doCreate(assignment);
 		else
@@ -70,7 +85,8 @@ public class AssignmentForm extends FormInputAbastract {
 
 	public void loadAssignment() {
 		this.txtName.setText(assignment.getName());
-		this.txtDescription.setText(assignment.getDescription().replace("<br/>", "\n"));
+		this.txtDescription.setText(assignment.getDescription().replace(
+				"<br/>", "\n"));
 	}
 
 	@Override

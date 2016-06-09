@@ -1,10 +1,13 @@
 package com.hust.soict.elearning_lannp.client.ui.users;
 
+import java.util.HashMap;
+
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.InlineRadio;
 import org.gwtbootstrap3.client.ui.Input;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.html.Span;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -22,7 +25,8 @@ import com.hust.soict.elearning_lannp.shared.model.User;
 
 public class SignupForm extends FormInputAbastract {
 
-	private static SignupFormUiBinder uiBinder = GWT.create(SignupFormUiBinder.class);
+	private static SignupFormUiBinder uiBinder = GWT
+			.create(SignupFormUiBinder.class);
 	private EventOfUser event;
 	private User user;
 
@@ -37,6 +41,11 @@ public class SignupForm extends FormInputAbastract {
 		avatarForm.setAction(GWT.getModuleBaseURL() + "fileupload");
 		avatarForm.setEncoding(FormPanel.ENCODING_MULTIPART);
 		avatarForm.setMethod(FormPanel.METHOD_POST);
+		this.errors = new HashMap<String, Span>();
+		this.errors.put("email", requiredEmail);
+		this.errors.put("name", requiredName);
+		this.errors.put("password", requiredPassword);
+		this.errors.put("password_confirm", requiredPasswordConfirm);
 	}
 
 	@UiField
@@ -59,6 +68,14 @@ public class SignupForm extends FormInputAbastract {
 	FormPanel avatarForm;
 	@UiField
 	FlowPanel panelRadio;
+	@UiField
+	Span requiredName;
+	@UiField
+	Span requiredEmail;
+	@UiField
+	Span requiredPassword;
+	@UiField
+	Span requiredPasswordConfirm;
 
 	public void show() {
 		modalSignUp.show();
@@ -91,13 +108,20 @@ public class SignupForm extends FormInputAbastract {
 
 	@UiHandler("btnSave")
 	void onBtnSaveClick(ClickEvent e) {
+		this.clearError();
 		String name = this.txtName.getText();
 		String email = this.txtEmail.getText();
 		String password = this.txtPassword.getText();
 		String password_confirm = this.txtPasswordConfirmation.getText();
 		String filename = uploadFile.getFilename();
 		int type = this.radioStudent.getValue() ? 0 : 1;
-		this.user.setInfo(email, password, password_confirm, name, type, filename);
+		this.user.setInfo(email, password, password_confirm, name, type,
+				filename);
+		if (!this.user.validate()) {
+			this.printError(this.user.getErros());
+			return;
+		}
+
 		if (this.user.getId() == 0) {
 			this.event.doCreate(user);
 		} else {

@@ -45,8 +45,12 @@ public class AttachFile extends Model {
 
 	@Override
 	public boolean validate() {
-		// TODO Auto-generated method stub
-		return false;
+		this.errors.clear();
+		if (this.name.isEmpty())
+			addError("name", "Attach file's name can't empty");
+		if (this.path.isEmpty())
+			addError("path", "Attach file's path can't empty");
+		return this.errors.isEmpty();
 	}
 
 	public int getLectureId() {

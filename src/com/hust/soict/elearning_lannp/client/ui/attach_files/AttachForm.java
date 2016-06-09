@@ -1,8 +1,11 @@
 package com.hust.soict.elearning_lannp.client.ui.attach_files;
 
+import java.util.HashMap;
+
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.html.Span;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -11,19 +14,20 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.hust.soict.elearning_lannp.client.event.EventOfAttachFile;
 import com.hust.soict.elearning_lannp.shared.model.AttachFile;
+import com.hust.soict.elearning_lannp.shared.model.FormInputAbastract;
 
-public class AttachForm extends Composite {
+public class AttachForm extends FormInputAbastract {
 	private AttachFile attachFile;
 	private FileAttach fA;
 	private FileAttaches fas;
-	private static AttachFormUiBinder uiBinder = GWT.create(AttachFormUiBinder.class);
+	private static AttachFormUiBinder uiBinder = GWT
+			.create(AttachFormUiBinder.class);
 	private EventOfAttachFile event;
 
 	interface AttachFormUiBinder extends UiBinder<Widget, AttachForm> {
@@ -39,8 +43,15 @@ public class AttachForm extends Composite {
 		this.fA = fa;
 		this.event = new EventOfAttachFile(fA, this);
 		addEventUploadFileChange();
+		this.errors = new HashMap<String, Span>();
+		this.errors.put("name", requiredName);
+		this.errors.put("path", requiredPath);
 	}
 
+	@UiField
+	Span requiredName;
+	@UiField
+	Span requiredPath;
 	@UiField
 	FormPanel attachForm;
 	@UiField
@@ -104,8 +115,13 @@ public class AttachForm extends Composite {
 
 	@UiHandler("btnSave")
 	void onBtnSaveClick(ClickEvent e) {
+		clearError();
 		this.attachFile.setName(txtName.getText());
 		this.attachFile.setPath(txtPath.getText());
+		if (!this.attachFile.validate()) {
+			printError(this.attachFile.getErros());
+			return;
+		}
 		submit();
 		if (this.attachFile.getId() == 0)
 			this.event.doSave(attachFile, fas);

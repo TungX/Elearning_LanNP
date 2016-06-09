@@ -132,13 +132,18 @@ public class User extends Model {
 	public boolean validate() {
 		this.errors.clear();
 		if (this.email.isEmpty())
-			this.errors.add("email error");
-		if (this.lastName.isEmpty())
-			return false;
-		if (this.lastName.isEmpty())
-			return false;
+			addError("email", "Your email can't empty");
+		if (!this.email.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+				+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"))
+			addError("email", "Your email isn't type email");
+		if (this.lastName.isEmpty() && this.firstName.isEmpty())
+			addError("name", "Your name can't empty");
+		if (this.id == 0 && this.password.isEmpty())
+			addError("password", "Your password can't empty");
+		if (this.id == 0 && this.password.length() < 6)
+			addError("password", "Your password need > 6 charter");
 		if (this.password.compareTo(this.password_confirm) != 0)
-			return false;
+			addError("password_confirm", "Password confirm isn't same password");
 		return this.errors.isEmpty();
 	}
 
