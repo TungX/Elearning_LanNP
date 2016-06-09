@@ -77,6 +77,7 @@ public class EventOfAssignment extends Event {
 						// TODO Auto-generated method stub
 						rightBar.loadAssignmentInfo(result);
 						form.hide();
+						leftBar.updateUi(result);
 					}
 
 					@Override
